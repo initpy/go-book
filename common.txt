@@ -1,0 +1,1 @@
+.. common substitution strings and misc.

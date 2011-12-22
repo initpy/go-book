@@ -1,0 +1,627 @@
+/*
+@font-face {
+    font-family:Rancho;
+    src:url('fonts/Rancho/Rancho-Regular.ttf');
+}
+*/
+@import url(http://fonts.googleapis.com/css?family=Rancho);
+
+*  {
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+body {
+    margin:0;
+    background:#503e2a;
+    background:#4b0000;
+    background: -moz-linear-gradient(top, #100000 0%, #4b0000 40%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#100000), color-stop(40%,#4b0000)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #100000 0%,#4b0000 40%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #100000 0%,#4b0000 40%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #100000 0%,#4b0000 40%); /* IE10+ */
+    background: linear-gradient(top, #100000 0%,#4b0000 40%); /* W3C */
+    font:12px/1.5 Verdana,sans-serif;
+    color:white;
+    text-align:left;
+}
+
+figure, footer, header, nav, section, figcaption {
+    display:block;
+}
+
+#wrapper {
+    width:960px;
+    margin:0px auto;
+}
+
+#main {
+    float:left;
+    margin:0;
+    width:640px;
+    font-size:1em;
+    color:#000;
+}
+
+#main > section {
+    padding:20px;
+    background-color:#fff;
+    min-height:600px;
+    -moz-box-shadow:#100000 0 0 10px;
+    -webkit-box-shadow:#100000 0 0 10px;
+}
+
+#sidebar {
+    float:right;
+    margin:0;
+    width:280px;
+    font-size:1em;
+    background-color:transparent;
+    color:#fff;
+    padding:30px 10px 0px 20px;
+    text-align:left;
+    text-shadow:#000000 1px 1px 1px;
+}
+
+header {
+    padding:4px 0 12px 0;
+}
+
+footer {
+    color:#f9f0bf;
+    font-size:90%;
+    padding-bottom:2em;
+    text-align:right
+}
+
+/*** links ***/
+a {
+    text-decoration:none;
+}
+
+a:link, a:visited  {
+    color:#ffffbf;
+}
+
+img {
+    margin:10px;
+}
+
+a img {
+    border:none;
+}
+
+#main a:link, #main a:visited {
+    color:#08519c;
+}
+
+#sidebar a:link, #sidebar a:visited {
+    color:#f9f05a;
+}
+
+#main a:hover {
+    text-decoration:underline;
+}
+
+#sidebar a:hover {
+    color:#f9f0bf;
+    text-decoration:underline;
+}
+
+h2 a, h3 a, h4 a {
+    text-decoration:none !important;
+}
+
+a.reference em {
+    font-style:normal;
+}
+
+a:hover {
+    text-decoration:underline;
+}
+
+header h1 a {
+    font-family:Rancho;
+    color:white;
+}
+
+header nav a:hover{
+    text-decoration:none;
+}
+
+
+#main footer a, #main footer a:link,  #main footer a:visited, 
+#main footer a:hover { 
+    color:#f9f0bf;
+}
+
+/*** sidebar ***/
+#sidebar div.sphinxsidebarwrapper {
+    font-size:92%;
+    margin-right:14px;
+}
+
+#sidebar h3, #sidebar h4 {
+    color:white;
+    font-size:175%;
+}
+
+#sidebar a {
+    color:white;
+}
+
+#sidebar ul ul {
+    margin-top:0;
+    margin-bottom:0;
+}
+
+#sidebar li {
+    margin-top:0.2em;
+    margin-bottom:0.2em;
+}
+
+/*** nav ***/
+#main nav {
+    margin:0;
+    padding:10px;
+    background-color:#200000;
+    font-size:11px;
+    text-align:right;
+    color:#fff;
+    -moz-box-shadow:#100000 0 0 10px;
+    -webkit-box-shadow:#100000 0 0 10px;
+}
+
+#main nav a, #main nav a:link, #main nav a:visited {
+    color:#f9f0bf;
+}
+
+#main nav a:hover {
+    text-decoration:underline;
+}
+
+section#main h2{
+    clear:left;
+}
+
+header h1 {
+    font-family:Rancho;
+    color:white;
+    font-size:48px;
+    text-shadow:#100000 1px 1px 4px;
+}
+
+header nav {
+    position:absolute;
+    top:5px;
+    margin-left:-5px;
+    padding:7px 0;
+    color:#263E2B;
+}
+
+header nav a, header nav a:visited {
+    color:#fff;
+}
+
+header nav a {
+    padding:0 4px;
+}
+
+header nav:hover {
+    color:#fff;
+}
+
+footer {
+    margin:10px 0;
+    color:#fff;
+    text-align:center;
+    text-shadow:#100000 1px 1px 4px;
+}
+
+/*** content ***/
+/*** basic styles ***/
+dd {
+    margin-left:15px;
+}
+
+h1,h2,h3,h4 {
+    margin-top:1em;
+    font-family:"Trebuchet MS",sans-serif;
+    font-family:Rancho;
+    font-weight:normal;
+}
+
+h1 {
+    font-size:300%;
+    margin-top:0.6em;
+    margin-bottom:.4em;
+    line-height:1.1em;
+    color:#67001f;
+}
+
+h2 {
+    font-size:250%;
+    margin-bottom:.6em;
+    line-height:1.2em;
+    color:#7f2704;
+}
+
+h3 {
+    font-size:175%;
+    margin-bottom:.2em;
+    color:#a63603;
+}
+
+h4 {
+    font-size:150%;
+    margin-top:1.5em;
+    margin-bottom:3px;
+    color:#f46d43;
+}
+
+div.figure {
+    text-align:center;
+}
+
+div.figure p.caption {
+    font-size:1em;
+    margin-top:0;
+    margin-bottom:1.5em;
+    color:#555;
+}
+
+hr {
+    color:#ccc;
+    background-color:#ccc;
+    height:1px;
+    border:0;
+}
+
+p, ul, dl {
+    margin-top:.6em;
+    margin-bottom:1em;
+    padding-bottom:0.1em;
+}
+
+caption {
+    font-size:1em;
+    font-weight:bold;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    margin-left:2px;
+    text-align:center;
+}
+
+blockquote {
+    padding:0 1em;
+    margin:1em 0;
+    font:125%/1.2em "Trebuchet MS", sans-serif;
+    color:#234f32;
+    border-left:2px solid #94da3a;
+}
+
+strong {
+    font-weight:bold;
+}
+
+em {
+    font-style:italic;
+}
+
+ins {
+    font-weight:bold;
+    text-decoration:none;
+}
+
+/*** lists ***/
+ul {
+    padding-left:30px;
+}
+
+ol {
+    padding-left:30px;
+}
+
+ol.arabic li {
+    list-style-type:decimal;
+}
+
+ul li {
+    list-style-type:square;
+    margin-bottom:.4em;
+}
+
+ol li {
+    margin-bottom:.4em;
+}
+
+ul ul {
+    padding-left:1.2em;
+}
+
+ul ul ul {
+    padding-left:1em;
+}
+
+ul.linklist, ul.toc {
+    padding-left:0;
+}
+
+ul.toc ul {
+    margin-left:.6em;
+}
+
+ul.toc ul li {
+    list-style-type:square;
+}
+
+ul.toc ul ul li {
+    list-style-type:disc;
+}
+
+ul.linklist li, ul.toc li {
+    list-style-type:none;
+}
+
+dt {
+    font-weight:bold;
+    margin-top:.5em;
+    font-size:1.1em;
+}
+
+dd {
+    margin-bottom:.8em;
+}
+
+ol.toc {
+    margin-bottom:2em;
+}
+
+ol.toc li {
+    font-size:125%;
+    padding:.5em;
+    line-height:1.2em;
+    clear:right;
+}
+
+ol.toc li.b {
+    background-color:#E0FFB8;
+}
+
+ol.toc li a:hover {
+    background-color:transparent !important;
+    text-decoration:underline !important;
+}
+
+ol.toc span.release-date {
+    float:right;
+    font-size:85%;
+    padding-right:.5em;
+}
+
+ol.toc span.comment-count {
+    font-size:75%;
+    color:#999;
+}
+
+/*** tables ***/
+table {
+    color:#000;
+    margin-bottom:1em;
+    width:100%;
+}
+
+table.docutils td p {
+    margin-top:0;
+    margin-bottom:.5em;
+}
+
+table.docutils td, table.docutils th {
+    border-bottom:1px solid #dfdfdf;
+    padding:4px 2px;
+}
+
+table.docutils thead th {
+    border-bottom:2px solid #dfdfdf;
+    text-align:left;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+table.docutils thead th p {
+    margin:0;
+    padding:0;
+}
+
+table.docutils {
+    border-collapse:collapse;
+}
+
+/*** code blocks ***/
+.literal {
+    white-space:nowrap;
+}
+
+.literal {
+    color:#aa0000;
+}
+
+#sidebar .literal {
+    color:white;
+    background:transparent;
+    font-size:11px;
+}
+
+h4 .literal {
+    color:#234f32;
+    font-size:13px;
+}
+
+pre {
+    font-size:small;
+    background:#222;
+    border:1px solid #111;
+    border-width:1px 0;
+    margin:1em 0;
+    padding:.3em .4em;
+    overflow:hidden;
+    line-height:1.3em;
+}
+
+dt .literal, table .literal {
+    background:none;
+}
+
+#main a.reference tt.literal {
+    border-bottom:1px #234f32 dotted;
+}
+
+/* Restore colors of pygments hyperlinked code */
+#main .highlight .k a:link, #main .highlight .k a:visited {
+    color:#000000;
+    text-decoration:none;
+    border-bottom:1px dotted #000000;
+}
+
+#main .highlight .nf a:link, #main .highlight .nf a:visited {
+    color:#990000;
+    text-decoration:none;
+    border-bottom:1px dotted #990000;
+}
+
+/*** notes & admonitions ***/
+.note, .admonition {
+    padding:.8em 1em .8em;
+    margin:1em 0;
+    border:1px solid #fee391;
+    background:url(note.png) .8em .8em no-repeat;
+    background-color:#fff7bc;
+}
+
+.admonition-title {
+    font-weight:bold;
+    margin-top:0 !important;
+    margin-bottom:0 !important;
+}
+
+.admonition .last {
+    margin-bottom:0 !important;
+}
+
+.note, .admonition {
+    padding-left:65px;
+    background-image:url(note.png);
+}
+
+div.admonition-philosophy {
+    padding-left:65px;
+    background-color:#fff7f3;
+    border-color:#f4cae4;
+    background-image:url(philosophy.png);
+}
+
+div.admonition-remember {
+    padding-left:65px;
+    background-image::url(remember.png);
+}
+
+/*** versoinadded/changes ***/
+div.versionadded, div.versionchanged {
+}
+
+div.versionadded span.title, div.versionchanged span.title {
+    font-weight:bold;
+}
+
+/*** p-links ***/
+a.headerlink {
+    color:#c60f0f;
+    font-size:0.8em;
+    padding:0 4px 0 4px;
+    text-decoration:none;
+    visibility:hidden;
+}
+
+h1:hover > a.headerlink, h2:hover > a.headerlink, h3:hover > a.headerlink,
+h4:hover > a.headerlink, h5:hover > a.headerlink, h6:hover > a.headerlink,
+dt:hover > a.headerlink { 
+    visibility:visible;
+}
+
+/*** index ***/
+table.indextable td {
+    text-align:left;
+    vertical-align:top;
+}
+
+table.indextable dl, table.indextable dd {
+    margin-top:0;
+    margin-bottom:0;
+}
+
+table.indextable tr.pcap {
+    height:10px;
+}
+
+table.indextable tr.cap {
+    margin-top:10px;
+    background-color:#f2f2f2;
+}
+
+/*** page-specific overrides ***/
+div#contents ul {
+    margin-bottom:0;
+}
+
+div#contents ul li {
+    margin-bottom:0;
+}
+
+div#contents ul ul li {
+    margin-top:0.3em;
+}
+
+/*** IE hacks ***/
+* pre {
+    width:100%;
+}
+
+.clearboth {
+    clear:both;
+}
+
+.linenos {
+    color:#eee;
+}
+
+.centerit, .graphviz {
+    text-align:center;
+    display:block;
+    margin:20px auto;
+}
+
+.output {
+    border:1px solid #d9d6ad;
+    background-color:#efeedb;
+    padding:20px;
+    margin:10px 0;
+}
+
+.rightfloat {
+    float:right;
+}
+
+.side {
+    float:right;
+    padding:0 0 0 20px;
+    border-left:3px solid #d9d6ad;
+    color:#555;
+    width:250px;
+    clear:both;
+}
+
+.a{
+    margin:20px 0;
+    border:1px solid #eee;
+}

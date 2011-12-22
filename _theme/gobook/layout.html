@@ -1,0 +1,111 @@
+{% extends "basic/layout.html" %}
+
+{%- block doctype -%}
+<!DOCTYPE html>
+{%- endblock %}
+
+{%- macro secondnav() %}
+  {%- if prev %}
+    &laquo; <a href="{{ prev.link|e }}" title="{{ prev.title|e }}">previous</a> 
+    {{ reldelim2 }}
+  {%- endif %}
+  {%- if parents %}
+    <a href="{{ parents.0.link|e }}" title="{{ parents.0.title|e }}" accesskey="U">up</a> 
+  {%- else %}
+    <a title="{{ docstitle }}" href="{{ pathto('index') }}" accesskey="U">up</a> 
+  {%- endif %}
+  {%- if next %}
+  {{ reldelim2 }}
+    <a href="{{ next.link|e }}" title="{{ next.title|e }}">next</a> &raquo;
+  {%- endif %}
+{%- endmacro %}
+
+{% block extrahead %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div id="wrapper">
+    <header id="hd">
+        <h1><a href="{{ pathto('index') }}">{{ docstitle }}</a></h1>
+    </header>
+
+    <section id="main">
+        <nav>{{ secondnav() }}</nav>
+        <section id="{{ pagename|replace('/', '-') }}">
+            {% block body %}{% endblock %}
+        </section>         
+        <nav>{{ secondnav() }}</nav>
+        <footer>
+            &copy; <a href="http://big.appspot.com" title="Big Yuuta">Big Yuuta</a>
+            &mdash;
+            <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" title="License">License</a>
+            &mdash;
+            <a href="https://github.com/initpy/go-book/" title="Github Repo">Github</a>
+            &mdash;
+            <a href="{{ pathto('colophon')}}" title="Colophon">Colophon</a>.
+        </footer>
+    </section>
+
+    {% block sidebarwrapper %}
+    <aside id="sidebar">
+        {{ sidebar() }}
+        {%- if last_updated %}
+        <h3>Last update:</h3>
+        <p class="topless">{{ last_updated }}</p>
+        {%- endif %}
+    </aside> 
+    <br class="clearboth" />
+    {% endblock %}
+</div>
+{% endblock %}
+
+{% block sidebarrel %}
+<h3>Browse</h3>
+<ul>
+    {% if prev %}
+    <li>Prev: <a href="{{ prev.link }}">{{ prev.title }}</a></li>
+    {% endif %}
+    {% if next %}
+    <li>Next: <a href="{{ next.link }}">{{ next.title }}</a></li>
+    {% endif %}
+</ul>
+<h3>You are here:</h3>
+<ul>
+    <li>
+    <a href="{{ pathto('index') }}">{{ docstitle }}</a>
+    {% for p in parents %}
+    <ul><li><a href="{{ p.link }}">{{ p.title }}</a>
+        {% endfor %}
+        <ul><li>{{ title }}</li></ul>
+        {% for p in parents %}</li></ul>{% endfor %}
+    </li>
+</ul>  
+{% endblock %}
+
+{# Empty some default blocks out #}
+{% block relbar1 %}{% endblock %}
+{% block relbar2 %}{% endblock %}
+{% block sidebar1 %}{% endblock %}
+{% block sidebar2 %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block sidebarsourcelink %}{% endblock %}
+
+{# Search box #}
+{% block sidebarsearch %}
+    {%- if pagename != "search" %}
+    <div id="searchbox" style="display: none">
+      <h3>{{ _('Quick search') }}</h3>
+        <form class="search" action="{{ pathto('search') }}" method="get">
+          <input type="text" name="q" />
+          <input type="submit" value="{{ _('Go') }}" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        {{ _('Enter search terms.') }}
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+    {%- endif %}
+{% endblock %}
