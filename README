@@ -1,0 +1,14 @@
+Welcome to the Go Book
+**********************
+
+This humble work (in progress) is an online book for learning the Go Programming
+Language (golang) - It is meant for anyone interested in Go, and aims to be easy
+and fun to read --despite my weak English.
+
+You can read it online at: http://go-book.appspot.com 
+
+It is written in reStructuredText and the rendering is done with Sphinx.
+
+Your feedback is really appreciated :)
+
+-Yuuta
