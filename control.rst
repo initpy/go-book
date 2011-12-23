@@ -188,7 +188,6 @@ condition expressed by ``expression2`` is still true.
 .. code-block:: go
     :linenos:
 
-    //infinite loop, no semicolons at all.
     for i:=10; i>0; i--{
         if i<5{
             break 
@@ -205,7 +204,6 @@ if i<5 break the loop! Hence, the program will print numbers 10, 9, 8, 7, 6, 5.
 .. code-block:: go
     :linenos:
 
-    //infinite loop, no semicolons at all.
     for i:=10; i>0; i--{
         if i==5{
             continue
