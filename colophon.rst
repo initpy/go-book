@@ -8,7 +8,7 @@ The font used for the titles is `Rancho Regular`_ released by `Sideshow`_ under
 the `Apache License, version 2.0`_
 
 The examples provided in this book are in public domain. You can do whatever you
-want with them and I claim no responsability over their use. Just leave me
+want with them and I claim no responsibility over their use. Just leave me
 alone.
 
 The whole work is produced in HTML5, and I don't care if your browser is old.

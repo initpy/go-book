@@ -3,9 +3,9 @@
 If you're not a programmer
 **************************
 This chapter is for people who have never written a single program in an
-imperative language. If you are used to languages likes C, C++, Python, Perl,
-Ruby... or if you simply know what the words: variable, constant, type,
-instruction, assignation mean you may (No! You SHOULD!) skip this entirely.
+imperative programming language. If you are used to languages likes C, C++, Python, Perl,
+Ruby or if you know what the words variable, constant, type,
+instruction, assignation mean you may (No! You SHOULD!) skip this section entirely.
 
 
 How do programs work?
@@ -23,7 +23,7 @@ the processor understands.
 
 Think of it as a list of steps to assemble or build something. We said
 *"sequence"* because the **order** of these steps generally amtters a LOT! You
-can't paint the walls of a house when you didn't already built the walls. See?
+can't paint the walls of a house when you haven't built the walls yet. See?
 Order matters!
 
 What are variables?

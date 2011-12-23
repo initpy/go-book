@@ -6,7 +6,7 @@ Hey, you! Yes, you!
 See the little gopher? Isn't it cute? Yes it is! He is the mascot of the Go
 programming language *---Go, what?* Go, the programming language! 
 
-This website is an online book to that aims to introduce people to this awesome
+This website is an online book that aims to introduce people to this awesome
 language. And if you, actually, stumbled upon it while looking for real gophers,
 let me still invite you to read it and learn something cool! 
 
@@ -69,7 +69,7 @@ Like a maestro with his orchestra
 
     Why think of programs as a sequential ballade executed by a single musician?
     We can do better by making every musician do what he/she has to do, and make
-    them *communicate* between them.
+    them *communicate* with one another.
 
 * Introduction to concurrency with Go
 * Communicating with channels
