@@ -23,8 +23,8 @@ Perl and other scripting languages.
 
 In fact, if we were to compare Go to something, it would be a modern C. Yes,
 that's a strong statement that calls for a justification. Being a C programmer
-myself, C has its very own dear place in my heart, a place that won't be shared by
-anything else. But Go earned my respect and that of many othersthanks to its
+myself, C has its very own dear place in my heart, a place that won't be shared
+by anything else. But Go earned my respect and that of many others thanks to its
 simplicity, efficiency and smart concepts that this book aims to demonstrate.
 
 Go comes with some new syntax and idioms but not too many. Enough to make things
@@ -41,14 +41,14 @@ concurrency and communication.
 Why this book?
 ==============
 This modest work is an introduction to the Go language. It is meant to be easy
-to understand by everyone and tries to make this learning experience fun and easy.
-Yes, that's quite a challenge, but... *aude aliquid dignum!* [#f1]_.
+to understand by everyone and tries to make this learning experience fun and
+easy.  Yes, that's quite a challenge, but... *aude aliquid dignum!* [#f1]_.
 
-I personnaly don't buy the *"learn the hard way"* method. Learning
-shouldn't be *hard*! Just remember that we've learnt how to speak while
-playing when we were younger and stupider. And Go, or any other language for
-that matter, is actually a lot easier than any spoken language; there are fewer
-words, fewer syntax rules, fewer idoms...
+I personnaly don't buy the *"learn the hard way"* method. Learning shouldn't be
+*hard*! Just remember that we've learnt how to speak while playing when we were
+younger and stupider. And Go, or any other language for that matter, is actually
+a lot easier than any spoken language; there are fewer words, fewer syntax
+rules, fewer idoms...
 
 So here's the deal and the only condition for learning with this book: take it
 easy. Really, consider it as a game.
