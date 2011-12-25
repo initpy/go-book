@@ -190,6 +190,147 @@ Example:
     a = append(a, b...) //look at this syntax: the slice followed by three dots
     // a == {1, 2, 3, 10, 11, 12}
 
+Using the append function to delete an element
+----------------------------------------------
+Suppose that we have a slice ``s`` and that we would like to delete an element
+from it. There are 3 cases:
+
+* The element we'd like to delete is the first one of the slice.
+* The element we'd like to delete is the last one of the slice
+* The element we'd like to delete is the one at index ``i`` of the slice (where
+  ``i`` is between the first and the last ones)
+
+Let's write a function that deletes the element at a given index ``i`` in a
+given slice of ``int``\s and see how the ``append`` function can help.
+
+.. code-block:: go
+    :linenos:
+
+    package main
+    import "fmt"
+
+    func delete(i int, slice []int) []int{
+        switch i {
+            case 0: slice = slice[1:] 
+            case len(slice)-1: slice = slice[:len(slice)-1]
+            default: slice = append(slice[:i], slice[i+1:]...)
+        }
+        return slice
+    }
+
+    func main(){
+        s := []int {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+        fmt.Println("In the beginning...")
+        fmt.Println("s = ", s)
+        fmt.Println("Let's delete the first element")
+        s = delete(0, s)
+        fmt.Println("s = ", s)
+        fmt.Println("Let's delete the last element")
+        s = delete(len(s)-1, s)
+        fmt.Println("s = ", s)
+        fmt.Println("Let's delete the 3rd element")
+        s = delete(2, s)
+        fmt.Println("s = ", s)
+    }
+
+Output:
+
+.. container:: output
+
+    | In the beginning...
+    | s =  [1 2 3 4 5 6 7 8 9 10]
+    | Let's delete the first element
+    | s =  [2 3 4 5 6 7 8 9 10]
+    | Let's delete the last element
+    | s =  [2 3 4 5 6 7 8 9]
+    | Let's delete the 3rd element
+    | s =  [2 3 5 6 7 8 9]
+
+The lines 6 and 7 of our program are pretty easy to understand. Aren't they? We
+just re-slice our slice to omit the first and the last elements respectively.
+
+Now, the case where the element is not the first nor the last one. We assign to
+our slice the result of ``append`` of the slice starting from the first up to,
+but not including, the ``i`` :sup:`th` element and the slice that starts from
+the element after the ``i`` :sup:`th` (i.e. i+1) up to the last one. That is, we
+made our slice contain elements from the right sub-slice and the left one to the
+element that we want to delete.
+
+.. graphviz::
+
+    digraph delete_from_slice {
+
+        //rankdir=LR;
+        graph [bgcolor=transparent, resolution=96, fontsize="10" ];
+        edge [arrowsize=.5, arrowtail="dot", color="#FF6600"];
+        node [fontsize=8, height=.1, penwidth=.4]
+        s [shape=plaintext, label=<
+        <table cellspacing="0" border="0" cellborder="1" cellpadding="8">
+            <tr>
+                <td bgcolor="lightpink" port="f0">2</td>
+                <td bgcolor="lightpink">3</td>
+                <td>4</td>
+                <td bgcolor="lightblue" port="f1">5</td>
+                <td bgcolor="lightblue">6</td>
+                <td bgcolor="lightblue">7</td>
+                <td bgcolor="lightblue">8</td>
+                <td bgcolor="lightblue">9</td>
+                <td border="0">s</td>
+            </tr>
+            <tr>
+                <td border="0">0</td>
+                <td border="0">1</td>
+                <td border="0">2</td>
+                <td border="0">3</td>
+                <td border="0">4</td>
+                <td border="0">5</td>
+                <td border="0">6</td>
+                <td border="0">7</td>
+                <td border="0"></td>
+            </tr>
+        </table>>]
+        s1 [shape=plaintext, label=<
+        <table cellspacing="0" border="0" cellborder="1" cellpadding="8">
+            <tr>
+                <td bgcolor="lightpink" port="f0">2</td>
+                <td bgcolor="lightpink">3</td>
+                <td bgcolor="lightblue" port="f1">5</td>
+                <td bgcolor="lightblue">6</td>
+                <td bgcolor="lightblue">7</td>
+                <td bgcolor="lightblue">8</td>
+                <td bgcolor="lightblue">9</td>
+                <td border="0">new s after deleting<br />the 3rd element</td>
+            </tr>
+            <tr>
+                <td border="0">0</td>
+                <td border="0">1</td>
+                <td border="0">2</td>
+                <td border="0">3</td>
+                <td border="0">4</td>
+                <td border="0">5</td>
+                <td border="0">6</td>
+                <td border="0"></td>
+            </tr>
+        </table>>]
+        s1:f0:n->s:f0:s
+        s1:f1:n->s:f1:s
+        {rank=sink; s1}
+    }
+
+Simple, isn't it? Now, we actually complicated the ``delete`` function in vain.
+We could have written it like this:
+
+.. code-block:: go
+    :linenos:
+    
+    //simpler delete
+    func delete(i int, slice []int) []int{
+        slice = append(slice[:i], slice[i+1:]...)
+        return slice
+    }
+
+Yes, it will work. Go and try it. Can you figure out why? (**Hint**: empty)
+
 Recursive functions
 ===================
 Some algorithmic problems can be thought of in a beautiful way using
