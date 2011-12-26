@@ -4,7 +4,7 @@ More on interfaces
 ******************
 We discovered the magic of interfaces in the previous chapter, and how a simple
 concept as defining a type's behavior can offer tremendous opportunities.
-I you haven't read the previous chapter, you shouldn't read this one, simply
+If you haven't read the previous chapter, you shouldn't read this one, simply
 because most of what we're about to study depends on a good understanding of the
 previous chapter.
 
@@ -308,8 +308,8 @@ Output:
     | (name: Martha - age: 74 years)
     | (name: Leo - age: 4 years)
 
-The example is idiotic but it worked as desired. Mind you, interfaces embedding
-can be very useful, you can find some interfaces embedding in some Go packages
+The example is idiotic but it worked as desired. Mind you, interface embedding
+can be very useful, you can find some interface embedding in some Go packages
 as well. For example, the `container/heap`_ package that provides heap
 operations of data collections that implement this interface:
 
@@ -323,7 +323,7 @@ operations of data collections that implement this interface:
         Pop() interface{} //a Pop elements that pops elements from the heap
     }
 
-Another example is the `io.ReadWriter`_ interface that is a combinaison of two
+Another example is the `io.ReadWriter`_ interface that is a combination of two
 interfaces: `io.Reader`_ and `io.Writer`_ both also defined in this package.
 
 .. code-block:: go
@@ -336,7 +336,7 @@ interfaces: `io.Reader`_ and `io.Writer`_ both also defined in this package.
     }
 
 Types that implement io.ReadWriter can read and write since they implement both
-interfaces Reader and Writer.
+Reader and Writer interfaces. 
 
 .. external links and footnotes:
 
