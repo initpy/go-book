@@ -12,10 +12,10 @@ the array or the slice.
 
 This is nice and quite useful. Now suppose that you'd like to access and modify
 elements given a kind of a name (and not an integer index). For example: Say,
-access the difinition of the word "Hello" in a dictionnary, find out the capital 
+access the definition of the word "Hello" in a dictionary, find out the capital 
 of "Japan".
 
-This calls for a new kind of types. A type where I can give it a *key* to
+This calls for a new kind of type. A type where I can give it a *key* to
 retrieve a *value*. It's not about the n\ :sup:`th` element of a sequence, it's
 about an *association* of things (keys) with other things (values).
 
@@ -35,7 +35,7 @@ For example:
     var numbers map[string] int //declare a map of strings to ints
 
 You can access and assign a value to an *entry* of this map using the square
-bracket syntax as in arrays, but instead of an ``int`` index you use a key of
+bracket syntax as in arrays or slices, but instead of an ``int`` index you use a key of
 the ``keyType`` type.
 
 Also, like with slices, since maps are reference types, one can make them using
@@ -150,7 +150,7 @@ The value type in our example is ``float32``, so it will return 0.00
     csharp_rating := rating["C#"]
     //csharp_rating == 0.00
 
-But then, if the value associated with an inexisting key is the zero of the type
+But then, if the value associated with an inexistent key is the zero of the type
 value, how can we be sure that C#'s rating is actually 0.00? In other words: is
 C#'s rating actually 0.00 so we can say that as a language it *stinks* or did we
 not jus rate it at all?
@@ -383,11 +383,11 @@ exists in a given map. And we also learned about the *blank identifier* and the
 
 Yes, the ``range`` clause, especially, is a control flow construct that should
 belong in the chapter about :doc:`control flow<control>`, but we didn't knew
-about arrays, slices or maps, then. This is why we defered it. 
+about arrays, slices or maps, then. This is why we deferred it. 
 
 The next chapter will be about things that we didn't mention about functions in
 the chapter about :doc:`functions <functions>` for the same reason: lack of
-prealable knowledge, or simply because I wanted the chapter to be light so we
+prior exposure, or simply because I wanted the chapter to be light so we
 can make progress with advanced data structures. 
 
 Anyways, you'll see, it will be fun! See you! :)

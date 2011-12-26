@@ -133,7 +133,7 @@ type ``Student`` or ``Employee``, or even... ``Human``!  Because they all
 implement methods specified in the ``Men`` interface.
 
 Now think with me: if ``m`` can store values of these different types, we can
-easily declare a slice of type ``Men`` that will contain heterogynous values,
+easily declare a slice of type ``Men`` that will contain heterogeneous values,
 and this was not possible with slices of classical types.
 
 Let's see an example:
@@ -272,8 +272,8 @@ How is this even useful? Read on, you'll see.
 Functions with interface parameters
 ===================================
 The examples above showed us how an interface variable can store any value of
-any type that satsifies this interface, and gave us an idea of how we can
-construct containers of hetergenous data.
+any type that satisfies this interface, and gave us an idea of how we can
+construct containers of heterogeneous data.
 
 In the same train of thought, we can consider function (and methods) that
 accept interfaces as parameters in order, justly, to be used with any type that
@@ -337,7 +337,7 @@ Output:
 Look at how we used ``fmt.Print``, we gave it ``Bob``, a variable of type
 ``Human``, and it printed it so nicely! All we had to do is make the ``Human``
 type implement a simple method ``String`` that returns a string, which means
-that we made ``Human`` satisfy the interface ``fmt.Srtinger``.
+that we made ``Human`` satisfy the interface ``fmt.Stringer``.
 
 Do you remember the :ref:`colored boxes example<colored-boxes-example>`? We had
 a type named ``Color`` that implemented a ``String`` method too. Go back to that

@@ -11,12 +11,12 @@ And now, armed with this knowledge, we're ready to work on advanced aspects of
 functions. 
 
 I decided to divide this task in two chapters, not because the things we're
-about to study are hard, but mainly becayse it's easier, and more fun to work on
+about to study are hard, but mainly because it's easier, and more fun to work on
 a few topics at a time. 
 
 Variadic functions
 ==================
-Do you remember when I made you :ref:`cringe <Older100>` of the idea of writing
+Do you remember when I made you :ref:`cringe <Older100>` at the idea of writing
 a function ``Older100`` that will not accept less than 100 ``person``\s?
 ``struct``\s as its input?
 
@@ -557,11 +557,11 @@ At the end, we return the slice ``result`` converted to a string, using a type
 casting and ``nil`` which means that there was no error while retrieving the
 contents of the file.
 
-I know, this example may look a little bit hard, espcieally since we never use
+I know, this example may look a little bit hard, especially since we have never used
 the ``os`` package before, but the main goal of it is to show you a use of the
 ``defer`` statement. And how it can be used to guarantee two things:
 
-- Using ``defer f.Close()`` in the begining makes sure that you will never
+- Using ``defer f.Close()`` in the beginning makes sure that you will never
   forget to close the file, no matter how the function might change in the
   future, and no matter how many ``return`` spots will be added/removed from it.
 
@@ -572,7 +572,7 @@ Multiple defer calls
 --------------------
 You can defer as many function calls as you want, and they'll be executed before
 the containing function returns in a LIFO (Last In First Out) order. That is,
-the last one to be defered will be run first, and the first one will be excuted
+the last one to be deferred will be run first, and the first one will be executed
 at last.
 
 Example:

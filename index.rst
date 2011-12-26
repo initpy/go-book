@@ -33,7 +33,7 @@ Let's combine stuff
 ===================
 .. container:: side
 
-    Now, it's time to play like with LeGos. We use primitive data types and
+    Now, it's time to play like with Legos. We use primitive data types and
     basic control structures, that we saw in the previous part, to build
     composite types and functions.
 
