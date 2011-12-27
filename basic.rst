@@ -2,7 +2,7 @@
 
 The basic things
 ****************
-In the previous chapter, we saw that Go programs are orginized in *packages* and
+In the previous chapter, we saw that Go programs are organized in *packages* and
 that Go natively supports UTF-8 for strings and identifiers. In this chapter we
 will see how to declare and use variables and constants and the different Go
 built-in types.
@@ -10,7 +10,7 @@ built-in types.
 
 How to declare a variable?
 ==========================
-There are sevral ways to declare a variable in Go. 
+There are several ways to declare a variable in Go. 
 
 The basic form is: 
 
@@ -19,7 +19,7 @@ The basic form is:
     // declare a variable named "variable_name" of type "type"
     var variable_name type
 
-You can declare sevral variables of the same type in a single line, by
+You can declare several variables of the same type in a single line, by
 separating them with commas.
 
 .. code-block:: go
@@ -31,23 +31,23 @@ And you can initialize a variable when declaring it too
 
 .. code-block:: go
 
-    /* declare a variable named "variable_name" of type "type" and initalize it
+    /* declare a variable named "variable_name" of type "type" and initialize it
         to value*/
         var variable_name type = value
 
-You can even initalize many variables that are declared in the same statement
+You can even initialize many variables that are declared in the same statement
 
 .. code-block:: go
 
-    /* declare a var1, var2, var3 of type "type" and initalize them to value1,
+    /* declare a var1, var2, var3 of type "type" and initialize them to value1,
     value2, and value3 respectively*/
     var var1, var2, var3 type = value1, value2, value3
 
-Guess what? You can omit the type and it will be infered from the initalizers
+Guess what? You can omit the type and it will be inferred from the initializers
 
 .. code-block:: go
 
-    /* declare and initialize var1, var2 and var3 and initalize them to
+    /* declare and initialize var1, var2 and var3 and initialize them to
     respectively: value1, value2, and value3 /
     var var1, var2, var3 = value1, value2, value3
 
@@ -81,10 +81,10 @@ one of the values: ``true`` or ``false``.
     
     //Example snippet
     var active bool //basic form
-    var enabled, disabled = true, false //type ommited, varables initialized
+    var enabled, disabled = true, false //type omitted, variables initialized
     func test(){
         var available bool //general form
-        valid := false //type and var omited, and variable initalized
+        valid := false //type and var omitted, and variable initialized
         available = true //normal assignation 
     }
     
@@ -153,11 +153,11 @@ From the `Go Programming Language Specification`_
     
     //Example snippet
     var i int32 //basic form with a int32
-    var x, y, z = 1, 2, 3 //type omited, variables initialized
+    var x, y, z = 1, 2, 3 //type omitted, variables initialized
     func test(){
         var pi  float32 //basic form
-        one, two, thre := 1, 2, 3 //type and var omited, variables initialized
-        c := 10+3i // a complex number, type infered and keyword 'var' omited.
+        one, two, thre := 1, 2, 3 //type and var omitted, variables initialized
+        c := 10+3i // a complex number, type infered and keyword 'var' omitted.
         pi = 3.14 // normal assignation 
     }
 
@@ -173,8 +173,8 @@ between two double quotes (") and their type is -you bet!- ``string``.
     var french_hello string //basic form
     var empty_string string = "" // here empty_string (like french_hello) equals ""
     func test(){
-        no, yes, maybe := "no", "yes", "maybe" //var and type omited
-        japanese_hello := "Ohaiou"  //type inferred, var keyword omited
+        no, yes, maybe := "no", "yes", "maybe" //var and type omitted
+        japanese_hello := "Ohaiou"  //type inferred, var keyword omitted
         french_hello = "Bonjour" //normal assignation 
     }
 
@@ -272,7 +272,7 @@ Example:
 
 
 Well, that's it for this chapter. I told you, it won't be hard. In fact, Go
-eases variables declarations a lot. You'd almost feel like coding with a
+eases variable declarations a lot. You'd almost feel like coding with a
 scripting language like python --and it's even better.
 
 .. external links and footnotes:

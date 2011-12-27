@@ -10,7 +10,7 @@ When you declare a variable in your program, you know that this variable
 occupies a place in your memory (RAM), right? Because when you access it, when
 you change its value, it must exist somewhere!
 
-And this *somewhere* is the variable's *adress* in memory.
+And this *somewhere* is the variable's *address* in memory.
 
 .. graphviz::
 
@@ -43,9 +43,9 @@ For example, the variable ``i`` can occupy 4 bytes of your RAM starting from the
 starting from the 105th byte to the 116th byte.
 
 The first byte's number of the space occupied by the variable is called its
-adress.
+address.
 
-And we use the ``&`` operator to find out the adress of a given variable.
+And we use the ``&`` operator to find out the address of a given variable.
 
 .. code-block:: go
     :linenos:
@@ -62,25 +62,25 @@ And we use the ``&`` operator to find out the adress of a given variable.
     )
 
     func main() {
-        fmt.Println("Hexadecimal adress of i is: ", &i)
-        fmt.Println("Hexadecimal adress of hello is: ", &hello)
-        fmt.Println("Hexadecimal adress of pi is: ", &pi)
-        fmt.Println("Hexadecimal adress of c is: ", &c)
+        fmt.Println("Hexadecimal address of i is: ", &i)
+        fmt.Println("Hexadecimal address of hello is: ", &hello)
+        fmt.Println("Hexadecimal address of pi is: ", &pi)
+        fmt.Println("Hexadecimal address of c is: ", &c)
     }
 
 Output:
 
 .. container:: output
 
-    | Hexadecimal adress of i is:  0x4b8018
-    | Hexadecimal adress of hello is:  0x4b8108
-    | Hexadecimal adress of pi is:  0x4b801c
-    | Hexadecimal adress of c is:  0x4b80b8
+    | Hexadecimal address of i is:  0x4b8018
+    | Hexadecimal address of hello is:  0x4b8108
+    | Hexadecimal address of pi is:  0x4b801c
+    | Hexadecimal address of c is:  0x4b80b8
 
-You see? Each variable has its own adress, and you can guess that the adresses
+You see? Each variable has its own address, and you can guess that the addresses
 of variables depend on the amount of RAM occupied by some other variables.
 
-The variables that can *store* other variables' adresses are called *pointers*
+The variables that can *store* other variables' addresses are called *pointers*
 to these variables.
 
 How to declare a pointer?
@@ -97,8 +97,8 @@ Example:
     var hello string
     var p *int //p is of type *int, so p is a pointer to variables of type int
 
-    //we can assign to p the adress of i like this:
-    p = &i //now p points to i (i.e. p stores the adress of i
+    //we can assign to p the address of i like this:
+    p = &i //now p points to i (i.e. p stores the address of i
     hello_ptr := &hello //hello_ptr is a pointer variable of type *string and it points hello
 
 
@@ -108,13 +108,13 @@ How to access the value of a pointed-to variable?
 If ``Ptr`` is a pointer to ``Var`` then ``Ptr == &Var``. And ``*Ptr == Var``.
 
 In other words: you precede a variable with the ``&`` operator to obtain its
-adress (a pointer to it), and you precede a pointer by the ``*`` operator to
+address (a pointer to it), and you precede a pointer by the ``*`` operator to
 obtain the value of the variable it points to. And this is called:
 *dereferencing*.
 
 .. admonition:: Remember
 
-    * ``&`` is called the adress operator.
+    * ``&`` is called the address operator.
     * ``*`` is called the dereferencing operator.
 
 .. code-block:: go
@@ -127,7 +127,7 @@ obtain the value of the variable it points to. And this is called:
         hello := "Hello, mina-san!"
         //declare a hello_ptr pointer variable to strings
         var hello_ptr *string
-        // make it point our hello variable. i.e. assign its adress to it
+        // make it point our hello variable. i.e. assign its address to it
         hello_ptr = &hello
         // and int variable and a pointer to it
         i := 6
@@ -164,7 +164,7 @@ Output:
     }
 
 
-And that is all! Pointers are variables that store other variables adresses, and
+And that is all! Pointers are variables that store other variables addresses, and
 if a variable is of type ``int``, its pointer will be of type ``*int``, if it is
 of type ``float32``, its pointer is of type ``*float32`` and so on...
 
@@ -180,7 +180,7 @@ You'll say: I'll prepare some variables just in case. But wait, what if the
 number of new variables differs on each execution of your program?
 
 The answer is *runtime allocation*: your program will *allocate* some memory to
-store some data while it is runing.
+store some data while it is running.
 
 .. _function-new:
 

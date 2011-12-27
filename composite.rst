@@ -193,7 +193,7 @@ Ok, let's see how to solve these kind of problems using arrays.
 
 Arrays
 ======
-An array is a *block* of **n** *consucitive* objects of the same **type**. That
+An array is a *block* of **n** *consecutive* objects of the same **type**. That
 is a *set* of indexed objects, where you can say: *object number 1*, *object
 number 2*, etc... 
 
@@ -280,9 +280,9 @@ The idea now is to write a function ``Older10`` that takes an array of 10
 
     //return the older person in a group of 10 persons
     func Older10(people [10]person) person{
-        older := people[0] //the first one is yje older for now
+        older := people[0] //the first one is the older for now
         //loop through the array and check if we could find an older person.
-        for i:= 1; i<10; i++{ //we skiped the first here
+        for i:= 1; i<10; i++{ //we skipped the first here
             if people[i].age > older.age{ //compare the current's person age with the older one
                 older = people[i] //if people[i] is older, replace the value of older
             }

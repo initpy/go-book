@@ -61,7 +61,7 @@ you write, or that already are brought to your by Go itself, can be used many
 times without rewriting the functionalities they provide each and every time you
 need them.
 
-For now, you can just think of package from the perspective of their *rasion
+For now, you can just think of packages from the perspective of their *rasion
 d'être* and advantages. Later we will see how to create our own packages.
 
 The main function
