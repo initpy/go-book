@@ -2,16 +2,16 @@
 
 Basic Control flow
 ******************
-So in the previous chapter, we learned how to declare variables and constants,
-and we saw the different basic, builtin types that come with Go. In this
-chapter, we will see the basic control constructions, or how to *process* this
-data. But before that, let's talk about comments and semicolons.
+In the previous chapter, we learned how to declare variables and constants.
+We also saw the different basic, builtin types that come with Go. In this
+chapter, we will see the basic control constructions, or how to *reason about*
+this data. But before that, let's talk about comments and semicolons.
 
 Comments
 ========
 You probably noticed in the example snippets given in previous chapters, some
 comments. Didn't you?
-Go, have the same comments convention as in C++. That is:
+Go has the same commenting conventions as in C++. That is:
 
 * Single line comments: Everything from ``//`` until the end of the line is a
   comment.
@@ -21,8 +21,8 @@ Go, have the same comments convention as in C++. That is:
     :linenos:
 
     //Single line comment, this is ignored by the compiler.
-    /* Everything from now on until the keyword var on line 4
-    is a comment, and is ignored by the compiler*/
+    /* Everything from the beginning of this line until the keyword 'var' on
+    line 4 is a comment and ignored by the compiler. */
     var(
         i int
         pi = float32
@@ -38,11 +38,11 @@ line end that looks like the end of a statement.
 
 And this makes the code a lot cleaner, and easy on the eyes.
 
-the only place you typically see semicolons is separating the clauses of for
-loops and the like; they are not necessary after every statement.
+The only place you will typically see semicolons is separating the clauses of
+for loops and the like; they are not necessary after every statement.
 
-Note that you can use semicolons to separate several statements written on the
-same line.
+Note that you can use semicolons to separate several statements written on a
+single line.
 
 The one surprise is that it's important to put the opening brace of a construct
 such as an if statement on the same line as the if; if you don't, there are
@@ -93,7 +93,7 @@ You can combine multiple if/else statements.
 
 The for statement
 =================
-The ``for`` statement is used for iterations and loops.
+The ``for`` statement is used to iterate and loop.
 Its general syntax is:
 
 .. code-block:: go
@@ -125,29 +125,31 @@ An example would be better than the previous paragraph, right? Here we go!
         fmt.Println("sum is equal to ", sum)
     }
 
-we initalize our variable ``sum`` to 0; and we start our ``for`` loop with
-initializing the variable ``i`` to 0; (``i:=0``) and we execute the for loop's
-body (``sum += i``) *while* the condition ``i<10`` is met, and at the end of
-each iteration, we execute the ``i++`` expression (increment i)
+In the code above we initalize our variable ``sum`` to 0. The ``for`` loop by
+is begun by initializing the variable ``i`` to 0 (``i:=0``).
+Next the ``for`` loop's body is executed (``sum += i``) *while* the condition ``i<10`` is
+true. At the end of each iteration the ``for`` loop will execute the ``i++``
+expression (eg. increments ``i``).
 
-So you guess, the output from the previous program would be:
+You might guess that the output from the previous program would be:
 
 .. container:: output
 
     | sum is equal to  45
 
-Because: sum = 0+1+2+3+4+5+6+7+8+9 = 45
+And you would be correct!
+Because the sum is 0+1+2+3+4+5+6+7+8+9 which equals 45.
 
 **Question:** Is it possible to combine lines 5 and 6 into a single one, in the
 previous program? How?
 
 Actually ``expression1``, ``expression2``, and ``expression3`` are all optional.
-This means you can omit, one, two or all of them in a for loop. If you omit
+This means you can omit, one, two or all of them in a ``for`` loop. If you omit
 ``expression1`` or ``expression3`` it means they simply won't be executed. If
 you omit ``expression2`` that'd mean that it is always true and that the loop
-will ieterate for ever -unless a ``break`` statement is met.
+will iterate forever -- unless a ``break`` statement is encountered.
 
-And since these expressions may be omitted, you can have something like:
+Since these expressions may be omitted, you can have something like:
 
 .. code-block:: go
     :linenos:
@@ -169,7 +171,7 @@ Which can be simplified by removing the semicolons:
         sum += sum
     }
 
-Or when even expression2 is omitted too, have something like this:
+Or when even expression2 is omitted also, we can have something like:
 
 .. code-block:: go
     :linenos:
@@ -182,7 +184,7 @@ Or when even expression2 is omitted too, have something like this:
 break and continue
 ==================
 
-With ``break`` you can quit loops early. i.e. finish the loop even if the
+With ``break`` you can stop loops early. i.e. finish the loop even if the
 condition expressed by ``expression2`` is still true.
 
 .. code-block:: go
@@ -195,8 +197,9 @@ condition expressed by ``expression2`` is still true.
         fmt.Println("i")
     }
 
-The previous snippet says: loop from 10 to 0, and print the numbers (line 6) but
-if i<5 break the loop! Hence, the program will print numbers 10, 9, 8, 7, 6, 5.
+The previous snippet says: loop from 10 to 0 printing the numbers (line 6); but
+if i<5 then break (stop) the loop!
+Hence, the program will print the numbers: 10, 9, 8, 7, 6, 5.
 
 ``continue``, on the other hand will just break the current iteration and
 *skips* to the next one.
@@ -221,7 +224,7 @@ Sometimes, you'll need to write a complicated chain of ``if``/``else`` tests.
 And the code becomes ugly and hard to read and maintain. The ``switch``
 statement, makes it look nicer and easier to read.
 
-Go's swith is more flexible than its C equivalent, because the case expression
+Go's switch is more flexible than its C equivalent, because the case expression
 need not to be constants or even integers.
 
 The general form of a switch statement is
@@ -243,7 +246,7 @@ The general form of a switch statement is
 
 The type of ``sExpr`` and the expressions ``expr1``, ``expr2``, ``expr3``...
 type should match. i.e. if ``var`` is of type *int* the cases expressions should
-be of type *int* too!
+be of type *int* also!
 
 Of course, you can have as many cases you want.
 
@@ -256,13 +259,13 @@ the cases expressions.
 If more than one case statements match, then the first in lexical order is
 executed.
 
-The *default* case is optional and can be anywhere within the switch block, and
+The *default* case is optional and can be anywhere within the switch block,
 not necessarily the last one.
 
 Unlike certain other languages, each case block is independent and code does not
-"fall through" (each of the case code blocks are like independent if-else code
-blocks. There is a fallthrough statement that you can explicitly use to obtain
-that behavior.)
+"fall through" (each of the case code blocks are like independent if-else-if
+code blocks. There is a fallthrough statement that you can explicitly use to
+obtain fall through behavior if desired.)
 
 Some switch examples:
 ---------------------
@@ -340,8 +343,8 @@ reached?
     }
 
 In this example, the case on line 10 matches, but since there is
-``fallthrough``, the code for ``case 7:`` and so on will be executed too (just
-like a C switch that doesn't use the ``break`` keyword)
+``fallthrough``, the code for ``case 7:`` and so on will also be executed (just
+like a C switch that doesn't use the ``break`` keyword).
 
 
 .. [#f1] http://golang.org/doc/go_tutorial.html#tmp_33
