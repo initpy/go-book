@@ -10,8 +10,8 @@ structures.
 
 The problem
 ===========
-Say, you have to write a program where you have to retrieve the maximum value of
-two integers A and B. That's easy with a simple *if* statement, right?
+Let's say that we have to write a program to retrieve the maximum value of
+two integers A and B. That's easy to do with a simple *if* statement, right?
 
 .. code-block:: go
     :linenos:
@@ -23,7 +23,7 @@ two integers A and B. That's easy with a simple *if* statement, right?
         fmt.Print("The max is B")
     }
 
-Now, imagine that you have to make such a comparison many times in your program.
+Now, imagine that we have to make such a comparison many times in our program.
 Writing the previous snippet every time becomes a real chore, and error-prone.
 This is why we need to *encapsulate* this snippet in a code block, give it a
 name and then call this code block every time we need to know the max of two
@@ -46,19 +46,20 @@ numbers.  This code block is what we call a function.
     }
 
 
-A function is a code block that takes some entries and returns some results.
+A *function* is a code block that takes some items and returns some results.
+
 If you've ever done some electronics, you'd see that functions really look like
-electronic circuits or chips. You need to amplify a signal? Take an amplifier
-chipset. Need to filter, use a filter chipset and so on...
+electronic circuits or chips. Need to amplify a signal? Take an amplifier
+chipset. Need to filter? Use a filter chipset and so on...
 
-Your job as a software developper will be much more easier, and fun once you
-start to think of a complex project as a set of modules for witch the input are
-the output of another module. The complexity will be reduced, and the debugging
-will be easier too.
+Your job as a software developer will be much easier, and far more fun once you
+start to think of a complex project as a set of modules for which the input is
+from the output of another module. The complexity of the solution will be
+reduced, and the debugging will be made easier also.
 
-Let's see how to apply this sort of design to this problem: suppose you have a
-function MAX(A, B) that takes two integers A, and B and returns one output M
-that is the bigger value of A, and B:
+Let's see how to apply this sort of design to the following problem:
+suppose we have a function MAX(A, B) which takes two integers {A, B} and returns
+a single integer output M which is the larger value of both A and B:
 
 .. graphviz::
 
@@ -73,8 +74,8 @@ that is the bigger value of A, and B:
         block->M;
     }
 
-By reusing the function ``MAX`` one can compute the maximum value of three
-values: A, B, and C like this:
+By reusing the function ``MAX`` we can compute the maximum value of three
+values: A, B and C as follows:
 
 .. graphviz::
 
@@ -94,9 +95,9 @@ values: A, B, and C like this:
     }
 
 
-This is a very simple example actually, and in practice you probably should
-write a ``MAX3`` function that takes 3 input integers and returns a single
-integer, instead of reusing the function ``MAX``.
+This is a very simple example actually. In practice you probably should write a
+``MAX3`` function that takes 3 input integers and returns a single integer,
+instead of reusing the function ``MAX``.
 
 Of course, you can *inject* the output of a function into another if and only if
 the types match.
@@ -117,15 +118,15 @@ The general syntax of a function is:
 
 The details:
 
-* The keyword ``func`` is used to declare a function of name *funcname*
-* A function may take as many input parameters as you want. each one followed
+* The keyword ``func`` is used to declare a function of name *funcname*.
+* A function may take as many input parameters as required. Each one followed
   by its type and all separated by commas.
-* A function may return many result values as well.
+* A function may return many result values.
 * In the previous snippet, ``result1`` and ``result2`` are called
   *named result parameters*, if you don't want to name the return parameters,
-  you can just specify the types, separated with commas.
+  you can instead specify only the types, separated with commas.
 * If your function returns only one output value, you may omit the parenthesis
-  arround the output values.
+  arround the output declaration portion.
 * If your function doesn't return any value, you may omit it entirely.
 
 Some examples to better understand these rules:
@@ -169,12 +170,13 @@ Output:
     | max(4, 5) = 5
 
 
-Our function *MAX* takes two input parameters A and B, and returns a single int.
+Our function *MAX* takes two input parameters A and B, and returns a single
+*int*.
 Notice how we grouped A and B's types. We could have written: MAX(A int, B int),
-but it's shorter this way.
+however, it is shorter this way.
 
-Notice also that we prefered not to name our output value. We just specified its
-type (int)
+Notice also that we prefered not to name our output value. We instead specified
+the output type (*int*).
 
 A function with two ouput values
 --------------------------------
@@ -262,17 +264,16 @@ Outputs:
     | The square root of 10.000000 is 3.162278
 
 
-Here we import the package "math" in order to use the Sqrt (Square root)
-function it provides, and we write our own function ``MySqrt`` that will return
-two values: the first one is boolean (indicates whether a square root is
-possible) and the second one is the actual sqaure root of the input parameter
-``f``.
+Here we *import* the package "math" in order to use the *Sqrt* (Square root)
+function it provides. We then write our own function ``MySqrt`` which returns
+two values: the first is boolean (indicates whether a square root is
+possible) and the second is the actual sqaure root of the input parameter ``f``.
 
 Notice how we use the parameters ``ok`` and ``s`` as actual variables in the
 function's body.
 
 Since result variables are initialized to "zero" (0, 0.00, false...) according
-to its type, we can rewrite the previous example as follow:
+to its type, we can rewrite the previous example as follows:
 
 .. code-block:: go
     :linenos:
@@ -293,7 +294,7 @@ When using named output variables, if the function executes a return statement
 with no arguments, the current values of the result parameters are used as the
 returned values.
 
-We can rewrite the previous example as follow:
+Thus, we can rewrite the previous example as follow:
 
 .. code-block:: go
     :linenos:
@@ -312,10 +313,10 @@ We can rewrite the previous example as follow:
 
 Parameters by value, and by reference
 =====================================
-When passing an input parameter to a function, it actually recieves a copy of
+When passing an input parameter to a function, it actually recieves a *copy* of
 this parameter. So, if the function changes the value of this parameter, the
-original variable's value won't be changed, because the function *works* on a
-copy of this variable.
+original variable's value won't be changed, because the function works on a
+*copy* of the original variable's value.
 
 An example to verify the previous paragraph:
 
@@ -351,12 +352,12 @@ An example to verify the previous paragraph:
 You see? The value of ``x`` wasn't changed by the call of the function ``add1``
 even though we had an explicit ``a = a+1`` instruction on line 6.
 
-The reason is simple: when we called the function ``add1``, it recieved a copy
-of the variable ``x`` and not ``x`` itself, hence it changed the value of this
-copy, not ``x`` itself.
+The reason is simple: when we called the function ``add1``, it recieved a *copy*
+of the variable ``x`` and not ``x`` itself, hence it changed the copy's value,
+not the value of ``x`` itself.
 
-I know the question you have in mind: *"What if I wanted the value of x to be
-changed by calling the function?"*
+I know the question you have in mind:
+*"What if I wanted the value of x to be changed by calling the function?"*
 
 And here comes the utility of pointers: Instead of writing a function that has
 an ``int`` input parameter, we should give it a pointer to the variable we want
@@ -398,14 +399,15 @@ Now, we have changed the value of ``x``!
 
 How is passing a reference to functions is useful? You may ask.
 
-* The first reason is that passing a reference makes functions *cooperation* on
+* The first reason is that passing a reference makes function *cooperation* on
   a single variable possible. In other words, if we want to apply several
   functions on a given variable, they will all be able to change it.
 
 * A pointer is cheap. Cheap in terms of memory usage. We can have functions that
-  operate on a big data for example. And copying this data will of course
-  require memory on each call. A pointer takes much less memory. Yo!  Remember,
-  it's just an adress! :)
+  operate on a big data value for example. Copying this data will, of course,
+  require memory on each call as it is copied for use by the function.
+  In this way, a pointer takes much less memory.
+  Yo! Remember, it's just an adress! :)
 
 .. _functions-signatures:
 
@@ -413,32 +415,33 @@ Functions signatures
 ====================
 Like with people, names don't matter that much. Do they? Well, yes, let's face
 it, they do matter, but what matters most is what they do, what they need, what
-they produce.
+they produce (Yeah you! Get back to work!).
 
-In our previous example, we could have called our function add_one instead of
-add1, and that would still work as long as we call it by its name. What really
-matters in our function is:
+In our previous example, we could have called our function **add_one** instead of
+**add1**, and that would still work as long as we call it by its name.
+What really matters in our function is:
 
 1. Its input parameters: how much? which types?
 2. Its output parameters: how much, which type?
 3. Its body code: What does the function do?
 
 We can rewrite the function's body to work differently, and the main program
-would compile without problems. But we can't change the input and output
-parameters in the function's declaration and still use its old parameters in the
-main program.
+would continue to compile and run without problems. But we can't change the
+input and output parameters in the function's declaration and still use its old
+parameters in the main program.
 
 In other words, of the 3 elements we listed above, what matters even more is:
-what input parameters does the function expects, and what parameters does it
-return.
+what input parameters does the function expect, and what output parameters does
+it return.
 
-These two elements are what we call a signature, and we use this formalism:
+These two elements are what we call a *function signature*, for which we use
+this formalism:
 
-func (input1 type1, ...) (output1 OutputType1...)
+``func (input1 type1 [, input2 type2 [, ...]]) (output1 OutputType1 [, output2 OutputType2 [,...]])``
 
 Or optionally with the function's name:
 
-func function_name (input1 type1, ...) (output1 OutputType1...)
+``func function_name (input1 type1 [, input2 type2 [, ...]]) (output1 OutputType1 [, output2 OutputType2 [,...]])``
 
 Examples of signatures
 ----------------------
