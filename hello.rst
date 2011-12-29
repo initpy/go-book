@@ -11,7 +11,7 @@ The program
 ===========
 This is a tradition. And we do respect some traditions [#f1]_. The very first program
 one should write when learning a programming language is a small one that
-outputs the sentence: ``Hello World``. 
+outputs the sentence: ``Hello World``.
 
 Ready? Go!
 
@@ -22,7 +22,7 @@ Ready? Go!
 
     import "fmt"
 
-    func main() { 
+    func main() {
         fmt.Printf("Hello, world; καλημ ́ρα κóσμ or こんにちは世界\n")
     }
 
@@ -37,11 +37,11 @@ The details
 
 The notion of packages
 ----------------------
-A Go program is constructed as a "package", which may use facilities from other
-packages.
+A Go program is constructed as a "package", which may in turn use facilities
+from other packages.
 
 The statement ``package <something>`` (in our example: ``<something>`` is main)
-tells which package this file is part of. 
+tells which package this file is part of.
 
 In order to print on screen the text "Hello, world..." we use a function called
 ``Printf`` that comes from the ``fmt`` package that we imported using the
@@ -55,7 +55,7 @@ statement ``import "fmt"`` on the 3rd line.
 This is actually the same idea as in perl packages and python modules. And as
 you may see, the big advantage here is: modularity and reusability.
 
-By *modularity*, I mean that you can divide your program into sevral pieces each
+By *modularity*, I mean that you can divide your program into several pieces each
 one answering a specific need. And by *reusability*, I mean that packages that
 you write, or that already are brought to your by Go itself, can be used many
 times without rewriting the functionalities they provide each and every time you
@@ -68,7 +68,7 @@ The main function
 -----------------
 On line 5, we declare our main function with the keyword ``func`` and its body
 is enclosed between ``{`` and ``}`` just like in C, C++, Java and other
-languages. 
+languages.
 
 Notice that our ``main()`` function takes no arguments. But we will see when we
 will study functions, that in Go, they can take arguments, and return no, or one,
@@ -79,7 +79,7 @@ packages that we imported in line 3.
 
 The ``dot notation`` is what is used in Go to refer to data, or functions
 located in imported packages. Again, this is not a Go's invention, since this
-technique is used in sevral other languages such as Python:
+technique is used in several other languages such as Python:
 ``<module_name>.<data_or_function>``
 
 UTF-8 Everywhere!

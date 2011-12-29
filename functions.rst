@@ -18,9 +18,9 @@ two integers A and B. That's easy with a simple *if* statement, right?
 
     //compare A and B and say wich is bigger
     if A>B {
-        fmt.Print("The max is A") 
+        fmt.Print("The max is A")
     } else {
-        fmt.Print("The max is B") 
+        fmt.Print("The max is B")
     }
 
 Now, imagine that you have to make such a comparison many times in your program.
@@ -118,13 +118,13 @@ The general syntax of a function is:
 The details:
 
 * The keyword ``func`` is used to declare a function of name *funcname*
-* A function may take as many input parameters as you want. each one followed 
-  by its type and all separated by commas. 
-* A function may return many result values as well. 
-* In the previous snippet, ``result1`` and ``result2`` are called 
-  *named result parameters*, if you don't want to name the return parameters, 
+* A function may take as many input parameters as you want. each one followed
+  by its type and all separated by commas.
+* A function may return many result values as well.
+* In the previous snippet, ``result1`` and ``result2`` are called
+  *named result parameters*, if you don't want to name the return parameters,
   you can just specify the types, separated with commas.
-* If your function returns only one output value, you may omit the parenthesis 
+* If your function returns only one output value, you may omit the parenthesis
   arround the output values.
 * If your function doesn't return any value, you may omit it entirely.
 
@@ -151,7 +151,7 @@ A simple Max function
         y := 4
         z := 5
 
-        
+
         max_xy := max(x, y) //calling max(x, y)
         max_xz := max(x, z) //calling max(x, z)
 
@@ -225,20 +225,20 @@ A function with a result variable
     //and false when not. And the actual square root of a float64
     func MySqrt(f float64) (ok bool, s float64){
         if f>0 {
-            ok, s = true, math.Sqrt(f) 
+            ok, s = true, math.Sqrt(f)
         } else {
-            ok, s = false, 0 
+            ok, s = false, 0
         }
         return ok, s
     }
 
     func main(){
         for i:= -2.0; i<=10; i++{
-            possible, sqroot := MySqrt(i) 
+            possible, sqroot := MySqrt(i)
             if possible{
-                fmt.Printf("The square root of %f is %f\n", i, sqroot) 
+                fmt.Printf("The square root of %f is %f\n", i, sqroot)
             } else {
-                fmt.Printf("Sorry, no square root for %f\n", i) 
+                fmt.Printf("Sorry, no square root for %f\n", i)
             }
         }
     }
@@ -282,7 +282,7 @@ to its type, we can rewrite the previous example as follow:
     //return A+B and A*B in a single shot
     func MySqrt(f float64) (ok bool, s float64){
         if f>0 {
-            ok, s = true, math.Sqrt(f) 
+            ok, s = true, math.Sqrt(f)
         }
         return ok, s
     }
@@ -303,7 +303,7 @@ We can rewrite the previous example as follow:
     //return A+B and A*B in a single shot
     func MySqrt(f float64) (ok bool, s float64){
         if f>0 {
-            ok, s = true, math.Sqrt(f) 
+            ok, s = true, math.Sqrt(f)
         }
         return //omitting the output named variables, but keeping "return"
     }
@@ -333,7 +333,7 @@ An example to verify the previous paragraph:
 
     func main(){
         x := 3
-        
+
         fmt.Println("x = ", x) //should print "x = 3"
 
         x1 := add1(x) //calling add1(x)
@@ -379,7 +379,7 @@ Let's try this.
 
     func main(){
         x := 3
-        
+
         fmt.Println("x = ", x) //should print "x = 3"
 
         x1 := add1(&x) //calling add1(&x) by passing the adress of x to it
@@ -399,7 +399,7 @@ Now, we have changed the value of ``x``!
 How is passing a reference to functions is useful? You may ask.
 
 * The first reason is that passing a reference makes functions *cooperation* on
-  a single variable possible. In other words, if we want to apply sevral
+  a single variable possible. In other words, if we want to apply several
   functions on a given variable, they will all be able to change it.
 
 * A pointer is cheap. Cheap in terms of memory usage. We can have functions that
@@ -419,7 +419,7 @@ In our previous example, we could have called our function add_one instead of
 add1, and that would still work as long as we call it by its name. What really
 matters in our function is:
 
-1. Its input parameters: how much? which types? 
+1. Its input parameters: how much? which types?
 2. Its output parameters: how much, which type?
 3. Its body code: What does the function do?
 
@@ -447,7 +447,7 @@ Examples of signatures
     :linenos:
 
     //The signature of a function that takes an int and returns and int
-    func (int x) x int 
+    func (int x) x int
 
     //takes two float and returns a bool
     func (float32, float32) bool
