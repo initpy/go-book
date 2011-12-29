@@ -106,7 +106,7 @@ Its general syntax is:
 Gramatically, ``expression1``, ``expression2``, and ``expression3`` are
 expressions, where ``expression1``, and ``expression3`` are used for
 assignements or function calls (``expression1`` before starting the loop, and
-``expression3`` at the end of evey iteration) and ``expression2`` is used to
+``expression3`` at the end of every iteration) and ``expression2`` is used to
 determine whether to continue or stop the iterations.
 
 An example would be better than the previous paragraph, right? Here we go!
@@ -125,7 +125,7 @@ An example would be better than the previous paragraph, right? Here we go!
         fmt.Println("sum is equal to ", sum)
     }
 
-we initalize our variable ``sum`` to 0; and we start our ``for`` loop with
+we initialize our variable ``sum`` to 0; and we start our ``for`` loop with
 initializing the variable ``i`` to 0; (``i:=0``) and we execute the for loop's 
 body (``sum += i``) *while* the condition ``i<10`` is met, and at the end of
 each iteration, we execute the ``i++`` expression (increment i)
@@ -221,8 +221,8 @@ Sometimes, you'll need to write a complicated chain of ``if``/``else`` tests.
 And the code becomes ugly and hard to read and maintain. The ``switch``
 statement, makes it look nicer and easier to read.
 
-Go's swith is more flexible than its C equivalent, because the case expression
-need not to be constants or even integers.
+Go's switch is more flexible than its C equivalent, because the case expression
+need not be constants or even integers.
 
 The general form of a switch statement is
 

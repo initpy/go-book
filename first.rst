@@ -122,10 +122,10 @@ precise, we can change the constant's declared value once to be ``3.14159``
 instead of the earlier ``3.14`` and the new value will be used all along when
 the program is compilled again.
 
-Conculsion
+Conclusion
 ==========
 Imperative programming is easy. Easy as putting values in boxes. Once you
 understand this very basic thing, complex (notice, I didn't say complicated)
 things can be seen as a composition of simpler things.
 
-Easy and fun. Fun as playing with lego sets :)
+Easy and fun. Fun as playing with Lego sets :)

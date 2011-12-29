@@ -51,8 +51,8 @@ If you've ever done some electronics, you'd see that functions really look like
 electronic circuits or chips. You need to amplify a signal? Take an amplifier
 chipset. Need to filter, use a filter chipset and so on...
 
-Your job as a software developper will be much more easier, and fun once you
-start to think of a complex project as a set of modules for witch the input are
+Your job as a software developer will be much easier, and fun once you
+start to think of a complex project as a set of modules for which the inputs are
 the output of another module. The complexity will be reduced, and the debugging
 will be easier too.
 
@@ -173,7 +173,7 @@ Our function *MAX* takes two input parameters A and B, and returns a single int.
 Notice how we grouped A and B's types. We could have written: MAX(A int, B int),
 but it's shorter this way.
 
-Notice also that we prefered not to name our output value. We just specified its
+Notice also that we preferred not to name our output value. We just specified its
 type (int)
 
 A function with two ouput values
@@ -351,7 +351,7 @@ An example to verify the previous paragraph:
 You see? The value of ``x`` wasn't changed by the call of the function ``add1``
 even though we had an explicit ``a = a+1`` instruction on line 6.
 
-The reason is simple: when we called the function ``add1``, it recieved a copy
+The reason is simple: when we called the function ``add1``, it received a copy
 of the variable ``x`` and not ``x`` itself, hence it changed the value of this
 copy, not ``x`` itself.
 
@@ -405,12 +405,12 @@ How is passing a reference to functions is useful? You may ask.
 * A pointer is cheap. Cheap in terms of memory usage. We can have functions that
   operate on a big data for example. And copying this data will of course
   require memory on each call. A pointer takes much less memory. Yo!  Remember,
-  it's just an adress! :)
+  it's just an address! :)
 
 .. _functions-signatures:
 
-Functions signatures
-====================
+Function's signatures
+=====================
 Like with people, names don't matter that much. Do they? Well, yes, let's face
 it, they do matter, but what matters most is what they do, what they need, what
 they produce.
@@ -419,9 +419,9 @@ In our previous example, we could have called our function add_one instead of
 add1, and that would still work as long as we call it by its name. What really
 matters in our function is:
 
-1. Its input parameters: how much? which types? 
-2. Its output parameters: how much, which type?
-3. Its body code: What does the function do?
+1. It's input parameters: how much, which types? 
+2. It's output parameters: how much, which type?
+3. It's body code: what does the function do?
 
 We can rewrite the function's body to work differently, and the main program
 would compile without problems. But we can't change the input and output
@@ -429,8 +429,8 @@ parameters in the function's declaration and still use its old parameters in the
 main program.
 
 In other words, of the 3 elements we listed above, what matters even more is:
-what input parameters does the function expects, and what parameters does it
-return.
+what input parameters does the function expect, and what parameters does it
+return?
 
 These two elements are what we call a signature, and we use this formalism:
 

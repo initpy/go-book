@@ -8,7 +8,7 @@ And we finished with the fact that we actually can use functions as fields of
 ``struct``\s.
 
 Today, we'll see a kind of an *extrapolation* of functions: functions with a
-*reciever*, simply called: methods.
+*receiver*, simply called: methods.
 
 What is a method?
 =================
@@ -62,12 +62,12 @@ fields.
 
 And this leads us to methods: A method is function that is bound or attached to
 a given type. Its syntax is the same as a traditional function except that we
-specify a *reciever* of this type just after the keyword ``func``.
+specify a *receiver* of this type just after the keyword ``func``.
 
 In the words of `Rob Pike`_: A method is a function with an implicit first
 argument, called a receiver.
 
-``func (RecieverType r) func_name (parameters) (results)``
+``func (ReceiverType r) func_name (parameters) (results)``
 
 Let's illustrate this with an example:
 
@@ -86,15 +86,15 @@ Let's illustrate this with an example:
     }
 
     /* 
-     Notice how we specified a reciever of type Rectangle to this method.
+     Notice how we specified a receiver of type Rectangle to this method.
      Notice also how this methods -in this case- doesn't need input parameters
-     because the data it need is part of its reciever r
+     because the data it need is part of its receiver r
     */
     func (r Rectangle) area() float64{
-        return r.width*r.height  //using fields of the reciever
+        return r.width*r.height  //using fields of the receiver
     }
 
-    // Another method with the SAME name but with a different reciever.
+    // Another method with the SAME name but with a different receiver.
     func (c Circle) area() float64{ 
         return c.radius*c.radius*math.Pi
     }
@@ -122,9 +122,9 @@ Output:
 
 A few things about methods:
 
-- Methods of different recievers are different methods even if they share the
+- Methods of different receivers are different methods even if they share the
   name.
-- A method has access to its reciever fields/data
+- A method has access to its receiver fields/data
 - A method is called with the dot notation like ``struct`` fields.
 
 So? Are methods applicable only for ``struct`` types? The anwser is No. In fact,
@@ -324,7 +324,7 @@ Output:
     | The color of the second one is BLACK
     | Obviously, now, the biggest one is BLACK
 
-So we defined some ``const``\s with consicutive values using the ``iota`` idiom
+So we defined some ``const``\s with consecutive values using the ``iota`` idiom
 to represent some colors.
 
 And then we declared some types: 
@@ -337,33 +337,33 @@ Simple and straightforward.
 
 Then we wrote some methods for these types:
 
-- ``Volume()`` with a reciever of type ``Box`` that returns its volume.
-- ``SetColor(c Color)`` sets its reciever's color to c.
-- ``BiggestsColor()`` with a reciever of type ``BoxList`` that returns the color
+- ``Volume()`` with a receiver of type ``Box`` that returns its volume.
+- ``SetColor(c Color)`` sets its receiver's color to c.
+- ``BiggestsColor()`` with a receiver of type ``BoxList`` that returns the color
   of the ``Box`` that has the biggest volume in this slice.
-- ``PaintItBlack()`` with a reciever of type ``BoxList`` that sets the colors of
+- ``PaintItBlack()`` with a receiver of type ``BoxList`` that sets the colors of
   all the ``Box``\es in the slice to BLACK.
-- ``String()`` a method with a reciever of type ``Color`` that returns a string
+- ``String()`` a method with a receiver of type ``Color`` that returns a string
   representation of this color.
 
 All this is simple. For real. We *translated* our vision of the problem into
 *things* that have methods that describe/implement a *behavior*.
 
-Pointer recievers
+Pointer receivers
 =================
-Now, look at line 25 that I highlighted on purpose. The reciever is a pointer to
+Now, look at line 25 that I highlighted on purpose. The receiver is a pointer to
 Box! Yes, you can use ``*Box`` too. The restriction with methods is that the
-type ``Box`` itself (or any reciever's type) shouldn't be a pointer.
+type ``Box`` itself (or any receiver's type) shouldn't be a pointer.
 
 Why did we use a pointer? You have 10 seconds to think about it, and then read
 on the next paragraph. I'll start counting: 10, 9, 8...
 
 Ok, We used a pointer because we needed the ``SetColor`` method to be able to
-change the value of the field 'color' of its reciever. Hadn't we used a pointer,
-the method would recieve a copy of the reciever ``b`` (passed by value) and the
+change the value of the field 'color' of its receiver. Hadn't we used a pointer,
+the method would recieve a copy of the receiver ``b`` (passed by value) and the
 changes that it will make will affect the copy, not the original. 
 
-Just think of the reciever as a parameter that the method has in input, and
+Just think of the receiver as a parameter that the method has in input, and
 remember the difference between :ref:`passing by value and
 reference<value-reference>`.
 
@@ -386,12 +386,12 @@ a pointer of type ``*Box``, not a value of type ``Box``?
 
 Yes, that's also true, and yes both forms are accepted. Go automatically does
 the conversion for you because it *knows* what type the method expects as a
-reciever.
+receiver.
 
-In other words: If a method ``M`` expects a reciever of type ``*T``, you can
+In other words: If a method ``M`` expects a receiver of type ``*T``, you can
 call it on a variable ``V`` of type ``T`` without passing it as ``&V`` to ``M``.
 
-Similarly, if a method ``M`` expects a reciever of type ``T``, you can call it
+Similarly, if a method ``M`` expects a receiver of type ``T``, you can call it
 on a variable ``P`` of type ``*T`` without passing it as ``*P`` to ``M``.
 
 Example:
@@ -404,19 +404,19 @@ Example:
 
     type Number int
 
-    //method inc has a reciever of type pointer to Number
+    //method inc has a receiver of type pointer to Number
     func (n *Number) inc(){
         *n++
     }
 
-    //method print has a reciever of type Number
+    //method print has a receiver of type Number
     func (n Number) print(){
         fmt.Println("The number is equal to", n) 
     }
 
     func main(){
 
-        i := Number(10) //say that i is od type Number and is equal to 10
+        i := Number(10) //say that i is of type Number and is equal to 10
         fmt.Println("i is equal to", i)
 
         fmt.Println("Let's increment it twice")
@@ -444,7 +444,7 @@ Output:
     | The number is equal to 12
     | The number is equal to 12
 
-So don't worry, Go knows the type of a reciever, and knowing this it simplifies
+So don't worry, Go knows the type of a receiver, and knowing this it simplifies
 by accepting ``V.M()`` as a shorthand of ``(&V).M()`` and ``P.M()`` as a
 shorthand for ``(*P).M()``.
 
