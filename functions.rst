@@ -171,12 +171,12 @@ Output:
 
 
 Our function *MAX* takes two input parameters A and B, and returns a single
-*int*.
+``int``.
 Notice how we grouped A and B's types. We could have written: MAX(A int, B int),
 however, it is shorter this way.
 
 Notice also that we prefered not to name our output value. We instead specified
-the output type (*int*).
+the output type (``int``).
 
 A function with two ouput values
 --------------------------------

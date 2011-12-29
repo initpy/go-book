@@ -245,8 +245,8 @@ The general form of a switch statement is
     }
 
 The type of ``sExpr`` and the expressions ``expr1``, ``expr2``, ``expr3``...
-type should match. i.e. if ``var`` is of type *int* the cases expressions should
-be of type *int* also!
+type should match. i.e. if ``var`` is of type ``int`` the cases expressions should
+be of type ``int`` also!
 
 Of course, you can have as many cases you want.
 
