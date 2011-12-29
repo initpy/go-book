@@ -171,7 +171,7 @@ of type ``float32``, its pointer is of type ``*float32`` and so on...
 Why do we need pointers?
 ========================
 Since we can access variables, assign values to them using only their names, one
-might wonder why and how pointer are useful.
+might wonder why and how pointers are useful.
 This is a very legitimate question, and you'll see the answer is quite simple.
 
 Suppose that your program as it runs needs some to store some results in some
@@ -184,9 +184,9 @@ store some data while it is running.
 
 .. _function-new:
 
-Go has a built-in allocation function called ``new`` that allocates enough
-memory to store a variable of a given type, and after it allocates the memory,
-it gives you a pointer to it.
+Go has a built-in allocation function called ``new`` which allocates exactly
+the amount of memory required to store a variable of a given type, and after
+it allocates the memory, it returns a pointer.
 
 You use it like this: ``new(Type)`` where ``Type`` is the type of the variable
 you want to use.
@@ -203,7 +203,7 @@ Here's an example to explain the ``new`` function.
         sum := 0
         var  double_sum *int //a pointer to int
         for i:=0; i<10; i++{
-            sum += i 
+            sum += i
         }
         double_sum = new(int) //allocate memory for an int and make double_sum point to it
         *double_sum = sum*2 //use the allocated memory, by dereferencing double_sum

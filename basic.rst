@@ -2,17 +2,17 @@
 
 The basic things
 ****************
-In the previous chapter, we saw that Go programs are organized in *packages* and
-that Go natively supports UTF-8 for strings and identifiers. In this chapter we
-will see how to declare and use variables and constants and the different Go
+In the previous chapter, we saw that Go programs are organized using *packages*
+and that Go natively supports UTF-8 for strings and identifiers. In this chapter
+we will see how to declare and use variables and constants and the different Go
 built-in types.
 
 
 How to declare a variable?
 ==========================
-There are several ways to declare a variable in Go. 
+There are several ways to declare a variable in Go.
 
-The basic form is: 
+The basic form is:
 
 .. code-block:: go
 
@@ -47,8 +47,8 @@ Guess what? You can omit the type and it will be inferred from the initializers
 
 .. code-block:: go
 
-    /* declare and initialize var1, var2 and var3 and initialize them to
-    respectively: value1, value2, and value3 /
+    /* declare and initialize var1, var2 and var3 and initialize them
+    respectively to value1, value2, and value3. /
     var var1, var2, var3 = value1, value2, value3
 
 Even shorter, inside a function body (let me repeat that: only inside a function
@@ -78,16 +78,16 @@ one of the values: ``true`` or ``false``.
 
 .. code-block:: go
     :linenos:
-    
+
     //Example snippet
     var active bool //basic form
     var enabled, disabled = true, false //type omitted, variables initialized
     func test(){
         var available bool //general form
         valid := false //type and var omitted, and variable initialized
-        available = true //normal assignation 
+        available = true //normal assignation
     }
-    
+
 
 Numeric types
 -------------
@@ -95,7 +95,7 @@ For integer values, signed and unsigned, Go has ``int`` and ``uint`` both having
 the appropriate length for your machine (32 or 64 bits) But there's also
 explicit sized ints: ``int8``, ``int16``, ``int32``, ``int64`` and ``byte``,
 ``uint8``, ``uint16``, ``uint32``, ``uint64``. With ``byte`` being an alias for
-``uint8``. 
+``uint8``.
 
 For floating point values, we have ``float32`` and ``float64``.
 
@@ -120,7 +120,7 @@ From the `Go Programming Language Specification`_
 +----------+----------------------------------------------------------------------------------------+
 |uint64    | the set of all unsigned 64-bit integers (0 to 18446744073709551615)                    |
 +----------+----------------------------------------------------------------------------------------+
-|                                                                                                   |   
+|                                                                                                   |
 +----------+----------------------------------------------------------------------------------------+
 |int8      | the set of all signed  8-bit integers (-128 to 127)                                    |
 +----------+----------------------------------------------------------------------------------------+
@@ -130,19 +130,19 @@ From the `Go Programming Language Specification`_
 +----------+----------------------------------------------------------------------------------------+
 |int64     | the set of all signed 64-bit integers (-9223372036854775808 to 9223372036854775807)    |
 +----------+----------------------------------------------------------------------------------------+
-|                                                                                                   |   
+|                                                                                                   |
 +----------+----------------------------------------------------------------------------------------+
 |float32   | the set of all IEEE-754 32-bit floating-point numbers                                  |
 +----------+----------------------------------------------------------------------------------------+
 |float64   | the set of all IEEE-754 64-bit floating-point numbers                                  |
 +----------+----------------------------------------------------------------------------------------+
-|                                                                                                   |   
+|                                                                                                   |
 +----------+----------------------------------------------------------------------------------------+
 |complex64 | the set of all complex numbers with float32 real and imaginary parts                   |
 +----------+----------------------------------------------------------------------------------------+
 |complex128| the set of all complex numbers with float64 real and imaginary parts                   |
 +----------+----------------------------------------------------------------------------------------+
-|                                                                                                   |   
+|                                                                                                   |
 +----------+----------------------------------------------------------------------------------------+
 | byte        familiar alias for uint8                                                              |
 +----------+----------------------------------------------------------------------------------------+
@@ -150,7 +150,7 @@ From the `Go Programming Language Specification`_
 
 .. code-block:: go
     :linenos:
-    
+
     //Example snippet
     var i int32 //basic form with a int32
     var x, y, z = 1, 2, 3 //type omitted, variables initialized
@@ -158,7 +158,7 @@ From the `Go Programming Language Specification`_
         var pi  float32 //basic form
         one, two, thre := 1, 2, 3 //type and var omitted, variables initialized
         c := 10+3i // a complex number, type infered and keyword 'var' omitted.
-        pi = 3.14 // normal assignation 
+        pi = 3.14 // normal assignation
     }
 
 Strings
@@ -168,14 +168,14 @@ between two double quotes (") and their type is -you bet!- ``string``.
 
 .. code-block:: go
     :linenos:
-    
+
     //Example snippet
     var french_hello string //basic form
     var empty_string string = "" // here empty_string (like french_hello) equals ""
     func test(){
         no, yes, maybe := "no", "yes", "maybe" //var and type omitted
         japanese_hello := "Ohaiou"  //type inferred, var keyword omitted
-        french_hello = "Bonjour" //normal assignation 
+        french_hello = "Bonjour" //normal assignation
     }
 
 Constants
@@ -186,7 +186,7 @@ can be: numbers, boolean or strings.
 The syntax to declare a constant is:
 
 .. code-block:: go
-    
+
     const constant_name = value
 
 Some examples:

@@ -16,9 +16,9 @@ Go comes with some *primitive* types: ints, floats, complex numbers, booleans,
 and strings. Fair enough, but you'll notice as you start to write complex
 programs that you'll need more advanced forms of data.
 
-Here's an example:
+Let's begin with an example.
 
-So in the previous chapter, we wrote the ``MAX(A, B int)`` function to find out
+In the previous chapter, we wrote the ``MAX(A, B int)`` function to find out
 the bigger value between two integers A, and B. Now, suppose that A, and B are
 actually the ages of persons whose names are respectively Tom and Bob. We need
 our program to output the name of the older person, and by how many years he is
@@ -26,7 +26,7 @@ older.
 
 Sure, we still can use the ``MAX(A, B int)`` function by giving it as input
 parameters, the ages of Tom and Bob. But it'd be nicer to write a function
-``Older`` for real **people**. And not for integers.
+``Older`` for **people**. And not for integers.
 
 *People*! I said people! Thus the need to *create* a custom type to *represent*
 people, and this type will be used for the input parameters of the ``Older``
@@ -36,8 +36,9 @@ Structs
 =======
 In Go, as in C and other languages, we can declare new types that act as
 *containers* for attributes or fields of some other types. For example, we can
-create a custom type called ``person`` to represent a real-world person, and
-that will contain the person's *name* **and** his *age*.
+create a custom type called ``person`` to represent the attributes of a
+person. In our example these attributes will be the person's
+*name* **and** *age*.
 
 .. graphviz::
 
@@ -55,7 +56,7 @@ that will contain the person's *name* **and** his *age*.
     }
 
 
-A type like this is called a ``struct`` (a structure)
+A type like this is called a ``struct``, which is short for *structure*.
 
 How to declare a struct in Go?
 ------------------------------
@@ -67,12 +68,13 @@ How to declare a struct in Go?
         age int //field age of type int.
     }
 
-See? It's easy. A person ``struct`` is a container of two fields: 
+See? It's easy. A person ``struct`` is a container of two fields:
 
 - The person's name: a field of type ``string``.
 - The person's age: a field of type ``int``.
 
-And we declare a ``person`` variable as we used to in :doc:`chapter 2<basic>`.
+To declare a ``person`` variable we do exactly as we learned in
+:doc:`chapter 2<basic>` for basic variable types.
 
 Thus, writing things like:
 
@@ -86,8 +88,8 @@ Thus, writing things like:
 
     var P person // tom is a variable of type person
 
-You access and assign a struct's field with the *dot nottation*. That is, if
-``P`` is a variable of type ``person``, then you can access its fields like
+We access and assign a struct's fields (attributes) with the *dot nottation*.
+That is, if ``P`` is a variable of type ``person``, then we access its fields like
 this:
 
 .. code-block:: go
@@ -97,7 +99,7 @@ this:
     P.age = 25 //set P's age to 25 (an int)
     fmt.Println("The person's name is %s", P.name) //Access P's name field.
 
-There's even two short assignment statement syntaxes:
+There's even two short-form assignment statement syntaxes:
 
 1. By providing the values for each (and every) field in order:
 
@@ -157,13 +159,13 @@ Good. Let's write our ``Older`` function that takes two input parameters of type
         tp_Older, tp_diff := Older(tom, paul)
         bp_Older, bp_diff := Older(bob, paul)
 
-        fmt.Printf("Of %s and %s, %s is older by %d years\n", 
+        fmt.Printf("Of %s and %s, %s is older by %d years\n",
                     tom.name, bob.name, tb_Older.name, tb_diff)
 
-        fmt.Printf("Of %s and %s, %s is older by %d years\n", 
+        fmt.Printf("Of %s and %s, %s is older by %d years\n",
                     tom.name, paul.name, tp_Older.name, tp_diff)
 
-        fmt.Printf("Of %s and %s, %s is older by %d years\n", 
+        fmt.Printf("Of %s and %s, %s is older by %d years\n",
                     bob.name, paul.name, bp_Older.name, bp_diff)
     }
 
@@ -187,17 +189,17 @@ Sure you can! But, seriously, that would be one ugly, very ugly function! Don't
 write it, just picture it in your brain. Still not convinced?  Ok, imagine a
 ``Older100`` function with **100** input parameters! Convinced, now?
 
-Ok, let's see how to solve these kind of problems using arrays.
+Ok, let's see how to solve these kinds of problems using arrays.
 
 .. _arrays:
 
 Arrays
 ======
-An array is a *block* of **n** *consecutive* objects of the same **type**. That
-is a *set* of indexed objects, where you can say: *object number 1*, *object
-number 2*, etc... 
+An array of size **n** is a *block* of **n** *consecutive* objects of the same
+**type**. That is a finite *set* of indexed objects, where you can enumerate
+them: *object number 1*, *object number 2*, etc...
 
-In fact, in Go as in C and other languages,  the indexing starts from 0, so you
+In fact, in Go as in C and other languages, the indexing starts from 0, so you
 actually say: *object number 0*, *object number 1*... *object number n-1*
 
 .. graphviz::
@@ -215,7 +217,7 @@ Here's how to declare an array of 10 ``int``\s, for example:
 
 .. code-block:: go
     :linenos:
-    
+
     //declare an array A of 10 ints
     var A [10]int
 
@@ -223,27 +225,27 @@ And here's how to declare an array of 10 ``person``\s:
 
 .. code-block:: go
     :linenos:
-    
+
     //declare an array A of 10 persons
     var people [10]person
 
 
-You can access the x :sup:`th` element of an array ``A``, with the syntax:
-**A[x]**.  So you say: A[0], A[1] and so on...
+We can access the x :sup:`th` element of an array ``A``, with the syntax:
+**A[x]**.  Specifically we say: A[0], A[1] and so on...
 
-For example, the name of the 3rd person is:
+For example, the name of the 3:sup:`rd` person is:
 
 .. code-block:: go
     :linenos:
-    
+
     //declare an array A of 10 persons
     var people [10]person
-    
+
     //Remember indices start from 0!
     third_name := people[2].name //use the dot to access the third 'name'.
     //or more verbosely:
     third_person := people[2]
-    thirdname := third_person.name 
+    thirdname := third_person.name
 
 .. graphviz::
 
@@ -295,7 +297,7 @@ The idea now is to write a function ``Older10`` that takes an array of 10
         var array [10]person
 
         // initialize some of the elements of the array, the others ar by default
-        // set to person{"", 0} 
+        // set to person{"", 0}
         array[1] = person{"Paul", 23};
         array[2] = person{"Jim", 24};
         array[3] = person{"Sam", 84};
@@ -334,10 +336,10 @@ function above in a single shot like this:
         person{"", 0}}
 
 This means that to initialize an array, you put its elements between two braces,
-and you separate them with commas. 
+and you separate them with commas.
 
-We can even omit the size of the array, and Go will count the number of element
-given in the initialization. So we could have written:
+We can even omit the size of the array, and Go will count the number of elements
+given in the initialization for us. So we could have written:
 
 .. code-block:: go
     :linenos:
@@ -364,14 +366,15 @@ given in the initialization. So we could have written:
     expects an array of 10 elements as an input. Simply because they are of
     *different* types. **Rememeber this.**
 
-Some things to keep in mind too:
+Some things to keep in mind:
 
-- Arrays are values. Assigning one array to another, copies all the elements.
+- Arrays are values. Assigning one array to another, copies all of the elements
+  of the right hand array to the left hand array.
   That is: if ``A``, and ``B`` are arrays of the same type, and we write: ``B =
   A``, then ``B[0] == A[0]``, ``B[1] == A[1]``... ``B[n-1] == A[n-1]``.
 
 - When passing an array to a function, it is copied. i.e. The function recieves
-  a copy of that array, and *not* a reference (pointer) to it.
+  a *copy* of that array, and **not** a reference (pointer) to it.
 
 - Go comes with a built-in function ``len`` that returns variables sizes. In the
   previous example: ``len(array) == 10``.
@@ -379,9 +382,9 @@ Some things to keep in mind too:
 Multi-dimensional arrays
 ========================
 You can think to yourself: *"Hey! I want an array of arrays!"*. Yes, that's
-possible, and often used actually.
+possible, and often used in practice.
 
-You can declare a 2-dimensional array like this:
+We can declare a 2-dimensional array like this:
 
 .. code-block:: go
     :linenos:
@@ -389,7 +392,7 @@ You can declare a 2-dimensional array like this:
     //declare and initialize an array of 2 arrays of 4 ints
     a := [2][4]int {[4]int{1,2,3,4}, [4]int{5,6,7,8}}
 
-This is an array of (2 arrays (of 4 ``int``)). You can think of it as a matrix,
+This is an array of (2 arrays (of 4 ``int``)). We can think of it as a matrix,
 or a table of two lines each made of 4 columns.
 
 .. graphviz::
@@ -420,7 +423,7 @@ count arrays' elements for us, like this:
     //simplify the previous declaration, with the '...' syntax
     a := [2][4]int {[...]int{1,2,3,4}, [...]int{5,6,7,8}}
 
-Guess what? Since Go is about cleaner code, you can even simplify:
+Guess what? Since Go is about cleaner code, we can simplify this even further:
 
 .. code-block:: go
     :linenos:
@@ -433,3 +436,4 @@ Cool, eh? Now, we can combine multiple fields of different types to create a
 same type, and pass it as a *single block* to our functions. But this is just
 the begining! In the next chapter, we will see how to create and use some
 advanced composite data types with pointers.
+
