@@ -231,9 +231,10 @@ And here's how to declare an array of 10 ``person``\s:
 
 
 We can access the x :sup:`th` element of an array ``A``, with the syntax:
-**A[x]**.  Specifically we say: A[0], A[1] and so on...
+**A[x]**.
+Specifically we say: ``A[0]``, ``A[1]``, ..., ``A[n]``.
 
-For example, the name of the 3:sup:`rd` person is:
+For example, the name of the 3 :sup:`rd` person is:
 
 .. code-block:: go
     :linenos:
@@ -339,13 +340,13 @@ This means that to initialize an array, you put its elements between two braces,
 and you separate them with commas.
 
 We can even omit the size of the array, and Go will count the number of elements
-given in the initialization for us. So we could have written:
+given in the initialization for us. So we could have written the above code as:
 
 .. code-block:: go
     :linenos:
 
     //declare and initialize an array of 10 person, but let the compiler guess the size.
-    array := [...]person  { //omit the size, and put ... instead.
+    array := [...]person  { // substitute '...' for the size of the array.
         person{"", 0},
         person{"Paul", 23},
         person{"Jim", 24},
@@ -356,6 +357,8 @@ given in the initialization for us. So we could have written:
         person{"", 0},
         person{"Karl", 10},
         person{"", 0}}
+
+Specifically note the elipses ``[...]``.
 
 .. _arrays-note:
 
@@ -381,8 +384,8 @@ Some things to keep in mind:
 
 Multi-dimensional arrays
 ========================
-You can think to yourself: *"Hey! I want an array of arrays!"*. Yes, that's
-possible, and often used in practice.
+You can think to yourself: *"Hey! I want an array of arrays!"*.
+Yes, that's possible, and often used in practice.
 
 We can declare a 2-dimensional array like this:
 
@@ -423,7 +426,8 @@ count arrays' elements for us, like this:
     //simplify the previous declaration, with the '...' syntax
     a := [2][4]int {[...]int{1,2,3,4}, [...]int{5,6,7,8}}
 
-Guess what? Since Go is about cleaner code, we can simplify this even further:
+Guess what?
+Since Go is about cleaner code, we can simplify this code even further:
 
 .. code-block:: go
     :linenos:
