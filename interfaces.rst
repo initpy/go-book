@@ -19,7 +19,7 @@ Enough spirituality, let's make this real.
 What is an interface?
 =====================
 Simply said, interfaces are sets of methods. We use them to specify a behavior
-of a given object. 
+of a given object.
 
 For example, in the previous chapter, we saw that both ``Student`` and
 ``Employee`` can ``SayHi``, they do it differently, but it doesn't matter. They
@@ -66,12 +66,12 @@ other objects. We use this syntax:
 
     //A human method to say hi
     func (h *Human) SayHi(){
-        fmt.Printf("Hi, I am %s you can call me on %s\n", h.name, h.phone) 
+        fmt.Printf("Hi, I am %s you can call me on %s\n", h.name, h.phone)
     }
 
     //A human can sing a song
     func (h *Human) Sing(lyrics string){
-        fmt.Println("La la la la...", lyrics) 
+        fmt.Println("La la la la...", lyrics)
     }
 
     //Employee's method overrides Human's one
@@ -82,30 +82,30 @@ other objects. We use this syntax:
 
     //A Student loans some money
     func (s *Student) LoanMoney(amount float32){
-        loan += amount 
+        loan += amount
     }
 
     // An Employee spends some of his salary
     func (e *Employee) SpendSalary(amount float32){
-        e.money -= amount 
+        e.money -= amount
     }
 
     // INTERFACES
     type Men interface{
-        SayHi() 
-        Sing(lyrics string) 
+        SayHi()
+        Sing(lyrics string)
     }
 
     type YoungChap interface{
-        SayHi() 
-        Sing(song string) 
+        SayHi()
+        Sing(song string)
         LoanMoney(amount float32)
     }
-    
+
     type OldGuy interface{
-        SayHi() 
-        Sing(song string) 
-        SpendSalary(amount float32) 
+        SayHi()
+        Sing(song string)
+        SpendSalary(amount float32)
     }
 
 As you can see, an interface can be satisfied (or implemented) by an arbitrary
@@ -164,12 +164,12 @@ Let's see an example:
 
     //A human method to say hi
     func (h Human) SayHi(){
-        fmt.Printf("Hi, I am %s you can call me on %s\n", h.name, h.phone) 
+        fmt.Printf("Hi, I am %s you can call me on %s\n", h.name, h.phone)
     }
 
     //A human can sing a song
     func (h Human) Sing(lyrics string){
-        fmt.Println("La la la la...", lyrics) 
+        fmt.Println("La la la la...", lyrics)
     }
 
     //Employee's method overrides Human's one
@@ -181,8 +181,8 @@ Let's see an example:
     // Interface Men is implemented by Human, Student and Employee
     // because it contains methods implemented by them.
     type Men interface{
-        SayHi() 
-        Sing(lyrics string) 
+        SayHi()
+        Sing(lyrics string)
     }
 
     func main(){
@@ -213,7 +213,7 @@ Let's see an example:
         x[0], x[1], x[2] = paul, sam, mike
 
         for _, value := range x{
-            value.SayHi() 
+            value.SayHi()
         }
     }
 
@@ -237,7 +237,7 @@ implement a given and precise data structure. They just say: if something can do
 *this*, it may be used *here*.
 
 Also, notice that types implementing a given interface do this simply by
-implementing the methods specified in the interface, they don't *claim* 
+implementing the methods specified in the interface, they don't *claim*
 explicitely that they are implementing this interface.
 
 And similarly, an interface doesn't specify or even *care* which types
@@ -284,7 +284,7 @@ right? It accepts any number of parameters. But did you notice that sometimes,
 we used ``string``\s, and ``int``\s, and ``float``\s with it?
 
 In fact, if you look into the `fmt package`_, documentation you will find a
-definition of an interface type called `Stringer`_ 
+definition of an interface type called `Stringer`_
 
 .. code-block:: go
     :linenos:
@@ -306,7 +306,7 @@ Let's try this out:
     package main
     import (
         "fmt"
-        "strconv" //for conversions to and from string 
+        "strconv" //for conversions to and from string
     )
 
     type Human struct{
@@ -364,7 +364,7 @@ Let's see a basic example, and then I'll show you the magic of this package.
 
     package main
     import(
-        "fmt" 
+        "fmt"
         "sort"
     )
 
@@ -407,7 +407,7 @@ contains three methods:
 Always from the `sort Interface doc`_: A type, typically a collection, that
 satisfies sort.Interface can be sorted by the routines in this package. The
 methods require that the elements of the collection be enumerated by an integer
-index. 
+index.
 
 So all we need to sort slices of any type is to implement these methods! Let's
 give it a try with a slice of ``Human`` that we want to sort based on their
@@ -436,12 +436,12 @@ ages.
     type HumanGroup []Human //HumanGroup is a type of slices that contain Humans
 
     func (g HumanGroup) Len() int{
-        return len(g) 
+        return len(g)
     }
 
     func (g HumanGroup) Less(i, j int) bool{
         if g[i].age < g[j].age {
-            return true 
+            return true
         }
         return false
     }
@@ -465,7 +465,7 @@ ages.
         //Let's print this group as it is
         fmt.Println("The unsorted group is:")
         for _, v := range group{
-            fmt.Println(v) 
+            fmt.Println(v)
         }
 
         //Now let's sort it using the sort.Sort function
@@ -474,7 +474,7 @@ ages.
         //Print the sorted group
         fmt.Println("\nThe sorted group is:")
         for _, v := range group{
-            fmt.Println(v) 
+            fmt.Println(v)
         }
     }
 
@@ -576,21 +576,21 @@ Let's do it.
     //Bigger implementation for our three types
     func (x IntSlice) Bigger(i, j int) bool{
         if x[i] > x[j] { //comparing two int
-            return true 
+            return true
         }
         return false
     }
 
     func (x Float32Slice) Bigger(i, j int) bool{
         if x[i] > x[j] { //comparing two float32
-            return true 
+            return true
         }
         return false
     }
 
     func (x PersonSlice) Bigger(i, j int) bool{
         if x[i].age > x[j].age { //comparing two Person ages
-            return true 
+            return true
         }
         return false
     }
@@ -614,7 +614,7 @@ Let's do it.
         }
         max = data.Get(0)//the first element is the max for now
         m := 0
-        for i:=1; i<data.Len(); i++{ 
+        for i:=1; i<data.Len(); i++{
             if data.Bigger(i, m){ //we found a bigger value in our slice
                 max = data.Get(i)
                 m = i
@@ -692,17 +692,19 @@ collection.
 Notice how the function Max is implemented: it doesn't make any mention of any
 specific collection type, everything it uses comes from the interface type. This
 *abstraction* is what makes it usable by any type that implements
-``MaxInterface``. 
+``MaxInterface``.
 
 Each time we call Max on a given data collection of a given type, it calls these
 methods as they are implemented by that type. And this works like a charm. If we
 need to find out the Max of any collection, we will just have to implement the
 MaxInterface for that type and it will work, like it worked for ``fmt.Print``
-and ``sort.Sort``. 
+and ``sort.Sort``.
+
+.. C'mon, admit it! You've got a NERDON after this one!
 
 And... that's it for this chapter. I'll stop here, take a break and have a good
 day. Next, we will see some little details about interfaces. Don't worry! It
-will be easier than this one, I promise. 
+will be easier than this one, I promise.
 
 .. external links and footnotes:
 

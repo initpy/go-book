@@ -3,15 +3,15 @@
 Even more on functions
 **********************
 In the previous chapter, we learned how to write variadic, and recursive
-functions and how to use the defer statement to ``defer`` functions calls just
-before the executing function returns.
+functions and how to use the ``defer`` statement to defer functions calls to
+just before the currently executing function returns.
 
 In this chapter, we will learn something that might seem surprising a little
-bit, but that will end up being *awesome*.
+bit, which will end up being *awesome*.
 
 Function types
 ==============
-Do you remember when we talked about 
+Do you remember when we talked about
 :ref:`functions signatures <functions-signatures>`? That what matters most in a
 function, beside what it actually does, is the parameters and results numbers
 and types.
@@ -20,8 +20,8 @@ Well, a function type denotes the set of all functions with the same parameter
 and result types.
 
 For example: the functions with signatures: func ``SUM(int, int) int`` and
-``MAX(int, int) int`` are of the same type, because their parameters and
-results  count, and types are the same.
+``MAX(int, int) int`` are of the same type, because their parameter count,
+results count and types are the same.
 
 Does this sound strange? One computes a sum, and the other the max, yet they are
 both of the same type?
@@ -43,7 +43,7 @@ How to declare a function type?
 -------------------------------
 The syntax is simple:
 
-``type type_name func(input1 type1, input2 type2..) (result resulttype1, ..)``
+``type type_name func(input1 inputType1 [, input2 inputType2 [, ...]) (result1 resultType1 [, ...])``
 
 Some examples to illustrate this:
 
@@ -66,8 +66,9 @@ Some examples to illustrate this:
 
 Is it clear now?
 
-*Yes, by why is this even useful or worth the hassle?* You might say. Well,
-I'm glad you asked this question! Read on, you will see the beauty of this.
+*Yes, by why is this even useful or worth the hassle?* You might find yourself
+asking. Well, I'm glad you asked this question! Read on, you will see the
+beautiful madness to this method!
 
 Functions are values
 ====================
@@ -75,11 +76,12 @@ Functions of the same type are values of this type! This means: You can declare
 a variable of a given function-type and assign any function of the same type to
 it. You can pass functions as parameters to other functions, you can also have
 functions that return other functions as results...  And this, my friend, offers
-a lot of beautiful, smart and powerful opportunities! Let me show you some
-examples.
+a lot of beautiful, intellignt and powerful opportunities! Let me show you some
+examples (don't worry, this doesn't result in Skynet... quite...).
 
-Example 1: Write a program that given a slice of ints will return another slice
-that contains only the odd elements of the first slice.
+**Example 1**: Write a program which when given a slice of integers will return
+another slice which contains only the odd elements of the first slice (yes...
+of course... by 'odd' I meant the 'weird' ones... what is wrong with you people?!?).
 
 .. code-block:: go
     :linenos:
@@ -89,13 +91,13 @@ that contains only the odd elements of the first slice.
 
     type test_int func(int) bool
 
-    // isOdd takes an ints and returns a bool set to true if the 
+    // isOdd takes an ints and returns a bool set to true if the
     // int parameter is odd, or false if not.
     // isOdd is of type func(int) bool which is what test_int is declared to be.
 
     func isOdd(i int) bool{
         if i%2 == 0 {
-            return false 
+            return false
         }
         return true
     }
@@ -103,7 +105,7 @@ that contains only the odd elements of the first slice.
     //same comment for isEven
     func isEven(i int) bool{
         if i%2 == 0 {
-            return true 
+            return true
         }
         return false
     }
@@ -116,7 +118,7 @@ that contains only the odd elements of the first slice.
             if f(value) {
                 result = append(result, value)
             }
-        } 
+        }
         return result
     }
 
@@ -137,10 +139,10 @@ Output:
     | Odd elements of s are:  [1 3 5 7]
     | Even elements of s are:  [2 4]
 
-The functions ``isOdd`` and ``isEven`` are very simple. They take an ``int``,
-and return a ``bool``. Of course, they're just little examples of functions of
-type ``test_int``.  One can imagine more advanced and complex functions that are
-of this type.
+The functions ``isOdd`` and ``isEven`` are very simple.
+They both take an ``int``, and return a ``bool``.
+Of course, they're just little examples of functions of type ``test_int``.
+One can imagine more advanced and complex functions that are of this type.
 
 The interesting part is the ``filter`` function, which takes a slice of type
 ``[]int`` *and* a function of type ``test_int`` and returns a slice of type
@@ -203,7 +205,7 @@ Output:
     | add1(n) =  7
 
 Our variable ``add1`` is assigned a *complete* function definition, minus the
-name. This function is said to be "anonymous" for this reason (lack of name)
+name. This function is said to be "anonymous" for this reason (lack of a name).
 
 Let's see an example using anonymous functions, and that returns functions.
 
@@ -212,7 +214,7 @@ Functions that return functions
 Back to the filtering problem, but now, we'd like to design it differently. We
 want to write a function ``filter_factory`` that given a single function ``f``
 like ``isOdd``, will produce a new function that takes a slice ``s`` of ints,
-and produces two slices: 
+and produces two slices:
 
 * ``yes``: a slice of the elements of ``s`` for which ``f`` returns ``true``.
 * ``no``: a slice of the elements of ``s`` for which ``f`` returns ``false``.
@@ -225,14 +227,14 @@ and produces two slices:
 
     func isOdd(i int) bool{
         if i%2 == 0 {
-            return false 
+            return false
         }
         return true
     }
 
     func isBiggerThan4(i int) bool{
         if i>4 {
-            return true 
+            return true
         }
         return false
     }
@@ -256,11 +258,11 @@ and produces two slices:
         return func(s []int) (yes, no []int){
             for _, value := range s{
                 if f(value){
-                    yes = append(yes, value) 
+                    yes = append(yes, value)
                 } else {
-                    no = append(no, value) 
+                    no = append(no, value)
                 }
-            } 
+            }
             return //look, we don't have to add yes, no. They're named results.
         }
     }
@@ -334,8 +336,8 @@ Since functions have types, and can be assigned to variables, one might wonder
 whether it is possible to, for example, have an array or a slice of functions?
 Maybe a struct with a function field? Why not a map?
 
-All this is possible in fact and, when used smartly, it can help you write
-simple and elegant code.
+All this is possible in fact and, when used intelligently, can help you write
+simple, readable and elegant code.
 
 Let's see a silly one:
 
@@ -371,19 +373,19 @@ Let's see a silly one:
     /*
         The function compose takes a map of available phrases
         and constructs a function that prints a sentence with these
-        phrases that are appropriate for a "list" of the activities 
+        phrases that are appropriate for a "list" of the activities
         given in the slice a
     */
     func compose(p phrases, a []activity) (func()){
         return func(){
             for key, value := range a{
-                fmt.Print(p[value]) 
+                fmt.Print(p[value])
                 if key == len(a)-1{
-                    fmt.Println(".") 
+                    fmt.Println(".")
                 } else {
-                    fmt.Print(" and ") 
+                    fmt.Print(" and ")
                 }
-            } 
+            }
         }
     }
 
@@ -393,7 +395,7 @@ Let's see a silly one:
             STUDENT: "I read books",
             DOCTOR: "I fix your head",
             MOM: "Dinner is ready!",
-            GEEK: "Look ma! My compiler works!"}        
+            GEEK: "Look ma! My compiler works!"}
 
         // a group of persons, and their activities
         folks := people{
@@ -406,9 +408,9 @@ Let's see a silly one:
         // Let's assign them their function "speak"
         // depending on their activities
         for name, value := range folks{
-            f := compose(ph, value.activities) 
+            f := compose(ph, value.activities)
             k := value.activities
-            //update the map's entry with a different person with the 
+            //update the map's entry with a different person with the
             //same activities and their function speak.
             folks[name] = person{activities:k, speak:f}
         }
@@ -430,12 +432,13 @@ Output:
     | Tom says: Look ma! My compiler works! and I read books and I fix your head.
 
 It may sound funny, and probably silly, but what I wanted to show you is how
-functions can be used as ``struct`` fields simply just as classic data types.
+functions can be used as ``struct`` fields just as simply as classic data types.
 
-Yes, I know what you think. It would have been more elegant if the function
-``speak`` of the type ``person`` could access her ``activities`` by itself and
-we won't even need the ``compose`` function then.
+Yes, I know what you are thinking; It would have been more elegant if the
+function ``speak`` of the type ``person`` could access her ``activities`` by
+itself and we won't even need the ``compose`` function then.
 
 That's called "Object Oriented Programming" (OOP), and even though Go isn't
 really an OOP language, it supports some notions of it. This will be the subject
 of our next chapter. Stay tuned, you, geek! :)
+
