@@ -4,8 +4,8 @@ Advanced composite types: Slices
 ********************************
 We saw in the previous chapter how to combine some fields of different types in
 a container called a ``struct`` to create a new type that we can use in our
-functions and programs. We also saw how to gather *n* objects of the same type
-in a single array that we can pass as a single value to a function.
+functions and programs. We also saw how to gather **n** objects of the same type
+into a single array that we can pass as a single value to a function.
 
 This is fine, but do you remember :ref:`the note we wrote about
 arrays<arrays-note>`?  Yes, that one about the fact that they don't grow or
@@ -16,11 +16,12 @@ This kind of *inflexibility* about arrays leads us to this chapter's subject.
 
 What is a slice?
 ================
-You'd love to have arrays without specifying sizes, right? Well, that's kind of
-possible, but they're not arrays but slices.
+You'd love to have arrays without specifying sizes, right?
+Well, that is possible in a manner of speaking, we call 'dynamic arrays' in Go *slices*.
 
-A slice is a **reference** to a section of an array. You can declare a slice
-like you used to declare an array, but without the size.
+A slice is not actually a 'dynamic array' but rather a **reference**
+(think pointer) to a sub-array of a given array (anywhere from empty to all of it).
+You can declare a slice just like you declare an array, omitting the size.
 
 .. code-block:: go
     :linenos:
@@ -28,8 +29,8 @@ like you used to declare an array, but without the size.
     //declare a slice of ints
     var a []int //notice how we didn't specify a size.
 
-we can declare a slice literal like an array literal, except we leave out the
-size.
+As we see in the above snippet, we can declare a slice literal just like an
+array literal, except that we leave out the size number.
 
 .. code-block:: go
     :linenos:
@@ -37,10 +38,10 @@ size.
     //declare a slice of ints
     s := []byte {'a', 'b', 'c', 'd'} //a slice of bytes (current size is 4)
 
-We can create slices by *slicing* an array or slice. That is taking a portion
-(a slice) of it, using this syntax array[i:j].
-Our created slice will contains elements of the array that start at index i and
-end before j. (array[j] not included in the slice)
+We can create slices by *slicing* an array or even an existing slice.
+That is taking a portion (a 'slice') of it, using this syntax ``array[i:j]``.
+Our created slice will contains elements of the array that start at index **i** and
+end before **j**. (``array[j]`` not included in the slice)
 
 .. code-block:: go
     :linenos:
@@ -48,7 +49,7 @@ end before j. (array[j] not included in the slice)
     //declare an array of 10 bytes (ASCII characters). Remember: byte is uint8
     var ar [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
     //declare a and b as slice of bytes
-    var a,b []byte 
+    var a,b []byte
     //make the slice "a" refer to a "portion" of "ar".
     a = ar[2:5] //a is a portion of ar that contains: ar[2], ar[3] and ar[4]
     //make the slice "b" refer to another "portion" of "ar".
@@ -83,14 +84,16 @@ end before j. (array[j] not included in the slice)
         {rank=same; a sa}
         {rank=sink; b sb}
     }
-    
+
 Slice shorthands
 ----------------
-- When slicing, first index defaults to 0: ar[:n] means the same as ar[0:n].
-- Second index defaults to len(array/slice): ar[n:] means the same as ar[n:len(ar)].
-- Thus to create a slice from an array: ar[:] means the same as ar[0:len(ar)].
+- When slicing, first index defaults to **0**, thus ``ar[:n]`` means the same as ``ar[0:n]``.
+- Second index defaults to len(array/slice), thus ``ar[n:]`` means the same as ``ar[n:len(ar)]``.
+- To create a slice from an entire array, we use ``ar[:]`` which means the same as ``ar[0:len(ar)]`` due to the defaults mentioned above.
 
-Ok, some more examples to make it even clearer:
+Ok, let's go over some more examples to make this even clearer.
+Read slowly and pause to think about each line so that you fully grasp the
+concepts.
 
 .. code-block:: go
     :linenos:
@@ -98,7 +101,7 @@ Ok, some more examples to make it even clearer:
     //declare an array of 10 bytes (ASCII characters). Remember: byte is uint8
     var ar [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
     //declare a and b as slice of bytes
-    var a,b []byte 
+    var a,b []byte
     //examples of slicing
     a = ar[4:8] // means: a contains elements of ar from ar[4] to ar[7]: e,f,g,h
     a = ar[6:7] // means: a contains ONE element of ar and that is ar[6]: g
@@ -114,8 +117,9 @@ Ok, some more examples to make it even clearer:
 
 Does it make more sense now? Fine!
 
-*Is that all there is? What's so interesting about slices?* Let me show you an
-example. 
+*Is that all there is? What's so interesting about slices?*
+
+Lets show you more examples below for the yummy ``slice``\d fruity goodness.
 
 Slices and functions
 ====================
@@ -125,8 +129,9 @@ value in many arrays of different sizes! Aha! See? One function is not enough fo
 that, because, remember, the types: ``[n]int`` and ``[m]int`` are **different**!
 They can not be used as an input of a single function.
 
-Slices fix this so easily! In fact, you just have to write a function that
-accepts a slice of ints as an input parameter, and create slices of your arrays.
+Slices fix this quite easily! In fact, we need only write a function that
+accepts a slice of integers as an input parameter, and create slices of arrays.
+
 Let's see the code.
 
 .. code-block:: go
@@ -138,9 +143,9 @@ Let's see the code.
     //return the biggest value in a slice of ints
     func Max(s []int) int{ //the input parameter is a slice of ints
         max := s[0] //the first element is the max for now
-        for i:=1; i<len(s); i++{ 
+        for i:=1; i<len(s); i++{
             if s[i]>max{ //we found a bigger value in our slice
-                max = s[i] 
+                max = s[i]
             }
         }
         return max
@@ -174,20 +179,23 @@ Output:
 You see? Using a slice as the input parameter of our function made it
 *reusable* and we didn't had to rewrite the same function for arrays of
 different sizes. So remember this: whenever you think of writing a function that
-takes an array as its input, think again, and use a slice instead.
+takes an array as its input, think again, and use a *slice* instead.
 
 Let's see other advantages of slices.
 
 Slices are references
 =====================
-So we said that slices are *references* to some underlying array (or slice).
-What does that mean? It means that slicing an array or another slice doesn't
-copy some of its elements into the new slice, it just make the new slice *point*
-to the element of this sliced array.
+We stated earlier that slices are *references* to some underlying array (or
+another slice).
+What exactly does that mean?
+It means that slicing an array or another slice doesn't simply copy some of the
+array's elements into the new slice, it instead make the new slice *point* to
+the element of this sliced array similar to the way pointers operate.
 
 In other words: changing an element's value in a slice will actually change the
-value of the element in the underlying array. And this change will be visible in
-all the slices, and slices of slices... referring to this array.
+value of the element in the underlying array to which the slice points.
+This changed value will be visible in all slices and slices of slices containing
+the array element.
 
 Let's see an example:
 
@@ -200,8 +208,8 @@ Let's see an example:
     func PrintByteSlice(name string, slice []byte){
         fmt.Printf("%s is : [", name)
         for i:=0; i<len(slice)-1; i++{
-            fmt.Printf("%q,", slice[i]) 
-        } 
+            fmt.Printf("%q,", slice[i])
+        }
         fmt.Printf("%q]\n", slice[len(slice)-1])
     }
 
@@ -263,17 +271,19 @@ Output:
 
 Let's talk about the ``PrintByteSlice`` function a little bit. If you analyze
 its code, you'll see that it loops until before ``len(slice)-1`` to print the
-element ``slice[i]`` and follow it with a comma. And at the end of the loop, it
-prints ``slice[len(slice)-1]`` (the last item) with a closing bracket.
+element ``slice[i]`` followed by a comma. At the end of the loop, it prints
+``slice[len(slice)-1]`` (the last item) with a closing bracket instead of
+a comma.
 
 ``PrintByteSlice`` works with slices of bytes, of any size, and can be used to
-print arrays content too, by using a slice that contains all of its elements as
+print arrays content also, by using a slice that contains all of its elements as
 an input parameter. This proves the utility of the advice before: always think
-of slices when you're about to write functions for arrays.
+of *slices* when you're about to write functions *for arrays*.
 
-So until now, we've learned that slices are really neat as input parameters for
-functions that expect *blocks* of variable size of consecutive elements of the
-same type. And that slices are references. 
+Until now, we've learned that slices are truly useful as input parameters for
+functions which expect *blocks* of a variable size of consecutive elements of
+the same type. We have learned also that slices are references to portions of
+an array or another slice.
 
 That is not all. Here's an awesome feature of slices.
 
@@ -284,15 +294,15 @@ array, its size can't change. It won't shrink nor grow. How unfortunate!
 
 Slices can grow or shrink.
 
-How so? Conceptually, a slice is struct of three fields:
+How so? Conceptually, a *slice* is a ``struct`` of three fields:
 
-* A pointer to the first element of the array where the slice begins.
-* A length: an int that represents the number of elements in the slice.
-* A Capacity: an int that represents the number of available elements.
+* A *pointer* to the first element of the array *where the slice begins*.
+* A *length* which is an **int** representing the total number of *elements in the slice*.
+* A *capacity* which is an **int** representing the number of *available elements*.
 
 .. code-block:: go
     :linenos:
-    
+
     type Slice struct {
         base *elementType //the pointer
         len int //length
@@ -350,7 +360,7 @@ Schematically, since you *love* my diagrams.
         s:f0:s->a:f4:n
         {rank=sink; a}
     }
-    
+
 
 .. code-block:: go
     :linenos:
@@ -358,7 +368,7 @@ Schematically, since you *love* my diagrams.
     //declare an array of 10 bytes.
     A := [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
     s := A[4:8]
-    
+
 The picture above is a representation of a slice that starts from the 5th
 element of the array. It contains exactly 4 elements (its length) and can
 contain up to 6 elements on the same underlying array (its capacity) starting
@@ -374,20 +384,22 @@ from the first element of the slice.
 To make things even easier, Go comes with a built-in function called make, which
 has the signature: ``func make([]T, len, cap) []T``.
 
-Where T stands for the element type of the slice to be created. The make
-function takes a type, a length, and an optional capacity. When called, make
-allocates an array and returns a slice that refers to that array.
+Where ``T`` stands for the element type of the slice to be created. The make
+function takes a *type*, a *length*, and an *optional capacity*.
+When called, make allocates an array and returns a slice that refers to that
+array.
 
 The optional capacity parameter, when omitted, defaults to the specified length.
 These parameters can be inspected for a given slice, using the built-in
-functions: ``len(slice)`` which returns the slice's length, and ``cap(slice)``
-which returns its capacity.
+functions:
+- ``len(slice)`` which returns a slice's length, and
+- ``cap(slice)`` which returns a slice's capacity.
 
 Example:
 
 .. code-block:: go
     :linenos:
-    
+
     var slice1, slice2 []int
     slice1 = make([]int, 4, 4)
     //so slice1 == []int {0, 0, 0, 0}
@@ -395,12 +407,12 @@ Example:
     //so slice2 == []int {0, 0, 0, 0}
     //cap(slice2) == len(slice2) == 4
 
-The zero value of a slice is ``nil``. The ``len`` and ``cap`` functions will
-both return 0 for a nil slice.
+The zero value of a slice is ``nil``.
+The ``len`` and ``cap`` functions will both return **0** for a ``nil`` slice.
 
 .. code-block:: go
     :linenos:
-    
+
     package main
 
     import "fmt"
@@ -438,40 +450,40 @@ Output:
     | Let's change some of its elements: s[1], s[3] = 2, 3
     | s ==  [0 2 0 3]
 
-Smart will already ask: "Why use ``make`` instead of ``new`` that we discussed
-when we studied :ref:`pointers<function-new>`?" -- And smarter ones already know
-why :)
+We may find ourselves wondering "Why use ``make`` instead of ``new`` that we discussed
+when we studied :ref:`pointers<function-new>`?"
 
-Let's say you're smart. Here's the reason why we use ``make`` and not ``new`` to
-create a new slice:
+Let's discuss the reason why we use ``make`` and not ``new`` to create a new
+slice:
 
-Rememeber? ``new(T)`` allocates memory to store a variable of type ``T`` and
-returns a pointer to it. Thus ``new(T)`` returns ``*T``. Right?
+Recall that ``new(T)`` allocates memory to store a variable of type ``T`` and
+returns a pointer to it. Thus ``new(T)`` returns ``*T``, right?
 
-So if we had used ``new([]int)`` for example to create a slice of ints, this
-will just allocate the internal structure discussed above and that will consist
-of a pointer, and two ints (length and capacity). And will return us a pointer
-of the type ``*[]int`` --and... that's not what we *need*!
+So for example if we had used ``new([]int)`` to create a slice of integers,
+``new`` will allocate the internal structure discussed above and that will
+consist of a pointer, and two integers (length and capacity).
+``new`` will then return us a pointer of the type ``*[]int`` -- which...
+let's face it... is not what we *need*!
 
-What we do need is a function that:
+What we do *need* is a function which:
 
 - Returns the actual structure not a pointer to it. i.e. returns ``[]int`` not
-  ``*[]int``.  
-- Allocate the underlying array that will hold the slice's elements.
+  ``*[]int``.
+- Allocates the underlying array that will hold the slice's elements.
 
-Do you see the difference? ``make`` doesn't allocate enough space to *host* a
-structure of a slice (the pointer, the length and the capacity) only, it
-allocates the structure *and* the underlying array.
+Do you see the difference? ``make`` doesn't merely allocate enough space to
+*host* the structure of a given slice (the pointer, the length and the capacity)
+only, it allocates both the structure *and* the underlying array.
 
 Back to our resizability of slices. As you may guess, shrinking a slice is
-really easy! All we have to do is reslice it and assign the new slice to it. 
+really easy! All we have to do is reslice it and assign the new slice to it.
 
-.. insert example of shrinking a slice here
+.. insert example of shrinking a slice here -- Shrinkage!!! Cold water Example!!!
 
-Now, let's see how -using only what we've learnt until now- we can make a slice
-grow. A very simple way of doing this is:
+Now, let's see how -- using only what we have learned until now -- we grow
+a slice. A very simple, straight forward way of growing a slice might be:
 
-1. make a new slice 
+1. make a new slice
 2. copy the elements of our slice to the one we created in 1
 3. make our slice refer to the slice created in 1
 
@@ -485,8 +497,8 @@ grow. A very simple way of doing this is:
     func PrintIntSlice(name string, slice []int){
         fmt.Printf("%s == [", name)
         for i:=0; i<len(slice)-1; i++{
-            fmt.Printf("%d,", slice[i]) 
-        } 
+            fmt.Printf("%d,", slice[i])
+        }
         fmt.Printf("%d]\n", slice[len(slice)-1])
     }
 
@@ -515,11 +527,11 @@ grow. A very simple way of doing this is:
         PrintIntSlice("s", s)
         fmt.Println("len(s) == ", len(s))
         fmt.Println("cap(s) == ", cap(s))
-	
+
         //Let's two elements to the slice
         //so we reslice the slice to add 2 to its original length
         s = s[:len(s)+2] //We can do this because cap(s) == 7
-        s[4], s[5] = 4, 5	
+        s[4], s[5] = 4, 5
        	fmt.Println("After adding new elements: s[4], s[5] = 4, 5")
         PrintIntSlice("s", s)
         fmt.Println("len(s) == ", len(s))
@@ -560,34 +572,36 @@ in lines 16, 17 and 18.
 
 And finally, it returns the ``new_slice`` as an output.
 
-We could have totally removed this loop actually with a built-in Go function
-called ``copy`` that takes two arguments: source and destination, and copies
-elements from source to destination and returns the number of the copied
-elements.
+The approach you may be used to or that first comes to mind is often
+implemented as a built-in Go function provided for you already.
+This is most definitely one such example. There is a built-in Go function
+called ``copy`` which takes two arguments: source and destination, and copies
+elements from the source to the destination and returns the number of elements
+copied.
 
-Its signature is: ``func copy(dst, src []T) int``
+The signature of ``copy`` is: ``func copy(dst, src []T) int``
 
 So we can replace the lines 16, 17, 18 with this very simple one:
 
 .. code-block:: go
     :linenos:
-    
+
     //instead of lines 16, 17, 18 of the previous source:
     copy(new_slice, slice) //copy elements from slice to new_slice
 
-Know what? Let's write another example and use the ``copy`` function in it.
+You know what? Let's write another example and use the ``copy`` function in it.
 
 .. code-block:: go
     :linenos:
-    
+
     package main
     import "fmt"
 
     func PrintByteSlice(name string, slice []byte){
         fmt.Printf("%s is : [", name)
         for i:=0; i<len(slice)-1; i++{
-            fmt.Printf("%q,", slice[i]) 
-        } 
+            fmt.Printf("%q,", slice[i])
+        }
         fmt.Printf("%q]\n", slice[len(slice)-1])
     }
 
@@ -631,8 +645,11 @@ Output:
     | h is : ['H','e','l','l','o','W','o','r','l','d']
     | w is : ['W','o','r','l','d']
 
-Appending to a slice is such a common operation that Go has a built-in function
-called ``append`` that we will see in details very soon.
+Appending to a slice is a very common operation and as such Go has a built-in
+function called ``append`` that we will see in details very soon.
 
-That was a long chapter, wasn't it? We'll stop here for now, go out, have a nice
-day, and see you tomorrow for another interesting composite type.
+Phew, that was a long chapter, eh? We'll stop here for now, go out, have a nice
+day, and see you tomorrow for another interesting composite type. If you are
+completely enthralled thus far by this exquisite book then do yourself a favor
+before continuing and go get a tea or coffee and take a nice 10 minute break.
+
