@@ -264,12 +264,13 @@ Outputs:
     | The square root of 10.000000 is 3.162278
 
 
-Here we *import* the package "math" in order to use the *Sqrt* (Square root)
-function it provides. We then write our own function ``MySqrt`` which returns
-two values: the first is boolean (indicates whether a square root is
-possible) and the second is the actual sqaure root of the input parameter ``f``.
+Here, we *import* the package "``math``" in order to use the ``Sqrt`` (Square
+root) function it provides. We, then, write our own function ``MySqrt`` which
+returns two values: the first one is the actual sqaure root of the input
+parameter ``f`` and the second one is a boolean (indicates whether a square root
+is possible or not)
 
-Notice how we use the parameters ``ok`` and ``s`` as actual variables in the
+Notice how we use the parameters ``s`` and ``ok`` as actual variables in the
 function's body.
 
 Since result variables are initialized to "zero" (0, 0.00, false...) according
