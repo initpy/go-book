@@ -225,13 +225,13 @@ A function with a result variable
 
     //A function that returns a bool that is set to true of Sqrt is possible
     //and false when not. And the actual square root of a float64
-    func MySqrt(f float64) (ok bool, s float64){
+    func MySqrt(f float64) (s float64, ok bool){
         if f>0 {
-            ok, s = true, math.Sqrt(f)
+            s, ok = math.Sqrt(f), true
         } else {
-            ok, s = false, 0
+            s, ok = 0, false
         }
-        return ok, s
+        return s, ok
     }
 
     func main(){
@@ -281,11 +281,11 @@ to its type, we can rewrite the previous example as follows:
     import "math"
 
     //return A+B and A*B in a single shot
-    func MySqrt(f float64) (ok bool, s float64){
+    func MySqrt(f float64) (s float64, ok bool){
         if f>0 {
-            ok, s = true, math.Sqrt(f)
+            s, ok = math.Sqrt(f), true
         }
-        return ok, s
+        return s, ok
     }
 
 The empty return
@@ -302,9 +302,9 @@ Thus, we can rewrite the previous example as follow:
     import "math"
 
     //return A+B and A*B in a single shot
-    func MySqrt(f float64) (ok bool, s float64){
+    func MySqrt(f float64) (s float64, ok bool) {
         if f>0 {
-            ok, s = true, math.Sqrt(f)
+            s, ok = math.Sqrt(f), true
         }
         return //omitting the output named variables, but keeping "return"
     }
