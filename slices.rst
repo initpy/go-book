@@ -119,10 +119,10 @@ example.
 
 Slices and functions
 ====================
-Say we need to fin the biggest value in an array of 10 elements. Good, we know
+Say we need to find the biggest value in an array of 10 elements. Good, we know
 how to do it. Now, imagine that our program has the task of finding the biggest
 value in many arrays of different sizes! Aha! See? One function is not enough for
-that, because, rememebr, the types: ``[n]int`` and ``[m]int`` are **different**!
+that, because, remember, the types: ``[n]int`` and ``[m]int`` are **different**!
 They can not be used as an input of a single function.
 
 Slices fix this so easily! In fact, you just have to write a function that
@@ -173,7 +173,7 @@ Output:
 
 You see? Using a slice as the input parameter of our function made it
 *reusable* and we didn't had to rewrite the same function for arrays of
-different sizes. So rememebr this: whenever you think of writing a function that
+different sizes. So remember this: whenever you think of writing a function that
 takes an array as its input, think again, and use a slice instead.
 
 Let's see other advantages of slices.
@@ -187,7 +187,7 @@ to the element of this sliced array.
 
 In other words: changing an element's value in a slice will actually change the
 value of the element in the underlying array. And this change will be visible in
-all the slices, and slices of slices... refering to this array.
+all the slices, and slices of slices... referring to this array.
 
 Let's see an example:
 
@@ -261,18 +261,18 @@ Output:
     | slice3 is : ['d', 'E']
 
 
-Let's talk about the ``PrintByteSlice`` function a little bit. If you analyse
+Let's talk about the ``PrintByteSlice`` function a little bit. If you analyze
 its code, you'll see that it loops until before ``len(slice)-1`` to print the
 element ``slice[i]`` and follow it with a comma. And at the end of the loop, it
 prints ``slice[len(slice)-1]`` (the last item) with a closing bracket.
 
 ``PrintByteSlice`` works with slices of bytes, of any size, and can be used to
 print arrays content too, by using a slice that contains all of its elements as
-an inuput parameter. This proves the utility of the advice before: always think
+an input parameter. This proves the utility of the advice before: always think
 of slices when you're about to write functions for arrays.
 
 So until now, we've learned that slices are really neat as input parameters for
-functions that expect *blocks* of variable size of consicutive elements of the
+functions that expect *blocks* of variable size of consecutive elements of the
 same type. And that slices are references. 
 
 That is not all. Here's an awesome feature of slices.
@@ -380,7 +380,7 @@ allocates an array and returns a slice that refers to that array.
 
 The optional capacity parameter, when omitted, defaults to the specified length.
 These parameters can be inspected for a given slice, using the built-in
-functions: ``len(slice)`` which returns the slice's lentgh, and ``cap(slice)``
+functions: ``len(slice)`` which returns the slice's length, and ``cap(slice)``
 which returns its capacity.
 
 Example:

@@ -106,7 +106,7 @@ Its general syntax is:
 Gramatically, ``expression1``, ``expression2``, and ``expression3`` are
 expressions, where ``expression1``, and ``expression3`` are used for
 assignements or function calls (``expression1`` before starting the loop, and
-``expression3`` at the end of evey iteration) and ``expression2`` is used to
+``expression3`` at the end of every iteration) and ``expression2`` is used to
 determine whether to continue or stop the iterations.
 
 An example would be better than the previous paragraph, right? Here we go!

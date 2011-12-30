@@ -11,7 +11,7 @@ bit, but that will end up being *awesome*.
 
 Function types
 ==============
-Do you rememebr when we talked about 
+Do you remember when we talked about 
 :ref:`functions signatures <functions-signatures>`? That what matters most in a
 function, beside what it actually does, is the parameters and results numbers
 and types.
@@ -142,7 +142,7 @@ and return a ``bool``. Of course, they're just little examples of functions of
 type ``test_int``.  One can imagine more advanced and complex functions that are
 of this type.
 
-The intersting part is the ``filter`` function, which takes a slice of type
+The interesting part is the ``filter`` function, which takes a slice of type
 ``[]int`` *and* a function of type ``test_int`` and returns a slice of type
 ``[]int``.
 

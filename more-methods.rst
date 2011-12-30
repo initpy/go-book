@@ -3,8 +3,8 @@
 More on methods
 ***************
 We learned how to write methods in Go, that they can be seen as functions with
-an implicit first parameter that is its reciever, and we saw some facilities
-that Go offers when working with pointers recievers.
+an implicit first parameter that is its receiver, and we saw some facilities
+that Go offers when working with pointers receivers.
 
 In this chapter we will see how to implement some OOP concepts with methods. It
 will be fun and relatively easy.
@@ -118,7 +118,7 @@ Example:
     type Student struct{
         Human //an anonymous field of type Human
         Skills //anonymous field for his skills
-        int //we will use this int as an anonymous field for his prefered number
+        int //we will use this int as an anonymous field for his preferred number
         speciality string
     }
 
@@ -137,9 +137,9 @@ Example:
         fmt.Println("She acquired two new ones")
         jane.Skills = append(jane.Skills, "physics", "golang")
         fmt.Println("Her skills now are", jane.Skills)
-        //her prefered number, which is an int anonymous field
+        //her preferred number, which is an int anonymous field
         jane.int = 3
-        fmt.Println("Her prefered number is", jane.int)
+        fmt.Println("Her preferred number is", jane.int)
     }
 
 Output:
@@ -153,7 +153,7 @@ Output:
     | Her skills are [anatomy]
     | She acquired two new ones
     | Her skills now are [anatomy physics golang]
-    | Her prefered number is 3
+    | Her preferred number is 3
 
 This anonymous field mechanism lets us *inherit* some (or even all)
 implementation of a given type from another type or types.

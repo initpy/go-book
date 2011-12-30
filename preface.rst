@@ -12,7 +12,7 @@ the studied concepts easy to understand.
 
 Why Go?
 =======
-There are gazzilions (not that many actually) programming languages already in
+There are gazillions (not that many actually) of programming languages already in
 the wild. So one could, and rightly so, ask why yet another language?
 The fact is Go is easy to grok, and fun to use but also efficient and well
 designed.
@@ -44,11 +44,11 @@ This modest work is an introduction to the Go language. It is meant to be easy
 to understand by everyone and tries to make this learning experience fun and
 easy.  Yes, that's quite a challenge, but... *aude aliquid dignum!* [#f1]_.
 
-I personnaly don't buy the *"learn the hard way"* method. Learning shouldn't be
+I personally don't buy the *"learn the hard way"* method. Learning shouldn't be
 *hard*! Just remember that we've learnt how to speak while playing when we were
 younger and stupider. And Go, or any other language for that matter, is actually
 a lot easier than any spoken language; there are fewer words, fewer syntax
-rules, fewer idoms...
+rules, fewer idioms...
 
 So here's the deal and the only condition for learning with this book: take it
 easy. Really, consider it as a game.

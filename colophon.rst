@@ -30,7 +30,7 @@ welcome! If you want to translate this work, please let me know, I'd love to
 share your translation here too.
 
 A little request, and I know most of you won't do it anyway. But I'd hate it if
-this work is copyied/pasted to spam search engines and make money out of it.
+this work was copied and pasted to spam search engines and make money out of it.
 Really. 
 
 

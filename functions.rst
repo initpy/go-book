@@ -411,8 +411,8 @@ How is passing a reference to functions is useful? You may ask.
 
 .. _functions-signatures:
 
-Functions signatures
-====================
+Function's signatures
+=====================
 Like with people, names don't matter that much. Do they? Well, yes, let's face
 it, they do matter, but what matters most is what they do, what they need, what
 they produce (Yeah you! Get back to work!).
