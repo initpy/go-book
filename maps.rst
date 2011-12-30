@@ -5,21 +5,24 @@ Advanced composite types: Maps
 This chapter will be lighter than the :doc:`previous one<slices>`, so don't
 worry, and smile for the perspective of adding a new tool to your box.
 
-Arrays and slices are good for gathering elements of the same type in a
-*sequential* fashion. You say: the first, the second, the third... element of
-the array or the slice. You access and modifiy elements using their indices in
-the array or the slice.
+Arrays and slices are wonderful tools for collecting elements of the same type
+in a *sequential* fashion.
+We simply say: the first element, the second element, ... the **n** :sup:`th`
+element of the array or the slice. We can access and modifiy elements using
+their numerical integer indices in the ``array`` or the *slice*.
 
-This is nice and quite useful. Now suppose that you'd like to access and modify
-elements given a kind of a name (and not an integer index). For example: Say,
-access the definition of the word "Hello" in a dictionary, find out the capital 
-of "Japan".
+This is nice and quite useful. Now suppose that we'd like to access and modify
+elements given a name of some type (a non-integer name or 'index').
+For example: Say we wish to access the definition of the word "Hello" in a
+dictionary or to find out the capital of "Japan".
 
-This calls for a new kind of type. A type where I can give it a *key* to
-retrieve a *value*. It's not about the n\ :sup:`th` element of a sequence, it's
-about an *association* of things (keys) with other things (values).
+These category of problems call for a new kind of type.
+A type where we can specify a *key* from which a *value* will be stored and
+retrieved. It's not about the n\ :sup:`th` element of a sequence, it's about an
+*association* of things (keys) with other things (values).
 
-This kind of types is called a *dict* in Python and *map* in Go.
+This kind of types is called a *dict* in Python and *map* in Go and a *hash* in
+Ruby.
 
 How to declare a map?
 =====================
@@ -35,11 +38,11 @@ For example:
     var numbers map[string] int //declare a map of strings to ints
 
 You can access and assign a value to an *entry* of this map using the square
-bracket syntax as in arrays or slices, but instead of an ``int`` index you use a key of
-the ``keyType`` type.
+bracket syntax as in arrays or slices, but instead of an ``int`` index you use a
+key of type ``keyType``.
 
-Also, like with slices, since maps are reference types, one can make them using
-the ``make`` function: ``make(map[string]float32)``.
+As with slices, since maps are reference types, we can make them using the
+``make`` function: ``make(map[string]float32)``.
 
 When used with maps, ``make`` takes an optional capacity parameter.
 
@@ -57,8 +60,8 @@ When used with maps, ``make`` takes an optional capacity parameter.
     fmt.Println("Trois is the french word for the number: ", numbers[3])
     // Trois is the french word for the number: 3
 
-You got the idea: it's like a table with two columns: on the left you have the
-key, and on the right column you have its *associated* value.
+We now have the idea: it's like a table with two columns: in the left column we
+have the key, and on the right column we have its *associated* value.
 
 .. graphviz::
 
@@ -91,19 +94,19 @@ key, and on the right column you have its *associated* value.
 
 Some things to notice:
 
-- There is no real notion of *order*. You don't access a value by an index, but
-  by a *key*
-- The size of a map is not fixed like in arrays. In fact, a map, like a slice,
-  is a reference type. 
+- There is no defined notion of *order*. We do not access a value by an index,
+  but rather by a *key* instead.
+- The size of a map is not fixed like in arrays. In fact, just like a *slice*,
+  a map is a *reference* type.
 - Doing for example ``numbers["coffees_I_had"] = 7`` will actually add an entry
   to this table, and the size of the map will be incremented by 1.
 - As in slices and arrays, the built-in function ``len`` will return the number
   of keys in a map (thus the number of entries).
 - Values can be changed, of course. ``numbers["coffees_I_had"] = 12`` will
-  change the int value associated with the string "coffes_I_had".
+  change the ``int`` value associated with the string "coffes_I_had".
 
 Literal values of maps can be expressed using a list of colon-separated
-key:value pairs
+``key:value`` pairs. Let's see an example of this:
 
 .. code-block:: go
     :linenos:
@@ -111,7 +114,7 @@ key:value pairs
     //A map representing the rating given to some programming languages.
     rating := map[string]float32 {"C":5, "Go":4.5, "Python":4.5, "C++":2 }
     //This is equivalent to writing more verbosely
-    var rating = map[string]float32 
+    var rating = map[string]float32
     rating = make(map[string]float)
     rating["C"] = 5
     rating["Go"] = 4.5
@@ -121,8 +124,9 @@ key:value pairs
 Maps are references
 -------------------
 If you assign a map ``m`` to another map ``m1``, they will both refer to the
-same underlying structure that holds the key/value pairs. So, changing the value
-associated with a given key in ``m1`` will also be visible in ``m``.
+same underlying structure that holds the key/value pairs.
+Thus, changing the value associated with a given key in ``m1`` will also change
+the value of that key in ``m`` as they both reference the same underlying data:
 
 .. code-block:: go
     :linenos:
@@ -136,11 +140,13 @@ associated with a given key in ``m1`` will also be visible in ``m``.
 
 Checking existence of a key
 ---------------------------
-What would the expression ``rating["C#"]`` return as a value, in our previous
-example? Good question, and the answer is simple: it will return the zero value
+**Question** What would the expression ``rating["C#"]`` return as a value, in our previous
+example?
+
+Good question! The answer is simple: the expression will return the zero value
 of the value type.
 
-The value type in our example is ``float32``, so it will return 0.00
+The value type in our example is ``float32``, so it will return '0.00'.
 
 .. code-block:: go
     :linenos:
@@ -152,8 +158,8 @@ The value type in our example is ``float32``, so it will return 0.00
 
 But then, if the value associated with an inexistent key is the zero of the type
 value, how can we be sure that C#'s rating is actually 0.00? In other words: is
-C#'s rating actually 0.00 so we can say that as a language it *stinks* or did we
-not jus rate it at all?
+C#'s rating actually 0.00 so we can say that as a language it *stinks* or was it
+that it was not rated at all?
 
 Here comes the "comma-ok" form of accessing a key's associated value in a map.
 It has this syntax: ``value, present = m[key]``.
@@ -167,15 +173,15 @@ map.
     rating := map[string]float32 {"C":5, "Go":4.5, "Python":4.5, "C++":2 }
     csharp_rating, ok := rating["C#"]
     //would print: We have no rating associated with C# in the map
-    if ok{
-        fmt.Println("C# is in the map and its rating is ", csharp_rating) 
+    if ok {
+        fmt.Println("C# is in the map and its rating is ", csharp_rating)
     } else {
-        fmt.Println("We have no rating associated with C# in the map") 
+        fmt.Println("We have no rating associated with C# in the map")
     }
 
 We often use ``ok`` as a variable name for boolean presence, hence the name
 "comma-ok" form. But, hey! You're free to use any name as long as it's a
-``bool``.
+``bool`` type.
 
 Deleting an entry
 -----------------
@@ -190,33 +196,34 @@ In fact, you just have to assign any given value followed by comma ``false``.
     map["C++"] = 1, false //we delete the entry with key "C++"
     cpp_rating, ok := rating["C++"]
     //would print: We have no rating associated with C++ in the map
-    if ok{
-        fmt.Println("C++ is in the map and its rating is ", cpp_rating) 
+    if ok {
+        fmt.Println("C++ is in the map and its rating is ", cpp_rating)
     } else {
-        fmt.Println("We have no rating associated with C++ in the map") 
+        fmt.Println("We have no rating associated with C++ in the map")
     }
 
 If in line 2, we had ``map["C++"] = 1, true`` the output of the if-else
 statement would be: *C++ is in the map and its rating is 1*. i.e. the entry
 associated with key "C++" would be kept in the map, and its value changed to 1.
 
-Cool! We have a new type where we can easily add key/value pairs, check if a
-given key is present, and delete any given key. Simply.
+Cool! We now have a sexy new type which allows us to easily add key/value pairs,
+check if a given key is present, and delete any given key. Simply.
 
-The question now is: How do I retrieve all the elements in my map? How do I print a
-list of all the languages in the ``rating`` map with their respective ratings?
+The question now is: "How do I retrieve all the elements in my map?"
+More specifically, "How do I print a list of all the languages in the ``rating``
+map with their respective ratings?"
 
 The range clause
 ================
-For maps (and arrays, and slices, and other stuff we'll see later), Go comes
-with an interesting syntax for the "for statement".
+For maps (and arrays, and slices, and other stuff which we'll see later), Go
+comes with a facinating alteration of the syntax for the "for statement".
 
-Its syntax is as follow:
+This syntax is as follow:
 
 .. code-block:: go
     :linenos:
 
-    for key, value := range m{
+    for key, value := range m {
         // in each iteration of this loop, the variables key and value are set
         // to the current key/value in the map
         ...
@@ -235,8 +242,8 @@ Let's see a complete example to understand this better.
         ratings := map[string]float32 {"C":5, "Go":4.5, "Python":4.5, "C++":2 }
 
         //iterate over the ratings map
-        for key, value := range ratings{
-            fmt.Printf("%s language is rated at %g\n", key, value) 
+        for key, value := range ratings {
+            fmt.Printf("%s language is rated at %g\n", key, value)
         }
     }
 
@@ -265,8 +272,8 @@ If we don't need the value in our for statement, we can omit it like this:
         fmt.Print("We rated these languages: ")
 
         //iterate over the ratings map, and print the languages names
-        for key := range ratings{
-            fmt.Print(key, ",") 
+        for key := range ratings {
+            fmt.Print(key, ",")
         }
     }
 
@@ -277,13 +284,13 @@ Output:
     | We rated these languages: C++,C,Go,Python,
 
 **Exercise**: Modify the program above to replace the last comma in the list by
-a period. That is: output "We rated these languages: C++,C,Go,Python."
-
+a period. That is, output:
+"We rated these languages: C++,C,Go,Python."
 
 This "for statement" form is also available for arrays and slices where instead
 of a key we have an index.
 
-Let's rewrite a previous example:
+Let's rewrite a previous example using this new tool:
 
 .. code-block:: go
     :linenos:
@@ -292,17 +299,17 @@ Let's rewrite a previous example:
     import "fmt"
 
     //return the biggest value in a slice of ints
-    func Max(s []int) int{ //the input parameter is a slice of ints
+    func Max(s []int) int { //the input parameter is a slice of ints
         max := s[0] //the first element is the max for now
-        for i, value := range s{ //notice how we iterate!
-            if value>max{ //we found a bigger value in our slice
-                max = value 
+        for i, value := range s { //notice how we iterate!
+            if value>max { //we found a bigger value in our slice
+                max = value
             }
         }
         return max
     }
 
-    func main(){
+    func main() {
         //declare three arrays of different sizes, to test the function Max
         A1 := [10]int {1,2,3,4,5,6,7,8,9}
         A2 := [4]int {1,2,3,4}
@@ -327,9 +334,9 @@ Output:
     | The biggest value of A2 is 4
     | The biggest value of A3 is 1
 
-Look at line 6. We used a ``range`` over a slice of ints. ``i`` is an index and
-it goes from 0 to ``len(s)-1`` and ``value`` is an int that goes from ``s[0]``
-to ``s[len(s)-1]``.
+Look carefully at line 6. We used a ``range`` over a slice of ints. ``i`` is an
+index and it goes from 0 to ``len(s)-1`` and ``value`` is an int that goes from
+``s[0]`` to ``s[len(s)-1]``.
 
 Notice also how we didn't use the index ``i`` in this loop. We didn't need it.
 
@@ -346,11 +353,11 @@ We could have written the ``Max(s []int)int`` function like this:
     :linenos:
 
     //return the biggest value in a slice of ints
-    func Max(s []int) int{ //the input parameter is a slice of ints
-        max := s[0] 
-        for _, value := range s{ //notice how we use _ to "ignore" the index
-            if value>max{
-                max = value 
+    func Max(s []int) int { //the input parameter is a slice of ints
+        max := s[0]
+        for _, value := range s { //notice how we use _ to "ignore" the index
+            if value>max {
+                max = value
             }
         }
         return max
@@ -358,36 +365,38 @@ We could have written the ``Max(s []int)int`` function like this:
 
 Also, say, we have a function that returns two or more values of which some are
 unimportant for us. We can "ignore" these output results using the *blank
-identifier*
+identifier*.
 
 .. code-block:: go
     :linenos:
 
     //A function that returns a bool that is set to true of Sqrt is possible
     //and false when not. And the actual square root of a float64
-    func MySqrt(f float64) (ok bool, s float64){
+    func MySqrt(f float64) (s float64, ok bool) {
         if f>0 {
-            ok, s = true, math.Sqrt(f) 
+            s, ok = math.Sqrt(f), true
         } else {
-            ok, s = false, 0 
+            s, ok = 0, false
         }
-        return ok, s
+        return s, ok
     }
     //...
-    _, r = MySqrt(v) //retrieve the square root of v, and ignore its faisability
+    r,_ = MySqrt(v) //retrieve the square root of v, and ignore its faisability
 
-That's it for this chapter. We learned about maps ; how to make them, how to
+That's it for this chapter. We learned about *maps* ; how to make them, how to
 add, change, and delete key/value pairs from them. How to check if a given key
-exists in a given map. And we also learned about the *blank identifier* and the
-``range`` clause.
+exists in a given map. And we also learned about the *blank identifier* '``_``'
+and the ``range`` clause.
 
 Yes, the ``range`` clause, especially, is a control flow construct that should
-belong in the chapter about :doc:`control flow<control>`, but we didn't knew
-about arrays, slices or maps, then. This is why we deferred it. 
+belong in the chapter about :doc:`control flow<control>`, but we didn't yet
+know about arrays, slices or maps, at that time. This is why we deferred it
+until this chapter.
 
 The next chapter will be about things that we didn't mention about functions in
 the chapter about :doc:`functions <functions>` for the same reason: lack of
 prior exposure, or simply because I wanted the chapter to be light so we
-can make progress with advanced data structures. 
+can make progress with advanced data structures.
 
-Anyways, you'll see, it will be fun! See you! :)
+Anyways, you'll see, it will be fun! See you in the next chapter! :)
+
