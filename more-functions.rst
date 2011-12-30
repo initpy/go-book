@@ -1,9 +1,7 @@
 .. include:: common.txt
 
-.. This chapter might be better named 'Getting funky with functions' ;)
-
-More on functions
-*****************
+Getting funky with functions
+****************************
 In the previous chapters, we went from how to declare variables, pointers, how
 to write basic control structures, how to combine these control structures to
 write functions. Then we went back to data, and how to combine basic data types
