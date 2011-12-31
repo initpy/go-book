@@ -579,9 +579,6 @@ the ``os`` package before, but the main goal of it is to show you a use of the
 
 Multiple defer calls
 --------------------
-.. Just like procrastinating ;) 'defer' should be called 'procrastinate' :p
-.. It likely wasn't due to the amount of typing involved ;) Plus we don't want
-.. to be known as 'lazy programmers' :)
 You can defer as many function calls as you want, and they'll be executed before
 the containing function returns in a LIFO (Last In First Out) order. That is,
 the last one to be deferred will be run first, and the first one will be executed

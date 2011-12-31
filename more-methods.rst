@@ -1,8 +1,7 @@
 .. include:: common.txt
 
-.. More *meth* please!!! ;)
-More on methods
-***************
+More meth(odes) please!
+***********************
 We have learned how to write methods in Go, that they can be seen as functions
 with an implicit first parameter that is its receiver, and we saw some
 facilities that Go offers when working with pointers and receivers.
