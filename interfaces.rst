@@ -256,8 +256,8 @@ themselves implement a given and precise data structure or method.
 They simply say: "if something can do *this*, it may be used *here*".
 
 Also, take note that types implementing a given interface do so by simply
-implementing the methods specified by the interface, they don't claim
-that they implement the methods.
+implementing the methods specified by the interface, they don't explicitly claim
+that they implement that interface.
 
 Similarly, an interface doesn't specify or even care which types implement it.
 Look how ``Men`` made no mention of types ``Student`` or ``Employee``.
@@ -267,7 +267,7 @@ declares then it can reference values of that type.
 The case of the empty interface
 ===============================
 The empty interface ``interface{}`` doesn't contain even a single method,
-hence every type implements *all* 0 of it's methods.
+hence every type implements *all* 0 of its methods.
 
 The empty interface, is not useful in *describing* a behavior (clearly, it is
 an entity of few words), but rather is extremely useful when we need to store
@@ -728,7 +728,7 @@ That wrapps up this chapter. I'll stop here, take a break and have a good
 day. Next, we will see some little details about interfaces. Don't worry! It
 will be easier than this one, I promise.
 
-C'mon, admit it! You've got a NERDON after this chapter!!!
+C'mon, admit it! You've got a *NERDON* after this chapter!!!
 
 .. external links and footnotes:
 
