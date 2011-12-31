@@ -133,9 +133,6 @@ So? Are methods applicable only for ``struct`` types? The anwser is No. In fact,
 you can write methods for any *named* type that you define, that is not a
 pointer:
 
-.. Question Why do you capitalize AgesBy below but not sliceOf? The 'random'
-.. Capitalization is confusing, perhaps it deserves a section/mention somewhere?
-
 .. code-block:: go
     :linenos:
 
@@ -143,10 +140,10 @@ pointer:
     import "fmt"
 
     //We define two new types
-    type sliceOfints []int
+    type SliceOfints []int
     type AgesByNames map[string]int
 
-    func (s sliceOfints) sum() int {
+    func (s SliceOfints) sum() int {
         sum := 0
         for _, value := range s {
             sum += value
@@ -167,7 +164,7 @@ pointer:
     }
 
     func main() {
-        s := sliceOfints {1, 2, 3, 4, 5}
+        s := SliceOfints {1, 2, 3, 4, 5}
         folks := AgesByNames {
             "Bob": 36,
             "Mike": 44,
@@ -218,12 +215,8 @@ Examples:
         "January":31,
         "February":28,
         ...
-        "December":31
+        "December":31,
     }
-
-.. Should likely note in the example above that the last entry does not require
-.. a comma after it. Question: Will a comma there break the compilation?
-.. Worth noting the answer.
 
 See? It's actually easy, and it can be handy to give more meaning to your
 code, by giving names to complicated composite -- or even simple -- types.
