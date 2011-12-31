@@ -1,25 +1,27 @@
 .. include:: common.txt
 
+.. Interfaces: the awesomesauce of Go
+
 Interfaces: the awesomeness of Go
 *********************************
 Let's recapitulate a little bit. We saw basic data types, and using them, we
-learned how to create composite data types. And we saw basic coltrol structures,
-and then we combined them to write functions.
+learned how to create composite data types. We also saw basic control
+structures. We then combined all of this to write functions.
 
-And then again, we discovered that functions are actually a kind of data, they
-are values and they have types. We went from there to learn about methods.  We
-used to write functions that act on data, to data types that *implement* a
-functionality.
+We next discovered that functions are actually a kind of data, they are
+themselves values and have types. We went on to learn about methods.
+We used methods to write functions that act on data, and then moved on to data
+types that *implement* a functionality.
 
-In this chapter, we will go even higher. We will learn to consider objects by
-their ability to do something.
+In this chapter, we will Go to the next realm.  We will now learn to use the
+innate spiritual ability of objects to actually *do* something.
 
 Enough spirituality, let's make this real.
 
 What is an interface?
 =====================
-Simply said, interfaces are sets of methods. We use them to specify a behavior
-of a given object.
+Stated simply, interfaces are *sets of methods*.
+We use an interface to specify a behavior of a given object.
 
 For example, in the previous chapter, we saw that both ``Student`` and
 ``Employee`` can ``SayHi``, they do it differently, but it doesn't matter. They
@@ -27,82 +29,88 @@ both *know* how to say "Hi".
 
 Let's extrapolate: ``Student`` and ``Employee`` implement another method
 ``Sing`` and ``Employee`` implements ``SpendSalary`` while ``Student``
-implements ``LoanMoney``.
+implements ``BorrowMoney``.
 
-So: ``Student`` implements: ``SayHi``, ``Sing`` and ``LoanMoney`` and
+So: ``Student`` implements: ``SayHi``, ``Sing`` and ``BorrowMoney`` and
 ``Employee`` implements: ``SayHi``, ``Sing`` and ``SpendSalary``.
 
 These sets of methods are *interfaces* that ``Student`` and ``Employee``
 *satisfy*. For example: both ``Student`` and ``Employee`` satisfy the interface
 that contains: ``SayHi`` and ``Sing``. But ``Employee`` doesn't satisfy the
-interafeca that is composed of ``SayHi``, ``Sing`` and ``LoanMoney`` because
-``Employee`` doesn't implement ``LoanMoney``.
+interafeca that is composed of ``SayHi``, ``Sing`` and ``BorrowMoney`` because
+``Employee`` doesn't implement ``BorrowMoney``.
 
 The interface type
 ==================
-An interface type in a specification of a set of methods implemented by some
-other objects. We use this syntax:
+An *interface type* is the specification of a set of methods implemented by some
+other objects. We use the following syntax:
 
 .. code-block:: go
     :linenos:
 
-    type Human struct{
+    type Human struct {
         name string
         age int
         phone string
     }
 
-    type Student struct{
+    type Student struct {
         Human //an anonymous field of type Human
         school string
         loan float32
     }
 
-    type Employee struct{
+    type Employee struct {
         Human //an anonymous field of type Human
         company string
         money float32
     }
 
-    //A human method to say hi
-    func (h *Human) SayHi(){
+    // A human likes to stay... err... *say* hi
+    func (h *Human) SayHi() {
         fmt.Printf("Hi, I am %s you can call me on %s\n", h.name, h.phone)
     }
 
-    //A human can sing a song
-    func (h *Human) Sing(lyrics string){
-        fmt.Println("La la la la...", lyrics)
+    // A human can sing a song, preferrably to a familiar tune!
+    func (h *Human) Sing(lyrics string) {
+        fmt.Println("La la, la la la, la la la la la...", lyrics)
     }
 
-    //Employee's method overrides Human's one
-    func (e *Employee) SayHi(){
+    // A Human man likes to guzzle his beer!
+    func (h *Human) Guzzle(beerStein string) {
+        fmt.Println("Guzzle Guzzle Guzzle...", beerStein)
+    }
+
+    // Employee's method for saying hi overrides a normal Human's one
+    func (e *Employee) SayHi() {
         fmt.Printf("Hi, I am %s, I work at %s. Call me on %s\n", e.name,
             e.company, e.phone) //Yes you can split into 2 lines here.
     }
 
-    //A Student loans some money
-    func (s *Student) LoanMoney(amount float32){
-        loan += amount
+    // A Student borrows some money
+    func (s *Student) BorrowMoney(amount float32) {
+        loan += amount // (again and again and...)
     }
 
     // An Employee spends some of his salary
-    func (e *Employee) SpendSalary(amount float32){
-        e.money -= amount
+    func (e *Employee) SpendSalary(amount float32) {
+        e.money -= amount // More vodka please!!! Get me through the day!
     }
 
     // INTERFACES
-    type Men interface{
+    type Men interface {
         SayHi()
         Sing(lyrics string)
+        Guzzle(beerStein string)
     }
 
-    type YoungChap interface{
+    type YoungChap interface {
         SayHi()
         Sing(song string)
-        LoanMoney(amount float32)
+        BorrowMoney(amount float32)
     }
 
-    type OldGuy interface{
+    type ElderlyGent interface {
         SayHi()
         Sing(song string)
         SpendSalary(amount float32)
@@ -114,29 +122,40 @@ and ``Employee``.
 
 Also, a type can implement an arbitrary number of interfaces, here, ``Student``
 implements (or satisfies) both ``Men`` and ``YoungChap`` interfaces, and
-``Employee`` satisfies ``Men`` and ``OldGuy``.
+``Employee`` satisfies ``Men`` and ``ElderlyGent``.
 
-And finally, every type implements the empty interface and that contains, you
-guessed it: 0 methods. We declare it: ``interface{}`` (No methods in it)
+And finally, every type implements the *empty interface* and that contains, you
+guessed it: *no methods*. We declare it as ``interface{}``
+(Again, notice that there are no methods in it.)
 
-*Cool, but what's the point in defining interfaces types? Is it just to describe
-how types behave, and what they have in common?* ---Of course there is more!
+You may find yourself now saying:
+
+  "*Cool, but what's the point in defining interfaces types?
+  Is it just to describe how types behave, and what they have in common?*"
+
+But wait! There's more! ---Of course there is more!
+
+Oh, by the way, did I mention that the empty interface has no methods yet?
 
 Interface values
 ================
-Since interfaces are types, you may wonder what are the values of these types.
+Since interfaces are themselves types, you may find yourself wonderng what
+exactly are the values of an interface type.
+
 Tada! Here comes the wonderful news: If you declare a variable of an interface,
-it may store any value that implements this interface!
+it may store any value type that implements the methods declared by the
+interface!
 
 That is, if we declare ``m`` of interface ``Men``, it may store a value of
-type ``Student`` or ``Employee``, or even... ``Human``!  Because they all
-implement methods specified in the ``Men`` interface.
+type ``Student`` or ``Employee``, or even... (gasp) ``Human``!
+This is because of the fact that they *all* implement methods specified by the
+``Men`` interface.
 
-Now think with me: if ``m`` can store values of these different types, we can
-easily declare a slice of type ``Men`` that will contain heterogeneous values,
-and this was not possible with slices of classical types.
+Reason with me now: if ``m`` can store values of these different types, we can
+easily declare a slice of type ``Men`` that will contain heterogeneous values.
+This was not even possible with slices of classical types!
 
-Let's see an example:
+An example should help to clarify what we are saying here:
 
 .. code-block:: go
     :linenos:
@@ -144,48 +163,48 @@ Let's see an example:
     package main
     import "fmt"
 
-    type Human struct{
+    type Human struct {
         name string
         age int
         phone string
     }
 
-    type Student struct{
+    type Student struct {
         Human //an anonymous field of type Human
         school string
         loan float32
     }
 
-    type Employee struct{
+    type Employee struct {
         Human //an anonymous field of type Human
         company string
         money float32
     }
 
     //A human method to say hi
-    func (h Human) SayHi(){
+    func (h Human) SayHi() {
         fmt.Printf("Hi, I am %s you can call me on %s\n", h.name, h.phone)
     }
 
     //A human can sing a song
-    func (h Human) Sing(lyrics string){
+    func (h Human) Sing(lyrics string) {
         fmt.Println("La la la la...", lyrics)
     }
 
     //Employee's method overrides Human's one
-    func (e Employee) SayHi(){
+    func (e Employee) SayHi() {
         fmt.Printf("Hi, I am %s, I work at %s. Call me on %s\n", e.name,
             e.company, e.phone) //Yes you can split into 2 lines here.
     }
 
     // Interface Men is implemented by Human, Student and Employee
     // because it contains methods implemented by them.
-    type Men interface{
+    type Men interface {
         SayHi()
         Sing(lyrics string)
     }
 
-    func main(){
+    func main() {
         mike := Student{Human{"Mike", 25, "222-222-XXX"}, "MIT", 0.00}
         paul := Student{Human{"Paul", 26, "111-222-XXX"}, "Harvard", 100}
         sam := Employee{Human{"Sam", 36, "444-222-XXX"}, "Golang Inc.", 1000}
@@ -232,25 +251,27 @@ Output:
     | Hi, I am Sam, I work at Golang Inc.. Call me on 444-222-XXX
     | Hi, I am Mike you can call me on 222-222-XXX
 
-As you may see, interfaces types are an abstract thing in that they don't
-implement a given and precise data structure. They just say: if something can do
-*this*, it may be used *here*.
+As you may have noticed, interfaces types are abstract in that they don't
+themselves implement a given and precise data structure or method.
+They simply say: "if something can do *this*, it may be used *here*".
 
-Also, notice that types implementing a given interface do this simply by
-implementing the methods specified in the interface, they don't *claim*
-explicitely that they are implementing this interface.
+Also, take note that types implementing a given interface do so by simply
+implementing the methods specified by the interface, they don't claim
+that they implement the methods.
 
-And similarly, an interface doesn't specify or even *care* which types
-implement it. Look how ``Men`` made no mention of types ``Student`` or
-``Employee``. All that matters for it is that if a type implements its methods,
-it can store values of it.
+Similarly, an interface doesn't specify or even care which types implement it.
+Look how ``Men`` made no mention of types ``Student`` or ``Employee``.
+All that matters for an interface is that if a type implements the methods it
+declares then it can reference values of that type.
 
 The case of the empty interface
 ===============================
-Sure, the empty interface ``interface{}`` doesn't contain any method, hence every
-type implements *all* of its 0 methods. This interface, indeed, is not useful in
-describing a behavior, but may serve as a type of variables that can store any
-value, since all types implement it.
+The empty interface ``interface{}`` doesn't contain even a single method,
+hence every type implements *all* 0 of it's methods.
+
+The empty interface, is not useful in *describing* a behavior (clearly, it is
+an entity of few words), but rather is extremely useful when we need to store
+*any* type value (since all types implement the empty interface).
 
 .. code-block:: go
     :linenos:
@@ -259,25 +280,25 @@ value, since all types implement it.
     var a interface{}
     var i int = 5
     s := "Hello world"
-    //These are legal statements
+    // These are legal statements
     a = i
     a = s
 
-A function that takes a parameter that is of type ``interface{}`` actually
-accepts any type, and if it returns a result of type ``interface{}`` you can
-expect it to return anything.
+A function that takes a parameter that is of type ``interface{}`` in actuality
+accepts any type. If a function returns a result of type ``interface{}`` then
+we expect it to be able to return values of any type.
 
-How is this even useful? Read on, you'll see.
+How is this even useful? Read on, you'll see! :sub:`(pixies)`
 
 Functions with interface parameters
 ===================================
 The examples above showed us how an interface variable can store any value of
-any type that satisfies this interface, and gave us an idea of how we can
-construct containers of heterogeneous data.
+any type which satisfies the interface, and gave us an idea of how we can
+construct containers of heterogeneous data (different types).
 
-In the same train of thought, we can consider function (and methods) that
-accept interfaces as parameters in order, justly, to be used with any type that
-satisfies that interface.
+In the same train of thought, we may consider functions (including methods) that
+accept interfaces as parameters in order to be used with any type that satisfies
+the given interfaces.
 
 For example: By now, you already know that fmt.Print is a variadic function,
 right? It accepts any number of parameters. But did you notice that sometimes,
@@ -295,8 +316,7 @@ definition of an interface type called `Stringer`_
     }
 
 Every type that implements the ``Stringer`` interface can be passed to
-``fmt.Print`` and ``fmt.Print`` will print out the output of its method
-``String``.
+``fmt.Print`` which will print out the output of the type's method ``String()``.
 
 Let's try this out:
 
@@ -309,7 +329,7 @@ Let's try this out:
         "strconv" //for conversions to and from string
     )
 
-    type Human struct{
+    type Human struct {
         name string
         age int
         phone string
@@ -317,13 +337,13 @@ Let's try this out:
 
     //Returns a nice string representing a Human
     //With this method, Human implements fmt.Stringer
-    func (h Human) String()string{
+    func (h Human) String() string {
         //We called strconv.Itoa on h.age to make a string out of it.
         //Also, thank you, UNICODE!
         return "❰"+h.name+" - "+strconv.Itoa(h.age)+" years -  ✆ " +h.phone+"❱"
     }
 
-    func main(){
+    func main() {
         Bob := Human{"Bob", 39, "000-7777-XXX"}
         fmt.Println("This Human is : ", Bob)
     }
@@ -335,14 +355,16 @@ Output:
     | This Human is : ❰Bob - 39 years -  ✆ 000-7777-XXX❱
 
 Look at how we used ``fmt.Print``, we gave it ``Bob``, a variable of type
-``Human``, and it printed it so nicely! All we had to do is make the ``Human``
-type implement a simple method ``String`` that returns a string, which means
-that we made ``Human`` satisfy the interface ``fmt.Stringer``.
+``Human``, and it printed it so nice and purty like!
+All we had to do is make the ``Human`` type implement a simple method
+``String()`` that returns a string, which means that we made ``Human`` satisfy
+the interface ``fmt.Stringer`` and thus were able to pass it to ``fmt.Print``.
 
-Do you remember the :ref:`colored boxes example<colored-boxes-example>`? We had
-a type named ``Color`` that implemented a ``String`` method too. Go back to that
-program, and instead of calling ``fmt.Println`` with the result of this method,
-call it directly with the color. You'll see it will work as expected.
+Recall the :ref:`colored boxes example<colored-boxes-example>`?
+We had a type named ``Color`` which implemented a ``String()`` method.
+Let's again go back to that program, and instead of calling ``fmt.Println`` with
+the result of this method, we will call it directly with the color.
+You'll see it will work as expected.
 
 .. code-block:: go
     :linenos:
@@ -354,10 +376,11 @@ call it directly with the color. You'll see it will work as expected.
 Cool, isn't it?
 
 Another example that will make you *love* interfaces is the `sort package`_
-which provides functions to sort slices of ``int``\s, ``float``\s, ``string``\s
-and other useful things.
+which provides functions to sort slices of type ``int``, ``float``, ``string``
+and wild and wonderous things.
 
-Let's see a basic example, and then I'll show you the magic of this package.
+Let's first see a basic example, and then I'll show you the magic of this
+package.
 
 .. code-block:: go
     :linenos:
@@ -368,7 +391,7 @@ Let's see a basic example, and then I'll show you the magic of this package.
         "sort"
     )
 
-    func main(){
+    func main() {
         // list is a slice of ints. It is unsorted as you can see
         list := []int {1, 23, 65, 11, 0, 3, 233, 88, 99}
         fmt.Println("The list is: ", list)
@@ -404,14 +427,15 @@ contains three methods:
         Swap(i, j int)
     }
 
-Always from the `sort Interface doc`_: A type, typically a collection, that
-satisfies sort.Interface can be sorted by the routines in this package. The
-methods require that the elements of the collection be enumerated by an integer
-index.
+From the `sort Interface doc`_:
 
-So all we need to sort slices of any type is to implement these methods! Let's
-give it a try with a slice of ``Human`` that we want to sort based on their
-ages.
+  "A type, typically a collection, that satisfies sort. Interface can be sorted
+  by the routines in this package. The methods require that the elements of the
+  collection be enumerated by an integer index.
+
+So all we need in order to sort slices of any type is to implement these  three
+methods! Let's give it a try with a slice of ``Human`` that we want to sort
+based on their ages.
 
 .. code-block:: go
     :linenos:
@@ -423,23 +447,23 @@ ages.
         "sort"
     )
 
-    type Human struct{
+    type Human struct {
         name string
         age int
         phone string
     }
 
-    func (h Human) String() string{
+    func (h Human) String() string {
         return "(name: " + h.name + " - age: "+strconv.Itoa(h.age)+ " years)"
     }
 
     type HumanGroup []Human //HumanGroup is a type of slices that contain Humans
 
-    func (g HumanGroup) Len() int{
+    func (g HumanGroup) Len() int {
         return len(g)
     }
 
-    func (g HumanGroup) Less(i, j int) bool{
+    func (g HumanGroup) Less(i, j int) bool {
         if g[i].age < g[j].age {
             return true
         }
@@ -512,23 +536,23 @@ It's actually simple. The function Sort of the package sort has this signature:
 ``func Sort(data Interface)``
 
 It accepts any value of any type that implements the interface
-``sort.Interface``, and deep inside (understand: in functions that ``sort.Sort``
-calls) there are calls for the ``Len``, ``Less``, and ``Swap`` methods that you
-defined for your type.
+``sort.Interface``, and deep inside (specifically: in functions that
+``sort.Sort`` calls) there are calls for the ``Len``, ``Less``, and ``Swap``
+methods that you defined for your type.
 
 Go and look into the `sort package source code`_, you'll see that in plain Go.
 
-We saw two different examples of functions that use interfaces as their
-parameters to offer an abstract way to do this on variables of different type
-provided that they implement the said interface.
+We have seen different examples of functions that use interfaces as their
+parameters offering an abstract way to do this on variables of different types
+provided they implement the interface.
 
-Let's just do that ourselves too! Let's write a function that accepts an
-interface as its parameter and see how smart we can be.
+Let's do that ourselves! Let's write a function that accepts an interface as
+it's parameter and see how brilliant we can be.
 
 Our own example
 ---------------
-We've seen the ``Max(s []int) int`` function, do you remember? And we also saw
-the ``Older(s []Person) Person`` one too! They have the same functionality.  In
+We've seen the ``Max(s []int) int`` function, do you remember? We also saw
+``Older(s []Person) Person``. They both have the same functionality.  In
 fact, retrieving the Max of a slice of ints, a slice of floats, or the older
 person in a group comes down to the same thing: loop and compare values.
 
@@ -544,7 +568,7 @@ Let's do it.
     )
 
     //A basic Person struct
-    type Person struct{
+    type Person struct {
         name string
         age int
     }
@@ -554,7 +578,7 @@ Let's do it.
     type Float32Slice []float32
     type PersonSlice []Person
 
-    type MaxInterface interface{
+    type MaxInterface interface {
         // Len is the number of elements in the collection.
         Len() int
         //Get returns the element with index i in the collection
@@ -574,21 +598,21 @@ Let's do it.
     func(x PersonSlice) Get(i int) interface{} {return x[i]}
 
     //Bigger implementation for our three types
-    func (x IntSlice) Bigger(i, j int) bool{
+    func (x IntSlice) Bigger(i, j int) bool {
         if x[i] > x[j] { //comparing two int
             return true
         }
         return false
     }
 
-    func (x Float32Slice) Bigger(i, j int) bool{
+    func (x Float32Slice) Bigger(i, j int) bool {
         if x[i] > x[j] { //comparing two float32
             return true
         }
         return false
     }
 
-    func (x PersonSlice) Bigger(i, j int) bool{
+    func (x PersonSlice) Bigger(i, j int) bool {
         if x[i].age > x[j].age { //comparing two Person ages
             return true
         }
@@ -596,7 +620,7 @@ Let's do it.
     }
 
     //Person implements fmt.Stringer interface
-    func (p Person) String() string{
+    func (p Person) String() string {
         return "(name: " + p.name + " - age: "+strconv.Itoa(p.age)+ " years)"
     }
 
@@ -605,7 +629,7 @@ Let's do it.
      - The bool is set to true if there is a MAX in the collection
      - The value is set to the MAX value or nil, if the bool is false
     */
-    func Max(data MaxInterface) (ok bool, max interface{}){
+    func Max(data MaxInterface) (ok bool, max interface{}) {
         if data.Len() == 0{
             return false, nil //no elements in the collection, no Max value
         }
@@ -614,7 +638,7 @@ Let's do it.
         }
         max = data.Get(0)//the first element is the max for now
         m := 0
-        for i:=1; i<data.Len(); i++{
+        for i:=1; i<data.Len(); i++ {
             if data.Bigger(i, m){ //we found a bigger value in our slice
                 max = data.Get(i)
                 m = i
@@ -623,7 +647,7 @@ Let's do it.
         return true, max
     }
 
-    func main(){
+    func main() {
         islice := IntSlice {1, 2, 44, 6, 44, 222}
         fslice := Float32Slice{1.99, 3.14, 24.8}
         group := PersonSlice{
@@ -657,16 +681,16 @@ Output:
 The ``MaxInterface`` interface contains three methods that must be implemented
 by types to satisfy it.
 
-* ``Len() int``: This method returns the lentgh of the collection
-* ``Get(int i) interface{}``: This one returns the element at index ``i`` in the
+* ``Len() int``: must return the length of the collection.
+* ``Get(int i) interface{}``: must return the element at index ``i`` in the
   collection. Notice how this method returns a result of type ``interface{}`` -
   We designed it this way, so that collections of any type may return a value
-  their own type, and this value can be a stored in an empty interface result.
+  their own type, which may then be stored in an empty interface result.
 * ``Bigger(i, j int) bool``: This methods returns ``true`` if the element at
   index ``i`` of the collection is bigger than the one at index ``j``, or
   ``false`` otherwise.
 
-Why three methods?
+Why these three methods?
 
 * ``Len() int``: Because no one said that collections must be slices. Imagine a
   complex data structure that has its own definition of length.
@@ -677,34 +701,34 @@ Why three methods?
   bigger, and programming languages come with numeric comparison operators such
   ``<``, ``==``, ``>`` and so on... But this notion of bigger value can be
   subtile. Person A is older (They say *bigger* in many languages) than B, if
-  his age is bigger than B's one.
+  his age is bigger (greater) than B's age.
 
-The different implementations of these methods by our types are pretty simple
+The different implementations of these methods by our types are fairly simple
 and straightforward.
 
 The heart of the program is the function: ``Max(data MaxInterface) (ok bool, max
-interface{})``. It takes as a parameter ``data`` of type ``MaxInterface``. So
-``data`` has the three methods discussed before. And it returns two results: a
-``bool`` (``true`` if there is a Max, ``false`` if the collection is emply) and
-a value of type ``interface{}`` which stores the Maximum value of the
+interface{})`` which takes as a parameter ``data`` of type ``MaxInterface``.
+``data`` has the three methods we discussed above. ``Max()`` returns two
+results: a ``bool`` (``true`` if there is a Max, ``false`` if the collection is
+empty) and a value of type ``interface{}`` which stores the Maximum value of the
 collection.
 
-Notice how the function Max is implemented: it doesn't make any mention of any
-specific collection type, everything it uses comes from the interface type. This
-*abstraction* is what makes it usable by any type that implements
+Notice how the function ``Max()`` is implemented: no mention is made of any
+specific collection type, everything it uses comes from the interface type.
+This *abstraction* is what makes ``Max()`` usable by any type that implements
 ``MaxInterface``.
 
-Each time we call Max on a given data collection of a given type, it calls these
-methods as they are implemented by that type. And this works like a charm. If we
-need to find out the Max of any collection, we will just have to implement the
-MaxInterface for that type and it will work, like it worked for ``fmt.Print``
+Each time we call ``Max()`` on a given data collection of a given type, it calls
+these methods as they are implemented by that type. This works like a charm. If
+we need to find out the max value of any collection, we only need implement the
+MaxInterface for that type and it will work, just as it worked for ``fmt.Print``
 and ``sort.Sort``.
 
-.. C'mon, admit it! You've got a NERDON after this one!
-
-And... that's it for this chapter. I'll stop here, take a break and have a good
+That wrapps up this chapter. I'll stop here, take a break and have a good
 day. Next, we will see some little details about interfaces. Don't worry! It
 will be easier than this one, I promise.
+
+C'mon, admit it! You've got a NERDON after this chapter!!!
 
 .. external links and footnotes:
 
