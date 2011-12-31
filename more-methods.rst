@@ -16,7 +16,7 @@ I didn't tell you about this when we studied ``struct``\s, but we actually can
 declare fields without specifying names for them (just the type). It is for
 this reason that we call them *anonymous fields* (the lack of a name).
 
-When an anonymous field is a ``struct`` it's fields are inserted (embedded)
+When an anonymous field is a ``struct`` its fields are inserted (embedded)
 into the struct containing it.
 
 Let's see an example to help clarify this concept:
