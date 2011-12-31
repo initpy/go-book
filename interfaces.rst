@@ -1,9 +1,7 @@
 .. include:: common.txt
 
-.. Interfaces: the awesomesauce of Go
-
-Interfaces: the awesomeness of Go
-*********************************
+Interfaces: the awesomesauce of Go
+**********************************
 Let's recapitulate a little bit. We saw basic data types, and using them, we
 learned how to create composite data types. We also saw basic control
 structures. We then combined all of this to write functions.
