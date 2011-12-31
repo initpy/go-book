@@ -38,15 +38,12 @@ Let's see an example to clarify the actual question:
         //...
     }
 
-.. Short form variable names make it harder for people to understand, stick to
-.. longer variable names that represent or associate what the variable is for.
-
 So, the question confronting us is:
 
   How do we test the type that is stored in an interface variable?
 
 Comma-ok type assertions
------------------------
+------------------------
 Go comes with a handy syntax to know whether it is possible to convert an
 interface value to a given type value, it's as easy as this: ``value, ok =
 element.(T)``, where ``value`` is a variable of type ``T``, ``ok`` is a boolean,
@@ -54,10 +51,8 @@ and ``element`` is the interface variable.
 
 If it is possible to convert ``element`` to type ``T``, then ``ok`` is set to
 ``true``, and ``value`` is set to the result of this conversion.
-Otherwise, ``ok`` is set to ``false``.
-
-.. And ``value`` is set to ... what in the false case? undefined? nil?
-.. It would be very good to specify here what it will be for the false case.
+Otherwise, ``ok`` is set to ``false`` and ``value`` is set to the *zero value*
+of ``T``.
 
 Let's use this comma-ok type assertion in an example:
 
