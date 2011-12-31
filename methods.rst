@@ -2,20 +2,21 @@
 
 Methods: a taste of OOP
 ***********************
-In the previous chapter, we saw some nice things to do with functions as values 
+In the previous chapter, we saw some nice things to do with functions as values
 that can be assigned to variables, passed to and returned from other functions.
-And we finished with the fact that we actually can use functions as fields of
-``struct``\s.
+We finished with the fact that we actually can use functions as ``struct``
+fields.
 
-Today, we'll see a kind of an *extrapolation* of functions: functions with a
-*receiver*, simply called: methods.
+
+Today, we'll see a kind of an *extrapolation* of functions, that is functions
+with a *receiver*, which are called **methods**.
 
 What is a method?
 =================
 Suppose that you have a ``struct`` representing a rectangle. And you want *this*
 rectangle to *tell* you *its own* area.
 
-The way we'd do it with functions would be something like this:
+The way we'd do this with functions would be something like this:
 
 .. code-block:: go
     :linenos:
@@ -23,15 +24,15 @@ The way we'd do it with functions would be something like this:
     package main
     import "fmt"
 
-    type Rectangle struct{
-        width, height float64 
+    type Rectangle struct {
+        width, height float64
     }
 
-    func area(r Rectangle) float64{
-        return r.width*r.height 
+    func area(r Rectangle) float64 {
+        return r.width*r.height
     }
 
-    func main(){
+    func main() {
         r1 := Rectangle{12, 2}
         r2 := Rectangle{9, 4}
         fmt.Println("Area of r1 is: ", area(r1))
@@ -54,7 +55,7 @@ and triangles and other polygons to your program, and you want to compute their
 areas, you'd have to write different functions *with different names* for a
 *functionality* or a *characteristic* that is, after all, the *same*.
 
-You'd have to write: area_rectangle, area_circle, area_triangle...
+You'd have to write: ``area_rectangle``, ``area_circle``, ``area_triangle``...
 
 And this is not elegant. Because the *area* of a *shape* is a *characteristic*
 of this shape. It should be a part of it, *belong* to it, just like its other
@@ -64,8 +65,9 @@ And this leads us to methods: A method is function that is bound or attached to
 a given type. Its syntax is the same as a traditional function except that we
 specify a *receiver* of this type just after the keyword ``func``.
 
-In the words of `Rob Pike`_: A method is a function with an implicit first
-argument, called a receiver.
+In the words of `Rob Pike`_:
+
+  "*A method is a function with an implicit first argument, called a receiver.*"
 
 ``func (ReceiverType r) func_name (parameters) (results)``
 
@@ -75,31 +77,31 @@ Let's illustrate this with an example:
     :linenos:
 
     package main
-    import ("fmt"; "math") //Hey! Look how we used a semi-colon!
+    import ("fmt"; "math") //Hey! Look how we used a semi-colon! Neat technique!
 
-    type Rectangle struct{
-        width, height float64 
+    type Rectangle struct {
+        width, height float64
     }
 
-    type Circle struct{
-        radius float64 
+    type Circle struct {
+        radius float64
     }
 
-    /* 
+    /*
      Notice how we specified a receiver of type Rectangle to this method.
      Notice also how this methods -in this case- doesn't need input parameters
      because the data it need is part of its receiver r
     */
-    func (r Rectangle) area() float64{
-        return r.width*r.height  //using fields of the receiver
+    func (r Rectangle) area() float64 {
+        return r.width * r.height  //using fields of the receiver
     }
 
     // Another method with the SAME name but with a different receiver.
-    func (c Circle) area() float64{ 
-        return c.radius*c.radius*math.Pi
+    func (c Circle) area() float64 {
+        return c.radius * c.radius * math.Pi
     }
 
-    func main(){
+    func main() {
         r1 := Rectangle{12, 2}
         r2 := Rectangle{9, 4}
         c1 := Circle{10}
@@ -120,18 +122,19 @@ Output:
     | Area of c1 is:  314.1592653589793
     | Area of c2 is:  1963.4954084936207
 
-A few things about methods:
+A few things to note about methods:
 
 - Methods of different receivers are different methods even if they share the
   name.
-- A method has access to its receiver fields/data
+- A method has access to its receiver's fields (data).
 - A method is called with the dot notation like ``struct`` fields.
 
 So? Are methods applicable only for ``struct`` types? The anwser is No. In fact,
 you can write methods for any *named* type that you define, that is not a
-pointer.
+pointer:
 
-Example:
+.. Question Why do you capitalize AgesBy below but not sliceOf? The 'random'
+.. Capitalization is confusing, perhaps it deserves a section/mention somewhere?
 
 .. code-block:: go
     :linenos:
@@ -143,27 +146,27 @@ Example:
     type sliceOfints []int
     type AgesByNames map[string]int
 
-    func (s sliceOfints) sum() int{
+    func (s sliceOfints) sum() int {
         sum := 0
-        for _, value := range s{
-            sum += value 
-        } 
+        for _, value := range s {
+            sum += value
+        }
         return sum
     }
 
-    func (people AgesByNames) older() string{
+    func (people AgesByNames) older() string {
         a := 0
         n := ""
-        for key, value := range people{
+        for key, value := range people {
             if value > a {
-                a = value 
+                a = value
                 n = key
             }
         }
         return n
     }
 
-    func main(){
+    func main() {
         s := sliceOfints {1, 2, 3, 4, 5}
         folks := AgesByNames {
             "Bob": 36,
@@ -176,6 +179,8 @@ Example:
         fmt.Println("The older in the map folks is:", folks.older())
     }
 
+If you missed the comma remark, go back and re-read the code carefully.
+
 Output:
 
 .. container:: output
@@ -183,12 +188,14 @@ Output:
     | The sum of ints in the slice s is:  15
     | The older in the map folks is: Popey
 
-*Now, wait a minute!* (You say this with your Bill Cosby's voice) *What is this
-"named types" thing that you're telling me now?* Sorry, my bad. I needn't to
-tell you before. And didn't want to distract you with this *detail* back then. 
+*Now, wait a minute!* (You say this with your best Bill Cosby's impression)
+*What is this "named types" thing that you're telling me now?*
+Sorry, my bad. I didn't need to tell you before.
+And I didn't want to distract you with this *detail* back then.
 
-It's in fact easy. You can define new types as much as you want. ``struct`` is
-just a case of this syntax. And we actually used it in the previous chapter too! 
+It's in fact easy. You can define new types as much as you want.
+``struct`` is in fact a specific case of this syntax.
+Look back, we actually used this in the previous chapter!
 
 You can create aliases for built-in and composite types with the following
 syntax:
@@ -214,8 +221,12 @@ Examples:
         "December":31
     }
 
-See? It's actually easy, and it can be handy to give more meaning to your programs,
-by giving names to complicated composite -or even simple- types.
+.. Should likely note in the example above that the last entry does not require
+.. a comma after it. Question: Will a comma there break the compilation?
+.. Worth noting the answer.
+
+See? It's actually easy, and it can be handy to give more meaning to your
+code, by giving names to complicated composite -- or even simple -- types.
 
 Back to our methods.
 
@@ -224,14 +235,16 @@ pre-declared type. Needless to say that you can define as many methods, for any
 given named type, as you want.
 
 Let's see a more advanced example, and we will discuss some details of it just
-after. 
+after.
 
-It's the story of a set of colored boxes. They have widths, heights and depths
-and of course colors. We want to find out the color of the biggest of them, and
+Tis the story of a set of colored boxes. They have widths, heights, depths
+and colors of course! We want to find out the color of the biggest box, and
 eventually paint them all black (Because you know... I see a red box, and I want
 it painted black...)
 
 Here we *Go*!
+
+.. Very punny... :p
 
 .. _colored-boxes-example:
 
@@ -252,50 +265,50 @@ Here we *Go*!
 
     type Color byte
 
-    type Box struct{
+    type Box struct {
         width, height, depth float64
         color Color
     }
 
     type BoxList []Box //a slice of boxes
 
-    func (b Box) Volume() float64{
-        return b.width*b.height*b.depth 
+    func (b Box) Volume() float64 {
+        return b.width * b.height * b.depth
     }
 
-    func (b *Box) SetColor(c Color){
-        b.color = c 
+    func (b *Box) SetColor(c Color) {
+        b.color = c
     }
 
-    func (bl BoxList) BiggestsColor() Color{
+    func (bl BoxList) BiggestsColor() Color {
         v := 0.00
         k := Color(WHITE) //initialize it to something
-        for _, b := range bl{
-            if b.Volume() > v{
+        for _, b := range bl {
+            if b.Volume() > v {
                 v = b.Volume()
                 k = b.color
             }
-        } 
+        }
         return k
     }
 
-    func (bl BoxList) PaintItBlack(){
-        for i, _ := range bl{
+    func (bl BoxList) PaintItBlack() {
+        for i, _ := range bl {
             bl[i].SetColor(BLACK)
         }
     }
 
-    func (c Color) String() string{
+    func (c Color) String() string {
         strings := []string {"WHITE", "BLACK", "BLUE", "RED", "YELLOW"}
         return strings[c]
     }
 
-    func main(){
-        boxes := BoxList{
+    func main() {
+        boxes := BoxList {
             Box{4, 4, 4, RED},
             Box{10, 10, 1, YELLOW},
-            Box{1, 1, 20, BLACK}, 
-            Box{10, 10, 1, BLUE}, 
+            Box{1, 1, 20, BLACK},
+            Box{10, 10, 1, BLUE},
             Box{10, 30, 1, WHITE},
             Box{20, 20, 20, YELLOW},
         }
@@ -327,27 +340,28 @@ Output:
 So we defined some ``const``\s with consecutive values using the ``iota`` idiom
 to represent some colors.
 
-And then we declared some types: 
+And then we declared some types:
 
 1. ``Color`` which is an alias to ``byte``.
 2. ``Box`` struct to represent a box, it has three dimensions and a color.
-3. ``BoxList`` which is a slice of ``Box``. 
-  
+3. ``BoxList`` which is a slice of ``Box``.
+
 Simple and straightforward.
 
 Then we wrote some methods for these types:
 
-- ``Volume()`` with a receiver of type ``Box`` that returns its volume.
-- ``SetColor(c Color)`` sets its receiver's color to c.
-- ``BiggestsColor()`` with a receiver of type ``BoxList`` that returns the color
-  of the ``Box`` that has the biggest volume in this slice.
-- ``PaintItBlack()`` with a receiver of type ``BoxList`` that sets the colors of
-  all the ``Box``\es in the slice to BLACK.
-- ``String()`` a method with a receiver of type ``Color`` that returns a string
+- ``Volume()`` with a receiver of type ``Box`` that returns the volume of the
+  received box.
+- ``SetColor(c Color)`` sets its receiver's color to ``c``.
+- ``BiggestsColor()`` with a receiver of type ``BoxList`` returns the color of
+  the ``Box`` with the biggest volume that exists within the slice.
+- ``PaintItBlack()`` with a receiver of type ``BoxList`` sets the colors of all
+  ``Box``\es in the slice to BLACK.
+- ``String()`` a method with a receiver of type ``Color`` returns a string
   representation of this color.
 
 All this is simple. For real. We *translated* our vision of the problem into
-*things* that have methods that describe/implement a *behavior*.
+*things* that have methods that describe and implement a *behavior*.
 
 Pointer receivers
 =================
@@ -356,43 +370,57 @@ Box! Yes, you can use ``*Box`` too. The restriction with methods is that the
 type ``Box`` itself (or any receiver's type) shouldn't be a pointer.
 
 Why did we use a pointer? You have 10 seconds to think about it, and then read
-on the next paragraph. I'll start counting: 10, 9, 8...
+on the next paragraph. I'll start counting:
 
-Ok, We used a pointer because we needed the ``SetColor`` method to be able to
-change the value of the field 'color' of its receiver. Hadn't we used a pointer,
-the method would recieve a copy of the receiver ``b`` (passed by value) and the
-changes that it will make will affect the copy, not the original. 
+  10, 9, 8...
 
-Just think of the receiver as a parameter that the method has in input, and
-remember the difference between :ref:`passing by value and
-reference<value-reference>`.
+Ready?
+
+Ok! Let's find out if you were correct.
+We used a pointer because we needed the ``SetColor`` method to be able to
+change the value of the field 'color' of its receiver. If we did not use a
+pointer, then the method would recieve a *copy* of the receiver ``b``
+(passed by value) and hence the changes that it will make will affect the copy
+only, not the original.
+
+Think of the receiver as a parameter that the method has in input, and
+ensure that you understand and remember the difference between
+:ref:`passing by value and reference<value-reference>`.
 
 Structs and pointers simplification
 -----------------------------------
-Again with the method ``SetColor``, smart readers (You are one of them, I know)
+Again with the method ``SetColor``, intelligent readers
+(You are one of them, this I know!)
 would say that we should have written ``(*b).color = c`` instead of ``b.color =
 c``, since we need to dereference the pointer ``b`` to access the field color.
 
-That's true, and in fact both forms are accepted because Go knows that you want
-to access the field of the value pointed to by the pointer (since a pointer has
+This is true! In fact, both forms are accepted because Go knows that you want
+to access the fields of the value pointed to by the pointer (since a pointer has
 no notion of fields) so it assumes that you wanted ``(*b)`` and it simplifies
-this for you.
+this for you. Look Ma, Magic!
 
 Even more simplification
 ------------------------
-Smarter readers would say: On line 43 where we call ``SetColor`` on ``bl[i]``,
-shouldn't it be ``(&bl[i]).SetColor(BLACK)`` instead? Since ``SetColor`` expects
-a pointer of type ``*Box``, not a value of type ``Box``?
+Experienced readers will also say:
 
-Yes, that's also true, and yes both forms are accepted. Go automatically does
+  "On line 43 where we call ``SetColor`` on ``bl[i]``,
+  shouldn't it be ``(&bl[i]).SetColor(BLACK)`` instead?
+  Since ``SetColor`` expects a pointer of type ``*Box`` and not a value of
+  type ``Box``?"
+
+This is also quite true! Both forms are accepted. Go automatically does
 the conversion for you because it *knows* what type the method expects as a
 receiver.
 
-In other words: If a method ``M`` expects a receiver of type ``*T``, you can
-call it on a variable ``V`` of type ``T`` without passing it as ``&V`` to ``M``.
+In other words:
 
-Similarly, if a method ``M`` expects a receiver of type ``T``, you can call it
-on a variable ``P`` of type ``*T`` without passing it as ``*P`` to ``M``.
+  If a method ``M`` expects a receiver of type ``*T``, you can call the method
+  on a variable ``V`` of type ``T`` without passing it as ``&V`` to ``M``.
+
+Similarly:
+
+  If a method ``M`` expects a receiver of type ``T``, you can call the method
+  on a variable ``P`` of type ``*T`` without passing it as ``*P`` to ``M``.
 
 Example:
 
@@ -405,16 +433,16 @@ Example:
     type Number int
 
     //method inc has a receiver of type pointer to Number
-    func (n *Number) inc(){
+    func (n *Number) inc() {
         *n++
     }
 
     //method print has a receiver of type Number
-    func (n Number) print(){
-        fmt.Println("The number is equal to", n) 
+    func (n Number) print() {
+        fmt.Println("The number is equal to", n)
     }
 
-    func main(){
+    func main() {
 
         i := Number(10) //say that i is of type Number and is equal to 10
         fmt.Println("i is equal to", i)
@@ -447,6 +475,9 @@ Output:
 So don't worry, Go knows the type of a receiver, and knowing this it simplifies
 by accepting ``V.M()`` as a shorthand of ``(&V).M()`` and ``P.M()`` as a
 shorthand for ``(*P).M()``.
+
+Anyone who has done much C/C++ programming will have realized at this point the
+world of pain that Go saves us from by simply using sane assumptions.
 
 Well, well, well... I know these pointers/values matters hurt heads, take a
 break, go out, have a good coffee, and in the next chapter we will see some cool
