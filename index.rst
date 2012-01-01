@@ -4,18 +4,18 @@ Hey, you! Yes, you!
     :class: rightfloat
 
 See the little gopher? Isn't it cute? Yes it is! He is the mascot of the Go
-programming language *---Go, what?* Go, the programming language! 
+programming language *---Go, what?* Why Go, the programming language of course!
 
 This website is an online book that aims to introduce people to this awesome
 language. And if you, actually, stumbled upon it while looking for real gophers,
-let me still invite you to read it and learn something cool! 
+let me still invite you to read it and learn something cool! C'mon, go-pher it!
 
 Welcome aboard
 ==============
 .. container:: side
 
     In this part, we will learn the very basic things about Go. The basic syntax
-    for simple programs, how to declare variables, pointers and how to use basic
+    for programs, how to declare variables, pointers and how to use basic
     control structures.
 
 .. toctree::
@@ -33,9 +33,9 @@ Let's combine stuff
 ===================
 .. container:: side
 
-    Now, it's time to play like with Legos. We use primitive data types and
-    basic control structures, that we saw in the previous part, to build
-    composite types and functions.
+    Now, it's time to play like children with Legos. Technical Legos. "Tegos"? ;)
+    We use primitive data types and basic control structures, that we saw in
+    the previous part, to build composite types and functions.
 
 .. toctree::
    :maxdepth: 1
@@ -51,7 +51,7 @@ And be smart and awesome
 
     We will learn smarter and nicer things about functions, and will have fun
     writing code to represent and solve real world problems (well... real as in
-    objects. ---You know what I mean)
+    objects. --- You know what I mean)
 
 .. toctree::
    :maxdepth: 1
@@ -72,8 +72,9 @@ Like a maestro with his orchestra
     them *communicate* with one another.
 
 * Introduction to concurrency with Go
-* Communicating with channels
-* More on channels
+* Sharing and Caring (Communicating with channels)
+* Channels on steroids
+* goroutines
 * ...
 
 .. toctree::
