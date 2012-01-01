@@ -24,7 +24,7 @@ Go has the same commenting conventions as in C++. That is:
     /* Everything from the beginning of this line until the keyword 'var' on
     line 4 is a comment and ignored by the compiler. */
     var(
-        i int
+        integer int
         pi = float32
         prefix string
     )
@@ -60,7 +60,7 @@ In Go, you don't need parenthesis for the condition.
 .. code-block:: go
     :linenos:
 
-    if x>10{
+    if x > 10 {
         fmt.Println("x is greater than 10")
     } else {
         fmt.Println("x is less than 10")
@@ -71,8 +71,8 @@ You can also have a leading initial short statement before the condition too.
 .. code-block:: go
     :linenos:
 
-    // compute the value of x, and then compare.
-    if x := computed_value(); x>10{
+    // Compute the value of x, and then compare it to 10.
+    if x := computed_value(); x > 10 {
         fmt.Println("x is greater than 10")
     } else {
         fmt.Println("x is less than 10")
@@ -83,12 +83,12 @@ You can combine multiple if/else statements.
 .. code-block:: go
     :linenos:
 
-    if i == 3 {
-        fmt.Println("i is equal to 3")
-    } else if i < 3{
-        fmt.Println("i is less than 3")
+    if integer == 3 {
+        fmt.Println("The integer is equal to 3")
+    } else if integer < 3 {
+        fmt.Println("The integer is less than 3")
     } else {
-        fmt.Println("i is greater than 3")
+        fmt.Println("The integer is greater than 3")
     }
 
 The for statement
@@ -119,17 +119,20 @@ An example would be better than the previous paragraph, right? Here we go!
 
     func main(){
         sum := 0;
-        for i:=0; i<10; i++{
-            sum += i
+        for index:=0; index < 10 ; index++ {
+            sum += index
         }
         fmt.Println("sum is equal to ", sum)
     }
 
 In the code above we initalize our variable ``sum`` to 0. The ``for`` loop by
-is begun by initializing the variable ``i`` to 0 (``i:=0``).
-Next the ``for`` loop's body is executed (``sum += i``) *while* the condition ``i<10`` is
-true. At the end of each iteration the ``for`` loop will execute the ``i++``
-expression (eg. increments ``i``).
+is begun by initializing the variable ``index`` to 0 (``index:=0``).
+
+Next the ``for`` loop's body is executed (``sum += i``) *while* the condition
+``index < 10`` is true.
+
+At the end of each iteration the ``for`` loop will execute the ``index++``
+expression (eg. increments ``index``).
 
 You might guess that the output from the previous program would be:
 
@@ -140,8 +143,10 @@ You might guess that the output from the previous program would be:
 And you would be correct!
 Because the sum is 0+1+2+3+4+5+6+7+8+9 which equals 45.
 
-**Question:** Is it possible to combine lines 5 and 6 into a single one, in the
-previous program? How?
+**Question:**
+
+  Is it possible to combine lines 5 and 6 into a single one, in the previous
+  program? How?
 
 Actually ``expression1``, ``expression2``, and ``expression3`` are all optional.
 This means you can omit, one, two or all of them in a ``for`` loop. If you omit
@@ -190,11 +195,11 @@ condition expressed by ``expression2`` is still true.
 .. code-block:: go
     :linenos:
 
-    for i:=10; i>0; i--{
-        if i<5{
+    for index := 10; index>0; index-- {
+        if index < 5{
             break
         }
-        fmt.Println("i")
+        fmt.Println(index)
     }
 
 The previous snippet says: loop from 10 to 0 printing the numbers (line 6); but
@@ -207,16 +212,16 @@ Hence, the program will print the numbers: 10, 9, 8, 7, 6, 5.
 .. code-block:: go
     :linenos:
 
-    for i:=10; i>0; i--{
-        if i==5{
+    for index := 10; index > 0; index-- {
+        if index == 5 {
             continue
         }
-        fmt.Println("i")
+        fmt.Println(index)
     }
 
 Here the program will print all the numbers from 10 down to 1, except 5! Because
-on line 3, the condition ``if i==5`` will be ``true`` so ``continue`` will be
-executed and the ``fmt.Println(i) (for i == 5)`` won't be run.
+on line 3, the condition ``if index == 5`` will be ``true`` so ``continue``
+will be executed and the ``fmt.Println(index) (for index == 5)`` won't be run.
 
 The switch statement
 ====================
@@ -232,7 +237,7 @@ The general form of a switch statement is
 .. code-block:: go
     :linenos:
 
-    //general form of a switch statement
+    // General form of a switch statement:
     switch sExpr {
         case expr1:
             some instructions
@@ -273,7 +278,7 @@ Some switch examples:
 .. code-block:: go
     :linenos:
 
-    //simple switch example
+    // Simple switch statement example:
     i := 10
     switch i {
         case 1:
@@ -286,9 +291,9 @@ Some switch examples:
             fmt.Println("All I know is that i is an integer")
     }
 
-In this snippet, we initialized ``i`` to 10, but in practice, you should think
-of ``i`` as a computed value (result of a function or some other calculus before
-the switch statement)
+In this snippet, we initialized ``index`` to 10, but in practice, you should
+think of ``index`` as a computed value (result of a function or some other
+calculus before the switch statement)
 
 Notice that in line 6, we grouped some expressions (2, 3, and 4) in a single
 case statement.
@@ -296,15 +301,15 @@ case statement.
 .. code-block:: go
     :linenos:
 
-    //switch example without sExpr
-    i := 10
+    // Switch example without sExpr
+    index := 10
     switch {
-        case i<10:
-            fmt.Println("i is less than 10")
-        case i>10, i<0:
-            fmt.Println("i is either bigger than 10 or less than 0")
-        case i==10:
-            fmt.Println("i is equal to 10")
+        case index < 10:
+            fmt.Println("The index is less than 10")
+        case index > 10, index < 0:
+            fmt.Println("The index is either bigger than 10 or less than 0")
+        case index == 10:
+            fmt.Println("The index is equal to 10")
         default:
             fmt.Println("This won't be printed anyway")
     }
@@ -313,38 +318,39 @@ Now, in this example, we omitted ``sExpr`` of the general form. So the cases
 expressions should be of type *bool*. And so they are! (They're comparisons that
 return either ``true`` or ``false``)
 
-**Question** Can you tell why the ``default`` case on line 10 will never be
-reached?
+**Question**:
+
+  Can you tell why the ``default`` case on line 10 will never be reached?
 
 
 .. code-block:: go
     :linenos:
 
     //switch example with fallthrough
-    i := 6
-    switch i {
+    integer := 6
+    switch integer {
     case 4:
-        fmt.Println("was <= 4")
+        fmt.Println("The integer was <= 4")
         fallthrough
     case 5:
-        fmt.Println("was <= 5")
+        fmt.Println("The integer was <= 5")
         fallthrough
     case 6:
-        fmt.Println("was <= 6")
+        fmt.Println("The integer was <= 6")
         fallthrough
     case 7:
-        fmt.Println("was <= 7")
+        fmt.Println("The integer was <= 7")
         fallthrough
     case 8:
-        fmt.Println("was <= 8")
+        fmt.Println("The integer was <= 8")
         fallthrough
     default:
         fmt.Println("default case")
     }
 
 In this example, the case on line 10 matches, but since there is
-``fallthrough``, the code for ``case 7:`` and so on will also be executed (just
-like a C switch that doesn't use the ``break`` keyword).
+``fallthrough``, the code for ``case 7:`` and so on will also be executed
+(just like a C switch that doesn't use the ``break`` keyword).
 
 
 .. [#f1] http://golang.org/doc/go_tutorial.html#tmp_33

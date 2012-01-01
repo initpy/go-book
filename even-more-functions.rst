@@ -50,16 +50,16 @@ Some examples to illustrate this:
 .. code-block:: go
     :linenos:
 
-    //twoOne is the type of functions with two int paarmeters and an int result.
+    // twoOne is the type of functions with two int parameters and an int result.
     // max(int, int) int and sum(int, int) int, for eg. are of this type.
     type twoOne func(int, int) int
 
-    //slice_transform is the type of functions that takes a slice and outputs a
-    //slice.
-    //invert(s []int) []int and sort(s []int) []int are of this type.
+    // slice_transform is the type of functions that takes a slice and outputs a
+    // slice.
+    // invert(s []int) []int and sort(s []int) []int are of this type.
     type slice_transform func(s []int) []int
 
-    //varbytes is the type of variadic functions that takes bytes and outputs a
+    // varbytes is the type of variadic functions that takes bytes and outputs a
     // boolean.
     // redundant(...byte) bool, and contains_zero(...byte) bool are of this type
     type varbytes func(...byte) bool
@@ -95,26 +95,26 @@ of course... by 'odd' I meant the 'weird' ones... what is wrong with you people?
     // int parameter is odd, or false if not.
     // isOdd is of type func(int) bool which is what test_int is declared to be.
 
-    func isOdd(i int) bool{
-        if i%2 == 0 {
+    func isOdd(integer int) bool {
+        if integer%2 == 0 {
             return false
         }
         return true
     }
 
-    //same comment for isEven
-    func isEven(i int) bool{
-        if i%2 == 0 {
+    // Same comment for isEven
+    func isEven(integer int) bool {
+        if integer%2 == 0 {
             return true
         }
         return false
     }
 
-    // we could've written:
-    // func filter(s []int, f func(int) bool) []int
-    func filter(s []int, f test_int) []int{
+    // We could've written:
+    // func filter(slice []int, f func(int) bool) []int
+    func filter(slice []int, f test_int) []int {
         var result []int
-        for _, value := range s{
+        for _, value := range slice {
             if f(value) {
                 result = append(result, value)
             }
@@ -123,12 +123,12 @@ of course... by 'odd' I meant the 'weird' ones... what is wrong with you people?
     }
 
     func main(){
-        s := []int {1, 2, 3, 4, 5, 7}
-        fmt.Println("s = ", s)
-        o := filter(s, isOdd)
-        fmt.Println("Odd elements of s are: ", o)
-        e := filter(s, isEven)
-        fmt.Println("Even elements of s are: ", e)
+        slice := []int {1, 2, 3, 4, 5, 7}
+        fmt.Println("slice = ", slice)
+        odd := filter(slice, isOdd)
+        fmt.Println("Odd elements of slice are: ", odd)
+        even := filter(slice, isEven)
+        fmt.Println("Even elements of slice are: ", even)
     }
 
 Output:
@@ -225,15 +225,15 @@ and produces two slices:
     package main
     import "fmt"
 
-    func isOdd(i int) bool{
-        if i%2 == 0 {
+    func isOdd(integer int) bool{
+        if integer%2 == 0 {
             return false
         }
         return true
     }
 
-    func isBiggerThan4(i int) bool{
-        if i>4 {
+    func isBiggerThan4(integer int) bool{
+        if integer > 4 {
             return true
         }
         return false

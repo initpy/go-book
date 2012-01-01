@@ -27,7 +27,7 @@ You can declare a slice just like you declare an array, omitting the size.
     :linenos:
 
     //declare a slice of ints
-    var a []int //notice how we didn't specify a size.
+    var array []int // Notice how we didn't specify a size.
 
 As we see in the above snippet, we can declare a slice literal just like an
 array literal, except that we leave out the size number.
@@ -36,7 +36,7 @@ array literal, except that we leave out the size number.
     :linenos:
 
     //declare a slice of ints
-    s := []byte {'a', 'b', 'c', 'd'} //a slice of bytes (current size is 4)
+    slice := []byte {'a', 'b', 'c', 'd'} // A slice of bytes (current size is 4).
 
 We can create slices by *slicing* an array or even an existing slice.
 That is taking a portion (a 'slice') of it, using this syntax ``array[i:j]``.
@@ -46,14 +46,19 @@ end before **j**. (``array[j]`` not included in the slice)
 .. code-block:: go
     :linenos:
 
-    //declare an array of 10 bytes (ASCII characters). Remember: byte is uint8
-    var ar [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
-    //declare a and b as slice of bytes
-    var a,b []byte
-    //make the slice "a" refer to a "portion" of "ar".
-    a = ar[2:5] //a is a portion of ar that contains: ar[2], ar[3] and ar[4]
-    //make the slice "b" refer to another "portion" of "ar".
-    b = ar[3:5] //b is a portion of ar that contains: ar[3], ar[4]
+    // Declare an array of 10 bytes (ASCII characters). Remember: byte is uint8.
+    var array [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+
+    // Declare a and b as slice of bytes
+    var a_slice,b_slice []byte
+
+    // Make the slice "a_slice" refer to a "portion" of "array".
+    a_slice = array[2:5]
+    // a_slice is now a portion of array that contains: array[2], array[3] and array[4]
+
+    // Make the slice "b_slice" refer to another "portion" of "array".
+    b_slice = array[3:5]
+    // b_slice is now a portion of array that contains: array[3], array[4]
 
 .. graphviz::
 
@@ -98,22 +103,27 @@ concepts.
 .. code-block:: go
     :linenos:
 
-    //declare an array of 10 bytes (ASCII characters). Remember: byte is uint8
-    var ar [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+    // Declare an array of 10 bytes (ASCII characters). Remember: byte is uint8
+    var array [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
     //declare a and b as slice of bytes
-    var a,b []byte
-    //examples of slicing
-    a = ar[4:8] // means: a contains elements of ar from ar[4] to ar[7]: e,f,g,h
-    a = ar[6:7] // means: a contains ONE element of ar and that is ar[6]: g
-    //examples of shorthands
-    a = ar[:3] // means: a = ar[0:3] thus: a contains: a,b,c
-    a = ar[5:] // means: a = ar[5:9] thus: a contains: f,g,h,i,j
-    a = ar[:] //means: a = ar[0:9] thus: a contains all ar elements.
-    //slice of a slice
-    a = ar[3:7] // means: a contains elements form 3 to 6 of ar: d,e,f,g
-    b = a[1:3] //means: b contains elements a[1], a[2] i.e the chars e,f
-    b = a[:3] //means: b contains elements a[0], a[1], a[2] i.e the chars: d,e,f
-    b : a[:] //mens: b contains all elements of slice a: d,e,f,g
+    var a_slice,b_slice []byte
+
+    // Examples of slicing
+    a_slice = array[4:8]
+    // means: a_slice contains elements of array from array[4] to array[7]: e,f,g,h
+    a_slice = array[6:7]
+    // means: a_slice contains ONE element of array and that is array[6]: g
+
+    // Examples of shorthands
+    a_slice = array[:3] // means: a_slice = array[0:3] thus: a contains: a,b,c
+    a_slice = array[5:] // means: a_slice = array[5:9] thus: a contains: f,g,h,i,j
+    a_slice = array[:] // means: a_slice = array[0:9] thus: a contains all array elements.
+
+    // Slice of a slice
+    a_slice = array[3:7] // means: a_slice contains elements form 3 to 6 of array: d,e,f,g
+    b_slice = a_slice[1:3] //means: b_slice contains elements a[1], a[2] i.e the chars e,f
+    b_slice = a_slice[:3] //means: b_slice contains elements a[0], a[1], a[2] i.e the chars: d,e,f
+    b_slice : a_slice[:] //mens: b_slice contains all elements of slice a: d,e,f,g
 
 Does it make more sense now? Fine!
 
@@ -140,31 +150,31 @@ Let's see the code.
     package main
     import "fmt"
 
-    //return the biggest value in a slice of ints
-    func Max(s []int) int{ //the input parameter is a slice of ints
-        max := s[0] //the first element is the max for now
-        for i:=1; i<len(s); i++{
-            if s[i]>max{ //we found a bigger value in our slice
-                max = s[i]
+    // Return the biggest value in a slice of ints.
+    func Max(slice []int) int{ // The input parameter is a slice of ints.
+        max := slice[0] // The first element is the max for now.
+        for index := 1; index < len(slice); index++ {
+            if slice[index]>max{ // We found a bigger value in our slice.
+                max = slice[index]
             }
         }
         return max
     }
 
-    func main(){
-        //declare three arrays of different sizes, to test the function Max
+    func main() {
+        // Declare three arrays of different sizes, to test the function Max.
         A1 := [10]int {1,2,3,4,5,6,7,8,9}
         A2 := [4]int {1,2,3,4}
         A3 := [1]int {1}
 
-        //declare a slice of ints
+        // Declare a slice of ints.
         var slice []int
 
-        slice = A1[:] //take all A1 elements
+        slice = A1[:] // Take all A1 elements.
         fmt.Println("The biggest value of A1 is", Max(slice))
-        slice = A2[:] //take all A2 elements
+        slice = A2[:] // Take all A2 elements.
         fmt.Println("The biggest value of A2 is", Max(slice))
-        slice = A3[:] //take all A3 elements
+        slice = A3[:] // Take all A3 elements.
         fmt.Println("The biggest value of A3 is", Max(slice))
     }
 
@@ -207,29 +217,29 @@ Let's see an example:
 
     func PrintByteSlice(name string, slice []byte){
         fmt.Printf("%s is : [", name)
-        for i:=0; i<len(slice)-1; i++{
+        for index :=0; index < len(slice)-1; index ++{
             fmt.Printf("%q,", slice[i])
         }
         fmt.Printf("%q]\n", slice[len(slice)-1])
     }
 
     func main(){
-        //declare an array of 10 bytes.
+        // Declare an array of 10 bytes.
         A := [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
 
-        //declare some slices
-        slice1 := A[3:7] // slice1 == {'d', 'e', 'f', 'g'}
-        slice2 := A[5:] //slice2 == {'f', 'g', 'h', 'i', 'j'}
-        slice3 := slice1[:2] //slice3 == {'d', 'e'}
+        //declare some slices.
+        slice1 := A[3:7] // Slice1 == {'d', 'e', 'f', 'g'}
+        slice2 := A[5:] // Slice2 == {'f', 'g', 'h', 'i', 'j'}
+        slice3 := slice1[:2] // Slice3 == {'d', 'e'}
 
-        //let's print the current content of A and the slices
+        // Let's print the current content of A and the slices.
         fmt.Println("\nFirst content of A and the slices")
         PrintByteSlice("A", A[:])
         PrintByteSlice("slice1", slice1)
         PrintByteSlice("slice2", slice2)
         PrintByteSlice("slice3", slice3)
 
-        //let's change the 'e' in A to 'E'
+        // Let's change the 'e' in A to 'E'.
         A[4] = 'E'
         fmt.Println("\nContent of A and the slices, after changing 'e' to 'E' in array A")
         PrintByteSlice("A", A[:])
@@ -237,8 +247,8 @@ Let's see an example:
         PrintByteSlice("slice2", slice2)
         PrintByteSlice("slice3", slice3)
 
-        //Let's change the 'g' in slice2 to 'G'
-        slice2[1] = 'G' //it's the 2nd element in slice2!
+        // Let's change the 'g' in slice2 to 'G'.
+        slice2[1] = 'G' // Remember that 1 is actually the 2nd element in slice2!
         fmt.Println("\nContent of A and the slices, after changing 'g' to 'G' in slice2")
         PrintByteSlice("A", A[:])
         PrintByteSlice("slice1", slice1)
@@ -365,9 +375,9 @@ Schematically, since you *love* my diagrams.
 .. code-block:: go
     :linenos:
 
-    //declare an array of 10 bytes.
-    A := [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
-    s := A[4:8]
+    // Declare an array of 10 bytes.
+    array := [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+    slice := A[4:8]
 
 The picture above is a representation of a slice that starts from the 5th
 element of the array. It contains exactly 4 elements (its length) and can
@@ -401,11 +411,10 @@ Example:
     :linenos:
 
     var slice1, slice2 []int
-    slice1 = make([]int, 4, 4)
-    //so slice1 == []int {0, 0, 0, 0}
-    slice2 = make([]int``,`` 4) //cap == len == 4
-    //so slice2 == []int {0, 0, 0, 0}
-    //cap(slice2) == len(slice2) == 4
+    slice1 = make([]int, 4, 4) // slice1 is []int {0, 0, 0, 0}
+    slice2 = make([]int``,`` 4) // slice2 is []int {0, 0, 0, 0}
+    // Note: cap == len == 4 for slice2
+    // cap(slice2) == len(slice2) == 4
 
 The zero value of a slice is ``nil``.
 The ``len`` and ``cap`` functions will both return **0** for a ``nil`` slice.
@@ -418,21 +427,23 @@ The ``len`` and ``cap`` functions will both return **0** for a ``nil`` slice.
     import "fmt"
 
     func main() {
-        var s []int
+        var slice []int
         fmt.Println("Before calling make")
-        if s==nil {fmt.Println("s == nil")}
-        fmt.Println("len(s) == ", len(s))
-        fmt.Println("cap(s) == ", cap(s))
-        //let's allocate the underlying array
+        if slice==nil {fmt.Println("slice == nil")}
+        fmt.Println("len(slice) == ", len(slice))
+        fmt.Println("cap(slice) == ", cap(slice))
+
+        // Let's allocate the underlying array:
         fmt.Println("After calling make")
-        s = make([]int, 4)
-        fmt.Println("s == ", s)
-        fmt.Println("len(s) == ", len(s))
-        fmt.Println("cap(s) == ", cap(s))
-        //let's change things
-        fmt.Println("Let's change some of its elements: s[1], s[3] = 2, 3")
-        s[1], s[3] = 2, 3
-        fmt.Println("s == ", s)
+        slice = make([]int, 4)
+        fmt.Println("slice == ", slice)
+        fmt.Println("len(slice) == ", len(slice))
+        fmt.Println("cap(slice) == ", cap(slice))
+
+        // Let's change things:
+        fmt.Println("Let's change some of its elements: slice[1], slice[3] = 2, 3")
+        slice[1], slice[3] = 2, 3
+        fmt.Println("slice == ", slice)
     }
 
 Output:
@@ -440,15 +451,15 @@ Output:
 .. container:: output
 
     | Before calling make
-    | s == nil
-    | len(s) ==  0
-    | cap(s) ==  0
+    | slice == nil
+    | len(slice) ==  0
+    | cap(slice) ==  0
     | After calling make
-    | s ==  [0 0 0 0]
-    | len(s) ==  4
-    | cap(s) ==  4
-    | Let's change some of its elements: s[1], s[3] = 2, 3
-    | s ==  [0 2 0 3]
+    | slice ==  [0 0 0 0]
+    | len(slice) ==  4
+    | cap(slice) ==  4
+    | Let's change some of its elements: slice[1], slice[3] = 2, 3
+    | slice ==  [0 2 0 3]
 
 We may find ourselves wondering "Why use ``make`` instead of ``new`` that we discussed
 when we studied :ref:`pointers<function-new>`?"
@@ -496,46 +507,46 @@ a slice. A very simple, straight forward way of growing a slice might be:
 
     func PrintIntSlice(name string, slice []int){
         fmt.Printf("%s == [", name)
-        for i:=0; i<len(slice)-1; i++{
-            fmt.Printf("%d,", slice[i])
+        for index := 0; index < len(slice)-1; index++ {
+            fmt.Printf("%d,", slice[index])
         }
         fmt.Printf("%d]\n", slice[len(slice)-1])
     }
 
 
-    func GrowIntSlice(slice []int, add int) []int{
+    func GrowIntSlice(slice []int, add int) []int {
         new_capacity := cap(slice)+add
         new_slice := make([]int, len(slice), new_capacity)
-        for i:=0; i<len(slice); i++{
-            new_slice[i] = slice[i]
+        for index := 0; index < len(slice); index++ {
+            new_slice[index] = slice[index]
         }
         return new_slice
     }
 
     func main(){
-        s := []int {0, 1, 2, 3}
+        slice := []int {0, 1, 2, 3}
 
         fmt.Println("Before calling GrowIntSlice")
-        PrintIntSlice("s", s)
-        fmt.Println("len(s) == ", len(s))
-        fmt.Println("cap(s) == ", cap(s))
+        PrintIntSlice("slice", slice)
+        fmt.Println("len(slice) == ", len(slice))
+        fmt.Println("cap(slice) == ", cap(slice))
 
-        //let's call GrowIntSlice
-        s = GrowIntSlice(s, 3) //add 3 elements to the slice
+        // Let's call GrowIntSlice
+        slice = GrowIntSlice(slice, 3) //add 3 elements to the slice
 
         fmt.Println("After calling GrowIntSlice")
-        PrintIntSlice("s", s)
-        fmt.Println("len(s) == ", len(s))
-        fmt.Println("cap(s) == ", cap(s))
+        PrintIntSlice("slice", slice)
+        fmt.Println("len(slice) == ", len(slice))
+        fmt.Println("cap(slice) == ", cap(slice))
 
-        //Let's two elements to the slice
-        //so we reslice the slice to add 2 to its original length
-        s = s[:len(s)+2] //We can do this because cap(s) == 7
-        s[4], s[5] = 4, 5
-       	fmt.Println("After adding new elements: s[4], s[5] = 4, 5")
-        PrintIntSlice("s", s)
-        fmt.Println("len(s) == ", len(s))
-        fmt.Println("cap(s) == ", cap(s))
+        // Let's two elements to the slice
+        // So we reslice the slice to add 2 to its original length
+        slice = slice[:len(slice)+2] // We can do this because cap(slice) == 7
+        slice[4], slice[5] = 4, 5
+       	fmt.Println("After adding new elements: slice[4], slice[5] = 4, 5")
+        PrintIntSlice("slice", slice)
+        fmt.Println("len(slice) == ", len(slice))
+        fmt.Println("cap(slice) == ", cap(slice))
     }
 
 Output:
@@ -543,17 +554,17 @@ Output:
 .. container:: output
 
     | Before calling GrowIntSlice
-    | s == [0,1,2,3]
-    | len(s) ==  4
-    | cap(s) ==  4
+    | slice == [0,1,2,3]
+    | len(slice) ==  4
+    | cap(slice) ==  4
     | After calling GrowIntSlice
-    | s == [0,1,2,3]
-    | len(s) ==  4
-    | cap(s) ==  7
-    | After adding new elements: s[4], s[5] = 4, 5
-    | s == [0,1,2,3,4,5]
-    | len(s) ==  6
-    | cap(s) ==  7
+    | slice == [0,1,2,3]
+    | len(slice) ==  4
+    | cap(slice) ==  7
+    | After adding new elements: slice[4], slice[5] = 4, 5
+    | slice == [0,1,2,3,4,5]
+    | len(slice) ==  6
+    | cap(slice) ==  7
 
 Let's discuss this program a little bit.
 
@@ -586,8 +597,8 @@ So we can replace the lines 16, 17, 18 with this very simple one:
 .. code-block:: go
     :linenos:
 
-    //instead of lines 16, 17, 18 of the previous source:
-    copy(new_slice, slice) //copy elements from slice to new_slice
+    // Instead of lines 16, 17, 18 of the previous source:
+    copy(new_slice, slice) // Copy elements from slice to new_slice
 
 You know what? Let's write another example and use the ``copy`` function in it.
 
@@ -599,39 +610,38 @@ You know what? Let's write another example and use the ``copy`` function in it.
 
     func PrintByteSlice(name string, slice []byte){
         fmt.Printf("%s is : [", name)
-        for i:=0; i<len(slice)-1; i++{
-            fmt.Printf("%q,", slice[i])
+        for index := 0; index < len(slice)-1; index++ {
+            fmt.Printf("%q,", slice[index])
         }
         fmt.Printf("%q]\n", slice[len(slice)-1])
     }
 
     func Append(slice, data[]byte) []byte {
-        l := len(slice)
-        if l + len(data) > cap(slice) {  // reallocate
+        length := len(slice)
+        if length + len(data) > cap(slice) {  // Reallocate
             // Allocate enough space to hold both slice and data
             newSlice := make([]byte, l+len(data))
             // The copy function is predeclared and works for any slice type.
             copy(newSlice, slice)
             slice = newSlice
         }
-        slice = slice[0:l+len(data)]
+        slice = slice[0:length+len(data)]
 
-        copy(slice[l:l+len(data)], data)
+        copy(slice[length:length+len(data)], data)
         return slice
     }
 
-    func main(){
-
-        h := []byte {'H', 'e', 'l', 'l', 'o'}
-        w := []byte {' ', 'W', 'o', 'r', 'l', 'd'}
+    func main() {
+        hello := []byte {'H', 'e', 'l', 'l', 'o'}
+        world := []byte {' ', 'W', 'o', 'r', 'l', 'd'}
         fmt.Println("Before calling Append")
-        PrintByteSlice("h", h)
-        PrintByteSlice("w", w)
+        PrintByteSlice("hello", hello)
+        PrintByteSlice("world", world)
 
         fmt.Println("After calling Append")
-        Append(h, w)
-        PrintByteSlice("h", h)
-        PrintByteSlice("w", w)
+        Append(hello, world)
+        PrintByteSlice("hello", hello)
+        PrintByteSlice("world", world)
     }
 
 Output:
@@ -639,11 +649,11 @@ Output:
 .. container:: output
 
     | Before calling Append
-    | h is : ['H','e','l','l','o']
-    | w is : ['W','o','r','l','d']
+    | hello is : ['H','e','l','l','o']
+    | world is : ['W','o','r','l','d']
     | After calling Append
-    | h is : ['H','e','l','l','o','W','o','r','l','d']
-    | w is : ['W','o','r','l','d']
+    | hello is : ['H','e','l','l','o','W','o','r','l','d']
+    | world is : ['W','o','r','l','d']
 
 Appending to a slice is a very common operation and as such Go has a built-in
 function called ``append`` that we will see in details very soon.
