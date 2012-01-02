@@ -33,6 +33,27 @@ A little request, and I know most of you won't do it anyway. But I'd hate it if
 this work was copied and pasted to spam search engines and make money out of it.
 Really. 
 
+Credits
+=======
+I, `Big Yuuta`_, am the author and the maintainer of this project, and despite
+my weak English, I'm doing my best to keep it fun and -I hope- useful for people
+wanting to learn Go.
+
+*But* I wouldn't be able to do this alone. In fact, I'd like to thank these
+people from the bottom of my heart.
+
+- `Wayne E. Seguin`_: This man is a real *machine*, he reviewed everything,
+  asked questions, suggested, and corrected many sentences, gave me some great
+  advice... And added more fun and humor to the whole thing. Wayne, you rock!
+
+- `Adam (hammerandtongs)`_: Thank you so much for those many spelling and
+  grammar fixes!
+
+- `Calvin (csmcanarney)`_: Thanks for being the first to give a hand and for
+  your fixes.
+
+- The whole golang-nuts_ community for their support and cheers, and the huge
+  amount of inspiration and ideas they share everyday in that group.
 
 .. external links and footnotes:
 
@@ -47,3 +68,11 @@ Really.
 .. _Plan 9: http://cm.bell-labs.com/plan9/
 .. _Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License: 
     http://creativecommons.org/licenses/by-nc-sa/3.0/
+
+.. credits
+
+.. _Big Yuuta: http://big.appspot.com
+.. _Wayne E. Seguin: https://github.com/wayneeseguin
+.. _Adam (hammerandtongs): https://github.com/hammerandtongs
+.. _Calvin (csmcanarney): https://github.com/csmcanarney
+.. _golang-nuts: http://groups.google.com/group/golang-nuts
