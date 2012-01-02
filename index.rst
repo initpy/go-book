@@ -74,7 +74,6 @@ Like a maestro with his orchestra
 * Introduction to concurrency with Go
 * Sharing and Caring (Communicating with channels)
 * Channels on steroids
-* goroutines
 * ...
 
 .. toctree::
