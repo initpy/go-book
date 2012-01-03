@@ -52,20 +52,21 @@ Let's see an example:
     package main
     import "fmt"
 
-    //Our struct representing a person
-    type person struct{
+    // Our struct representing a person
+    type person struct {
         name string
         age int
     }
 
-    //Return true, and the older person in a group of persons
-    //Or false, and nil if the group is empty.
-    func Older(people ...person) (bool, person){ //variadic function
-        if(len(people) == 0){return false, person{}} //the group is empty
-        older := people[0] //The first one is the older FOR NOW.
-        //loop through the slice people
-        for _, value := range people{ //we don't need the index
-            if value.age > older.age{ //compare the current person's age with the older one
+    // Return true, and the older person in a group of persons
+    // Or false, and nil if the group is empty.
+    func Older(people ...person) (bool, person) { // Variadic function.
+        if(len(people) == 0){return false, person{}} // The group is empty.
+        older := people[0] // The first one is the older FOR NOW.
+        // Loop through the slice people.
+        for _, value := range people{ // We don't need the index.
+            // Compare the current person's age with the oldest one so far
+            if value.age > older.age {
                 older = value //if value is older, replace older
             }
         }
@@ -74,32 +75,32 @@ Let's see an example:
 
     func main(){
 
-        //two variables to be used by our program
+        // Two variables to be used by our program.
         var(
             ok bool
             older person
         )
 
-        // declare some persons
+        // Declare some persons.
         paul := person{"Paul", 23};
         jim := person{"Jim", 24};
         sam := person{"Sam", 84};
         rob := person{"Rob", 54};
         karl := person{"Karl", 19};
 
-        //who is older? Paul or Jim?
+        // Who is older? Paul or Jim?
         _, older = Older(paul, jim) //notice how we used the blank identifier
         fmt.Println("The older of Paul and Jim is: ", older.name)
-        //who is older? Paul, Jim or Sam?
+        // Who is older? Paul, Jim or Sam?
         _, older = Older(paul, jim, sam)
         fmt.Println("The older of Paul, Jim and Sam is: ", older.name)
-        //who is older? Paul, Jim , Sam or Rob?
+        // Who is older? Paul, Jim , Sam or Rob?
         _, older = Older(paul, jim, sam, rob)
         fmt.Println("The older of Paul, Jim, Sam and Rob is: ", older.name)
-        //who is older in a group containing only Karl?
+        // Who is older in a group containing only Karl?
         _, older = Older(karl)
         fmt.Println("When Karl is alone in a group, the older is: ", older.name)
-        //is there an older person in an empty group?
+        // Is there an older person in an empty group?
         ok, older = Older() //this time we use the boolean variable ok
         if !ok {
             fmt.Println("In an empty group there is no older person")
@@ -144,22 +145,22 @@ Example:
     import "fmt"
 
     func main(){
-        s := []int {1, 2, 3}
+        slice := []int {1, 2, 3}
         fmt.Println("At first: ")
-        fmt.Println("s = ", s)
-        fmt.Println("len(s) = ", len(s))
+        fmt.Println("slice = ", slice)
+        fmt.Println("len(slice) = ", len(slice))
         fmt.Println("Let's append 4 to it")
-        s = append(s, 4)
-        fmt.Println("s = ", s)
-        fmt.Println("len(s) = ", len(s))
+        slice = append(slice, 4)
+        fmt.Println("slice = ", slice)
+        fmt.Println("len(slice) = ", len(slice))
         fmt.Println("Let's append 5 and 6 to it")
-        s = append(s, 5, 6)
-        fmt.Println("s = ", s)
-        fmt.Println("len(s) = ", len(s))
+        slice = append(slice, 5, 6)
+        fmt.Println("slice = ", slice)
+        fmt.Println("len(slice) = ", len(slice))
         fmt.Println("Let's append 7, 8, and 9 to it")
-        s = append(s, 7, 8, 9)
-        fmt.Println("s = ", s)
-        fmt.Println("len(s) = ", len(s))
+        slice = append(slice, 7, 8, 9)
+        fmt.Println("slice = ", slice)
+        fmt.Println("len(slice) = ", len(slice))
     }
 
 Output:
@@ -167,17 +168,17 @@ Output:
 .. container:: output
 
     | At first:
-    | s =  [1 2 3]
-    | len(s) =  3
+    | slice =  [1 2 3]
+    | len(slice) =  3
     | Let's append 4 to it
-    | s =  [1 2 3 4]
-    | len(s) =  4
+    | slice =  [1 2 3 4]
+    | len(slice) =  4
     | Let's append 5 and 6 to it
-    | s =  [1 2 3 4 5 6]
-    | len(s) =  6
+    | slice =  [1 2 3 4 5 6]
+    | len(slice) =  6
     | Let's append 7, 8, and 9 to it
-    | s =  [1 2 3 4 5 6 7 8 9]
-    | len(s) =  9
+    | slice =  [1 2 3 4 5 6 7 8 9]
+    | len(slice) =  9
 
 You can even give a variadic function a slice of type ``[]T`` instead of a list
 of comma-separated parameters of type ``T``.
@@ -187,11 +188,11 @@ Example:
 .. code-block:: go
     :linenos:
 
-    //two slices of ints
-    a := []int {1, 2, 3}
-    b := []int {10, 11, 12}
-    a = append(a, b...) // look at this syntax: the slice followed by three dots
-    // a == {1, 2, 3, 10, 11, 12}
+    // Two slices of ints
+    a_slice := []int {1, 2, 3}
+    b_slice := []int {10, 11, 12}
+    a_slice = append(a_slice, b_slice...) // Note the syntax: the slice followed by three dots
+    // a_slice == {1, 2, 3, 10, 11, 12}
 
 Again, just in case you glossed over the comment, notice the ellipses '``...``'
 immediately following the second slice argument to the variadic function.
@@ -225,18 +226,18 @@ given slice of ``int``\s and see how the ``append`` function can help.
     }
 
     func main(){
-        s := []int {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+        slice := []int {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
         fmt.Println("In the beginning...")
-        fmt.Println("s = ", s)
+        fmt.Println("slice = ", slice)
         fmt.Println("Let's delete the first element")
-        s = delete(0, s)
-        fmt.Println("s = ", s)
+        slice = delete(0, slice)
+        fmt.Println("slice = ", slice)
         fmt.Println("Let's delete the last element")
-        s = delete(len(s)-1, s)
-        fmt.Println("s = ", s)
+        slice = delete(len(slice)-1, slice)
+        fmt.Println("slice = ", slice)
         fmt.Println("Let's delete the 3rd element")
-        s = delete(2, s)
-        fmt.Println("s = ", s)
+        slice = delete(2, slice)
+        fmt.Println("slice = ", slice)
     }
 
 Output:
@@ -244,13 +245,13 @@ Output:
 .. container:: output
 
     | In the beginning...
-    | s =  [1 2 3 4 5 6 7 8 9 10]
+    | slice =  [1 2 3 4 5 6 7 8 9 10]
     | Let's delete the first element
-    | s =  [2 3 4 5 6 7 8 9 10]
+    | slice =  [2 3 4 5 6 7 8 9 10]
     | Let's delete the last element
-    | s =  [2 3 4 5 6 7 8 9]
+    | slice =  [2 3 4 5 6 7 8 9]
     | Let's delete the 3rd element
-    | s =  [2 3 5 6 7 8 9]
+    | slice =  [2 3 5 6 7 8 9]
 
 The lines 6 and 7 of our program are fairly easy to understand. Aren't they?
 We re-slice our slice omitting the first and the last elements respectively.
@@ -449,26 +450,26 @@ Let's write it:
     import "fmt"
 
     func Invert(slice []int){
-        l := len(slice)
-        if l > 1 { //only a slice of 2 or more elements can be inverted
-            slice[0], slice[l-1] = slice[l-1], slice[0] //swap first and last ones
-            Invert(slice[1:l-1]) //invert the slice in between
+        length := len(slice)
+        if length > 1 { // Only a slice of 2 or more elements can be inverted
+            slice[0], slice[length-1] = slice[length-1], slice[0] // Swap first and last ones
+            Invert(slice[1:length-1]) // Invert the slice in between
         }
     }
 
     func main(){
-        s := []int {1, 2, 3, 4, 5}
-        fmt.Println("s = ", s)
-        Invert(s)
-        fmt.Println("Invert(s) = ", s)
+        slice := []int {1, 2, 3, 4, 5}
+        fmt.Println("slice = ", slice)
+        Invert(slice)
+        fmt.Println("Invert(slice) = ", slice)
     }
 
 Output:
 
 .. container:: output
 
-    | s =  [1 2 3 4 5]
-    | Invert(s) =  [5 4 2 3 1]
+    | slice =  [1 2 3 4 5]
+    | Invert(slice) =  [5 4 2 3 1]
 
 **Exercise** Recursive absurdity! The SUM of the ints in a given slice is equal
 to the first element *plus* the SUM of the subslice starting from the second
@@ -537,9 +538,10 @@ Look at this simple program from `Effective Go`_.
         return string(result), nil // f will be closed if we return here.
     }
 
-    func main(){
-        c, _ := Contents("/etc/hosts")
-        fmt.Println(c)
+
+    func main() {
+        contents, _ := Contents("/etc/hosts")
+        fmt.Println(contents)
     }
 
 Our function ``Contents`` needs a file name as its input, and it ouputs this
@@ -592,11 +594,11 @@ Example:
     package main
     import "fmt"
 
-    func A(){
+    func A() {
         fmt.Println("Running function A")
     }
 
-    func B(){
+    func B() {
         fmt.Println("Running function B")
     }
 

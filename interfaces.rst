@@ -253,9 +253,8 @@ As you may have noticed, interfaces types are abstract in that they don't
 themselves implement a given and precise data structure or method.
 They simply say: "if something can do *this*, it may be used *here*".
 
-Also, take note that types implementing a given interface do so by simply
-implementing the methods specified by the interface, they don't explicitly claim
-that they implement that interface.
+Notice that these types make *no mention* of any interface.
+Their implementation doesn't explicitly mention a given interface.
 
 Similarly, an interface doesn't specify or even care which types implement it.
 Look how ``Men`` made no mention of types ``Student`` or ``Employee``.

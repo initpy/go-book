@@ -63,9 +63,9 @@ How to declare a struct in Go?
 .. code-block:: go
     :linenos:
 
-    type person struct{
-        name string //field name of type string.
-        age int //field age of type int.
+    type person struct {
+        name string // Field name of type string.
+        age int // Field age of type int.
     }
 
 See? It's easy. A person ``struct`` is a container of two fields:
@@ -81,12 +81,12 @@ Thus, writing things like:
 .. code-block:: go
     :linenos:
 
-    type person struct{
+    type person struct {
         name string
         age int
     }
 
-    var P person // tom is a variable of type person
+    var P person // Tom will be a variable of type person. How quaint!
 
 We access and assign a struct's fields (attributes) with the *dot nottation*.
 That is, if ``P`` is a variable of type ``person``, then we access its fields like
@@ -95,9 +95,9 @@ this:
 .. code-block:: go
     :linenos:
 
-    P.name = "Tom" //assign "Tom" to P's name field.
-    P.age = 25 //set P's age to 25 (an int)
-    fmt.Println("The person's name is %s", P.name) //Access P's name field.
+    P.name = "Tom" // Assign "Tom" to P's name field.
+    P.age = 25 // Set P's age to 25 (an int).
+    fmt.Println("The person's name is %s", P.name) // Access P's name field.
 
 There's even two short-form assignment statement syntaxes:
 
@@ -131,27 +131,26 @@ Good. Let's write our ``Older`` function that takes two input parameters of type
     import "fmt"
 
     // We declare our new type
-    type person struct{
+    type person struct {
         name string
         age int
     }
 
-
-    //return the older person of p1 and p2
-    //and the difference in their ages
-    func Older(p1, p2 person) (person, int){
-        if p1.age>p2.age { //compare p1 and p2's ages
+    // Return the older person of p1 and p2
+    //   and the difference in their ages.
+    func Older(p1, p2 person) (person, int) {
+        if p1.age>p2.age { // Compare p1 and p2's ages
             return p1, p1.age-p2.age
         }
         return p2, p2.age-p1.age
     }
 
-    func main(){
+    func main() {
         var tom person
 
         tom.name, tom.age = "Tom", 18
 
-        //Look how to declare and initialize easily
+        // Look how to declare and initialize easily.
         bob := person{age:25, name:"Bob"} //specify the fields and their values
         paul := person{"Paul", 43} //specify values of fields in their order
 
@@ -239,12 +238,13 @@ For example, the name of the 3 :sup:`rd` person is:
 .. code-block:: go
     :linenos:
 
-    //declare an array A of 10 persons
+    // Declare an array A of 10 persons:
     var people [10]person
 
-    //Remember indices start from 0!
+    // Remember indices start from 0!
     third_name := people[2].name //use the dot to access the third 'name'.
-    //or more verbosely:
+
+    // Or more verbosely:
     third_person := people[2]
     thirdname := third_person.name
 
@@ -276,36 +276,36 @@ The idea now is to write a function ``Older10`` that takes an array of 10
     import "fmt"
 
     //Our struct
-    type person struct{
+    type person struct {
         name string
         age int
     }
 
     //return the older person in a group of 10 persons
-    func Older10(people [10]person) person{
-        older := people[0] //the first one is the older for now
-        //loop through the array and check if we could find an older person.
-        for i:= 1; i<10; i++{ //we skipped the first here
-            if people[i].age > older.age{ //compare the current's person age with the older one
-                older = people[i] //if people[i] is older, replace the value of older
+    func Older10(people [10]person) person {
+        older := people[0] // The first one is the older for now.
+        // Loop through the array and check if we could find an older person.
+        for index := 1; index < 10; index++ { // We skipped the first element here.
+            if people[index].age > older.age { // Current's persons age vs olderest so far.
+                older = people[index] // If people[index] is older, replace the value of older.
             }
         }
         return older
     }
 
-    func main(){
-        // declare an example array variable of 10 person called: array
+    func main() {
+        // Declare an example array variable of 10 person called 'array'.
         var array [10]person
 
-        // initialize some of the elements of the array, the others ar by default
-        // set to person{"", 0}
+        // Initialize some of the elements of the array, the others ar by
+        // default set to person{"", 0}
         array[1] = person{"Paul", 23};
         array[2] = person{"Jim", 24};
         array[3] = person{"Sam", 84};
         array[4] = person{"Rob", 54};
         array[8] = person{"Karl", 19};
 
-        older := Older10(array) //call the function by passing it our array
+        older := Older10(array) // Call the function by passing it our array.
 
         fmt.Println("The older of the group is: ", older.name)
     }
@@ -323,7 +323,7 @@ function above in a single shot like this:
 .. code-block:: go
     :linenos:
 
-    //declare and initialize an array A of 10 person
+    // Declare and initialize an array A of 10 person.
     array := [10]person  {
         person{"", 0},
         person{"Paul", 23},
@@ -345,8 +345,8 @@ given in the initialization for us. So we could have written the above code as:
 .. code-block:: go
     :linenos:
 
-    //declare and initialize an array of 10 person, but let the compiler guess the size.
-    array := [...]person  { // substitute '...' for the size of the array.
+    // Declare and initialize an array of 10 persons, but let the compiler guess the size.
+    array := [...]person  { // Substitute '...' instead of an integer size.
         person{"", 0},
         person{"Paul", 23},
         person{"Jim", 24},
@@ -393,7 +393,7 @@ We can declare a 2-dimensional array like this:
     :linenos:
 
     //declare and initialize an array of 2 arrays of 4 ints
-    a := [2][4]int {[4]int{1,2,3,4}, [4]int{5,6,7,8}}
+    double_array := [2][4]int {[4]int{1,2,3,4}, [4]int{5,6,7,8}}
 
 This is an array of (2 arrays (of 4 ``int``)). We can think of it as a matrix,
 or a table of two lines each made of 4 columns.
@@ -424,7 +424,7 @@ count arrays' elements for us, like this:
     :linenos:
 
     //simplify the previous declaration, with the '...' syntax
-    a := [2][4]int {[...]int{1,2,3,4}, [...]int{5,6,7,8}}
+    double_array := [2][4]int {[...]int{1,2,3,4}, [...]int{5,6,7,8}}
 
 Guess what?
 Since Go is about cleaner code, we can simplify this code even further:
@@ -433,7 +433,7 @@ Since Go is about cleaner code, we can simplify this code even further:
     :linenos:
 
     //über simpifikation!
-    a := [2][4]int {{1,2,3,4}, {5,6,7,8}}
+    double_array := [2][4]int {{1,2,3,4}, {5,6,7,8}}
 
 Cool, eh? Now, we can combine multiple fields of different types to create a
 ``struct`` and we can have ``array``\s of, as many as we want, of objects of the

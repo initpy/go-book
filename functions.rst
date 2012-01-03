@@ -17,7 +17,7 @@ two integers A and B. That's easy to do with a simple *if* statement, right?
     :linenos:
 
     //compare A and B and say wich is bigger
-    if A>B {
+    if A > B {
         fmt.Print("The max is A")
     } else {
         fmt.Print("The max is B")
@@ -109,7 +109,7 @@ The general syntax of a function is:
 .. code-block:: go
     :linenos:
 
-    func funcname(input1 type1, input2 type2) (output1 type1, output2 type2){
+    func funcname(input1 type1, input2 type2) (output1 type1, output2 type2) {
         //some code and processing here
         ...
         //return the results of the function
@@ -140,18 +140,17 @@ A simple Max function
     import "fmt"
 
     //return the maximum between two int a, and b.
-    func max(a, b int) int{
-        if a>b {
+    func max(a, b int) int {
+        if a > b {
             return a
         }
         return b
     }
 
-    func main(){
+    func main() {
         x := 3
         y := 4
         z := 5
-
 
         max_xy := max(x, y) //calling max(x, y)
         max_xz := max(x, z) //calling max(x, z)
@@ -188,11 +187,11 @@ A function with two ouput values
     import "fmt"
 
     //return A+B and A*B in a single shot
-    func SumAndProduct(A, B int) (int, int){
+    func SumAndProduct(A, B int) (int, int) {
         return A+B, A*B
     }
 
-    func main(){
+    func main() {
         x := 3
         y := 4
 
@@ -225,22 +224,22 @@ A function with a result variable
 
     //A function that returns a bool that is set to true of Sqrt is possible
     //and false when not. And the actual square root of a float64
-    func MySqrt(f float64) (s float64, ok bool){
-        if f>0 {
-            s, ok = math.Sqrt(f), true
+    func MySqrt(f float64) (squareroot float64, ok bool){
+        if f > 0 {
+            squareroot, ok = math.Sqrt(f), true
         } else {
-            s, ok = 0, false
+            squareroot, ok = 0, false
         }
-        return s, ok
+        return squareroot, ok
     }
 
-    func main(){
-        for i:= -2.0; i<=10; i++{
-            possible, sqroot := MySqrt(i)
-            if possible{
-                fmt.Printf("The square root of %f is %f\n", i, sqroot)
+    func main() {
+        for index := -2.0; index <= 10; i++ {
+            squareroot, possible := MySqrt(index)
+            if possible {
+                fmt.Printf("The square root of %f is %f\n", index, squareroot)
             } else {
-                fmt.Printf("Sorry, no square root for %f\n", i)
+                fmt.Printf("Sorry, no square root for %f\n", index)
             }
         }
     }
@@ -282,11 +281,11 @@ to its type, we can rewrite the previous example as follows:
     import "math"
 
     //return A+B and A*B in a single shot
-    func MySqrt(f float64) (s float64, ok bool){
-        if f>0 {
-            s, ok = math.Sqrt(f), true
+    func MySqrt(floater float64) (squareroot float64, ok bool){
+        if floater > 0 {
+            squareroot, ok = math.Sqrt(f), true
         }
-        return s, ok
+        return squareroot, ok
     }
 
 The empty return
@@ -303,11 +302,11 @@ Thus, we can rewrite the previous example as follow:
     import "math"
 
     //return A+B and A*B in a single shot
-    func MySqrt(f float64) (s float64, ok bool) {
-        if f>0 {
-            s, ok = math.Sqrt(f), true
+    func MySqrt(floater float64) (squareroot float64, ok bool) {
+        if floater > 0 {
+            squareroot, ok = math.Sqrt(f), true
         }
-        return //omitting the output named variables, but keeping "return"
+        return // Omitting the output named variables, but keeping the "return".
     }
 
 .. _value-reference:
@@ -328,20 +327,20 @@ An example to verify the previous paragraph:
     import "fmt"
 
     //simple function that returns 1 + its input parameter
-    func add1(a int) int{
+    func add1(a int) int {
         a = a+1 // we change the value of a, by adding 1 to it
         return a //return the new value
     }
 
-    func main(){
+    func main() {
         x := 3
 
-        fmt.Println("x = ", x) //should print "x = 3"
+        fmt.Println("x = ", x) // Should print "x = 3"
 
         x1 := add1(x) //calling add1(x)
 
-        fmt.Println("x+1 = ", x1) //should print "x+1 = 4"
-        fmt.Println("x = ", x) //will print "x = 3"
+        fmt.Println("x+1 = ", x1) // Should print "x+1 = 4"
+        fmt.Println("x = ", x) // Will print "x = 3"
     }
 
 .. container:: output
@@ -374,20 +373,20 @@ Let's try this.
     import "fmt"
 
     //simple function that returns 1 + its input parameter
-    func add1(a *int) int{ //notice that we give it a pointer to an int!
-        *a = *a+1 // we dereference and change the value pointed by a
-        return *a //return the new value
+    func add1(a *int) int { // Notice that we give it a pointer to an int!
+        *a = *a+1 // We dereference and change the value pointed by a
+        return *a // Return the new value
     }
 
-    func main(){
+    func main() {
         x := 3
 
-        fmt.Println("x = ", x) //should print "x = 3"
+        fmt.Println("x = ", x) // Will print "x = 3"
 
-        x1 := add1(&x) //calling add1(&x) by passing the adress of x to it
+        x1 := add1(&x) // Calling add1(&x) by passing the adress of x to it
 
-        fmt.Println("x+1 = ", x1) //should print "x+1 = 4"
-        fmt.Println("x = ", x) //will print "x = 4"
+        fmt.Println("x+1 = ", x1) // Will print "x+1 = 4"
+        fmt.Println("x = ", x) // Will print "x = 4"
     }
 
 .. container:: output

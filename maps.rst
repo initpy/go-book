@@ -33,7 +33,7 @@ For example:
 .. code-block:: go
     :linenos:
 
-    // a map that associates strings to int
+    // A map that associates strings to int
     // eg. "one" --> 1, "two" --> 2...
     var numbers map[string] int //declare a map of strings to ints
 
@@ -49,7 +49,7 @@ When used with maps, ``make`` takes an optional capacity parameter.
 .. code-block:: go
     :linenos:
 
-    // a map that associates strings to int
+    // A map that associates strings to int
     // eg. "one" --> 1, "two" --> 2...
     var numbers map[string] int //declare a map of strings to ints
     numbers = make(map[string]int)
@@ -58,7 +58,7 @@ When used with maps, ``make`` takes an optional capacity parameter.
     numbers["trois"] = 3 //trois is "three" in french. I know that you know.
     //...
     fmt.Println("Trois is the french word for the number: ", numbers[3])
-    // Trois is the french word for the number: 3
+    // Trois is the french word for the number: 3. Also a good time.
 
 We now have the idea: it's like a table with two columns: in the left column we
 have the key, and on the right column we have its *associated* value.
@@ -111,9 +111,9 @@ Literal values of maps can be expressed using a list of colon-separated
 .. code-block:: go
     :linenos:
 
-    //A map representing the rating given to some programming languages.
+    // A map representing the rating given to some programming languages.
     rating := map[string]float32 {"C":5, "Go":4.5, "Python":4.5, "C++":2 }
-    //This is equivalent to writing more verbosely
+    // This is equivalent to writing more verbosely
     var rating = map[string]float32
     rating = make(map[string]float)
     rating["C"] = 5
@@ -191,11 +191,11 @@ In fact, you just have to assign any given value followed by comma ``false``.
 .. code-block:: go
     :linenos:
 
-    //A map representing the rating given to some programming languages.
+    // A map representing the rating given to some programming languages.
     rating := map[string]float32 {"C":5, "Go":4.5, "Python":4.5, "C++":2 }
-    map["C++"] = 1, false //we delete the entry with key "C++"
+    map["C++"] = 1, false // We delete the entry with key "C++"
     cpp_rating, ok := rating["C++"]
-    //would print: We have no rating associated with C++ in the map
+    // Would print: We have no rating associated with C++ in the map
     if ok {
         fmt.Println("C++ is in the map and its rating is ", cpp_rating)
     } else {
@@ -224,7 +224,7 @@ This syntax is as follow:
     :linenos:
 
     for key, value := range m {
-        // in each iteration of this loop, the variables key and value are set
+        // In each iteration of this loop, the variables key and value are set
         // to the current key/value in the map
         ...
     }
@@ -238,10 +238,10 @@ Let's see a complete example to understand this better.
     import "fmt"
 
     func main(){
-        //declare a map literal
+        // Declare a map literal
         ratings := map[string]float32 {"C":5, "Go":4.5, "Python":4.5, "C++":2 }
 
-        //iterate over the ratings map
+        // Iterate over the ratings map
         for key, value := range ratings {
             fmt.Printf("%s language is rated at %g\n", key, value)
         }
@@ -266,12 +266,12 @@ If we don't need the value in our for statement, we can omit it like this:
     import "fmt"
 
     func main(){
-        //declare a map literal
+        // Declare a map literal.
         ratings := map[string]float32 {"C":5, "Go":4.5, "Python":4.5, "C++":2 }
 
         fmt.Print("We rated these languages: ")
 
-        //iterate over the ratings map, and print the languages names
+        // Iterate over the ratings map, and print the languages names.
         for key := range ratings {
             fmt.Print(key, ",")
         }
@@ -298,11 +298,11 @@ Let's rewrite a previous example using this new tool:
     package main
     import "fmt"
 
-    //return the biggest value in a slice of ints
-    func Max(s []int) int { //the input parameter is a slice of ints
-        max := s[0] //the first element is the max for now
-        for i, value := range s { //notice how we iterate!
-            if value>max { //we found a bigger value in our slice
+    // Return the biggest value in a slice of ints.
+    func Max(slice []int) int { // The input parameter is a slice of ints.
+        max := slice[0] //the first element is the max for now.
+        for index, value := range slice { // Notice how we iterate!
+            if value > max { // We found a bigger value in our slice.
                 max = value
             }
         }
@@ -310,7 +310,7 @@ Let's rewrite a previous example using this new tool:
     }
 
     func main() {
-        //declare three arrays of different sizes, to test the function Max
+        // Declare three arrays of different sizes, to test the function Max.
         A1 := [10]int {1,2,3,4,5,6,7,8,9}
         A2 := [4]int {1,2,3,4}
         A3 := [1]int {1}
@@ -318,11 +318,11 @@ Let's rewrite a previous example using this new tool:
         //declare a slice of ints
         var slice []int
 
-        slice = A1[:] //take all A1 elements
+        slice = A1[:] // Take all A1 elements.
         fmt.Println("The biggest value of A1 is", Max(slice))
-        slice = A2[:] //take all A2 elements
+        slice = A2[:] // Ttake all A2 elements.
         fmt.Println("The biggest value of A2 is", Max(slice))
-        slice = A3[:] //take all A3 elements
+        slice = A3[:] // Ttake all A3 elements.
         fmt.Println("The biggest value of A3 is", Max(slice))
     }
 
@@ -352,11 +352,11 @@ We could have written the ``Max(s []int)int`` function like this:
 .. code-block:: go
     :linenos:
 
-    //return the biggest value in a slice of ints
-    func Max(s []int) int { //the input parameter is a slice of ints
-        max := s[0]
-        for _, value := range s { //notice how we use _ to "ignore" the index
-            if value>max {
+    // Return the biggest value in a slice of ints.
+    func Max(slice []int) int { // The input parameter is a slice of ints.
+        max := slice[0]
+        for _, value := range slice { // Notice how we use _ to "ignore" the index.
+            if value > max {
                 max = value
             }
         }
@@ -370,15 +370,15 @@ identifier*.
 .. code-block:: go
     :linenos:
 
-    //A function that returns a bool that is set to true of Sqrt is possible
-    //and false when not. And the actual square root of a float64
-    func MySqrt(f float64) (s float64, ok bool) {
-        if f>0 {
-            s, ok = math.Sqrt(f), true
+    // A function that returns a bool that is set to true of Sqrt is possible
+    // and false when not. And the actual square root of a float64
+    func MySqrt(floater float64) (squareroot float64, ok bool) {
+        if floater > 0 {
+            squareroot, ok = math.Sqrt(f), true
         } else {
-            s, ok = 0, false
+            squareroot, ok = 0, false
         }
-        return s, ok
+        return squareroot, ok
     }
     //...
     r,_ = MySqrt(v) //retrieve the square root of v, and ignore its faisability
