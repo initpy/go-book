@@ -517,26 +517,27 @@ Look at this simple program from `Effective Go`_.
 
     // Contents returns the file's contents as a string.
     func Contents(filename string) (string, os.Error) {
-        file, error := os.Open(filename)
-        if error != nil {
-            return "", error
+        f, err := os.Open(filename)
+        if err != nil {
+            return "", err
         }
-        defer file.Close()  // file.Close will run when we're finished.
+        defer f.Close()  // f.Close will run when we're finished.
 
         var result []byte
         buf := make([]byte, 100)
         for {
-            n, error := file.Read(buf[0:])
-            result = append(result, buf[0:n]...) // Append is discussed later.
-            if error != nil {
-                if error == os.EOF {
+            n, err := f.Read(buf[0:])
+            result = append(result, buf[0:n]...) // append is discussed later.
+            if err != nil {
+                if err == os.EOF {
                     break
                 }
-                return "", error  // file will be closed if we return here.
+                return "", err  // f will be closed if we return here.
             }
         }
-        return string(result), nil // file will be closed if we return here.
+        return string(result), nil // f will be closed if we return here.
     }
+
 
     func main() {
         contents, _ := Contents("/etc/hosts")
