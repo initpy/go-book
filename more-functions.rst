@@ -216,8 +216,8 @@ given slice of ``int``\s and see how the ``append`` function can help.
     package main
     import "fmt"
 
-    func delete(integer int, slice []int) []int{
-        switch integer {
+    func delete(i int, slice []int) []int{
+        switch i {
             case 0: slice = slice[1:]
             case len(slice)-1: slice = slice[:len(slice)-1]
             default: slice = append(slice[:i], slice[i+1:]...)
@@ -331,8 +331,8 @@ We could have written it like this:
     :linenos:
 
     //simpler delete
-    func delete(integer int, slice []int) []int{
-        slice = append(slice[:integer], slice[integer+1:]...)
+    func delete(i int, slice []int) []int{
+        slice = append(slice[:i], slice[i+1:]...)
         return slice
     }
 
