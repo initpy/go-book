@@ -86,7 +86,7 @@ Thus, writing things like:
         age int
     }
 
-    var P person // Tom will be a variable of type person. How quaint!
+    var P person // P will be a variable of type person. How quaint!
 
 We access and assign a struct's fields (attributes) with the *dot nottation*.
 That is, if ``P`` is a variable of type ``person``, then we access its fields like
