@@ -22,6 +22,7 @@
 
 {% block extrahead %}
 {{ super() }}
+{% include "analytics.html" ignore missing %}
 {% endblock %}
 
 {% block content %}
@@ -58,7 +59,6 @@
     <br class="clearboth" />
     {% endblock %}
 </div>
-{% include "analytics.html" ignore missing %}
 {% endblock %}
 
 {% block sidebarrel %}
