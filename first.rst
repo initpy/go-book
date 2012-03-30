@@ -22,7 +22,7 @@ executes when the program is compiled and *transformed* to a binary form that
 the processor understands.
 
 Think of it as a list of steps to assemble or build something. We said
-*"sequence"* because the **order** of these steps generally amtters a LOT! You
+*"sequence"* because the **order** of these steps generally matters a LOT! You
 can't paint the walls of a house when you haven't built the walls yet. See?
 Order matters!
 
