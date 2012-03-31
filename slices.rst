@@ -40,7 +40,7 @@ array literal, except that we leave out the size number.
 
 We can create slices by *slicing* an array or even an existing slice.
 That is taking a portion (a 'slice') of it, using this syntax ``array[i:j]``.
-Our created slice will contains elements of the array that start at index **i** and
+Our created slice will contain elements of the array that start at index **i** and
 end before **j**. (``array[j]`` not included in the slice)
 
 .. code-block:: go
