@@ -383,7 +383,7 @@ Let's try this.
 
         fmt.Println("x = ", x) // Will print "x = 3"
 
-        x1 := add1(&x) // Calling add1(&x) by passing the adress of x to it
+        x1 := add1(&x) // Calling add1(&x) by passing the address of x to it
 
         fmt.Println("x+1 = ", x1) // Will print "x+1 = 4"
         fmt.Println("x = ", x) // Will print "x = 4"
@@ -407,7 +407,7 @@ How is passing a reference to functions is useful? You may ask.
   operate on a big data value for example. Copying this data will, of course,
   require memory on each call as it is copied for use by the function.
   In this way, a pointer takes much less memory.
-  Yo! Remember, it's just an adress! :)
+  Yo! Remember, it's just an address! :)
 
 .. _functions-signatures:
 
