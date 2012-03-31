@@ -297,7 +297,7 @@ The idea now is to write a function ``Older10`` that takes an array of 10
         // Declare an example array variable of 10 person called 'array'.
         var array [10]person
 
-        // Initialize some of the elements of the array, the others ar by
+        // Initialize some of the elements of the array, the others are by
         // default set to person{"", 0}
         array[1] = person{"Paul", 23};
         array[2] = person{"Jim", 24};
