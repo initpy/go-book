@@ -358,7 +358,7 @@ given in the initialization for us. So we could have written the above code as:
         person{"Karl", 10},
         person{"", 0}}
 
-Specifically note the elipses ``[...]``.
+Specifically note the ellipsis ``[...]``.
 
 .. _arrays-note:
 
@@ -367,7 +367,7 @@ Specifically note the elipses ``[...]``.
     definition**.  They don't *grow* and they don't *shrink*. You can't, for
     example, have an array of 9 elements, and use it with a function that
     expects an array of 10 elements as an input. Simply because they are of
-    *different* types. **Rememeber this.**
+    *different* types. **Remember this.**
 
 Some things to keep in mind:
 
