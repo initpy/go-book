@@ -234,7 +234,7 @@ A function with a result variable
     }
 
     func main() {
-        for index := -2.0; index <= 10; i++ {
+        for index := -2.0; index <= 10; index++ {
             squareroot, possible := MySqrt(index)
             if possible {
                 fmt.Printf("The square root of %f is %f\n", index, squareroot)
