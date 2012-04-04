@@ -18,7 +18,7 @@ The fact is Go is easy to grok, and fun to use but also efficient and well
 designed.
 
 Go is a compiled language, i.e. a language that produces machine code that
-can be executed without the need of an external interpreter like Python, Puby,
+can be executed without the need of an external interpreter like Python, Ruby,
 Perl and other scripting languages.
 
 In fact, if we were to compare Go to something, it would be a modern C. Yes,
