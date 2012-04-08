@@ -548,7 +548,7 @@ Our function ``Contents`` needs a file name as its input, and it ouputs this
 file's content, and an eventual error (for example in case the file was not
 found).
 
-On line 10, we open the file. If the returned error from ``os.Open`` is ``nil``
+On line 10, we open the file. If the returned error from ``os.Open`` is not ``nil``
 then we were unable to open the file. So we return an empty string and the same
 error that ``os.Open`` returned.
 
