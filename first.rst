@@ -91,7 +91,7 @@ values of that type.
 
 What is a constant?
 ===================
-A constant is an identifier whose associated to a given value, and that can't be
+A constant is an identifier that is assigned a given value, which can't be
 changed by your program.
 
 We *declare* a constant with a given value.
