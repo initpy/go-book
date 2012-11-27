@@ -155,7 +155,7 @@ From the `Go Programming Language Specification`_
     var i int32 //basic form with a int32
     var x, y, z = 1, 2, 3 //type omitted, variables initialized
     func test(){
-        var pi  float32 //basic form
+        var pi float32 //basic form
         one, two, three := 1, 2, 3 //type and var omitted, variables initialized
         c := 10+3i // a complex number, type infered and keyword 'var' omitted.
         pi = 3.14 // normal assignation
