@@ -107,7 +107,7 @@ We *declare* a constant with a given value.
     x = 3 * Pi //when compiled, x == 3 * 3.14
 
     var y float32
-    x = 4 * Pi //when compiled, y == 4 * 3.14
+    y = 4 * Pi //when compiled, y == 4 * 3.14
 
 For example, we can declare the constant ``Pi`` to be equal to ``3.14``. During
 the execution of the program, the value of ``Pi`` won't and can not be changed.
