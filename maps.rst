@@ -57,7 +57,7 @@ When used with maps, ``make`` takes an optional capacity parameter.
     numbers["ten"] = 10
     numbers["trois"] = 3 //trois is "three" in french. I know that you know.
     //...
-    fmt.Println("Trois is the french word for the number: ", numbers[3])
+    fmt.Println("Trois is the french word for the number: ", numbers[trois])
     // Trois is the french word for the number: 3. Also a good time.
 
 We now have the idea: it's like a table with two columns: in the left column we
